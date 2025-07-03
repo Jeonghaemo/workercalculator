@@ -126,7 +126,7 @@ function ToggleGroup({ value, options, onChange }) {
 
 export default function HourlyCalculator() {
   // 입력 상태
-  const [inputValue, setInputValue] = useState("9860");
+  const [inputValue, setInputValue] = useState("10030");
   const [inputUnit, setInputUnit] = useState("hourly");
   const [hoursPerDay, setHoursPerDay] = useState("8");
   const [daysPerMonth, setDaysPerMonth] = useState("22");
@@ -174,7 +174,7 @@ export default function HourlyCalculator() {
   };
 
   const reset = () => {
-    setInputValue("9860");
+    setInputValue("10030");
     setInputUnit("hourly");
     setHoursPerDay("8");
     setDaysPerMonth("22");
@@ -207,7 +207,7 @@ export default function HourlyCalculator() {
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
-              placeholder="9860"
+              placeholder="10030"
             />
             <select
               value={inputUnit}

@@ -13,7 +13,7 @@ export const metadata = {
   robots: "index, follow",
 };
 
-import WeeklyBonusCalculator from "./WeeklyBonusCalculator";
+import WeeklyBonusCalculator from "./weekly-bonus";
 
 export default function Page() {
   return <WeeklyBonusCalculator />;

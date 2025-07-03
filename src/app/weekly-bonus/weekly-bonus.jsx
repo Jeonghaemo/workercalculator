@@ -1,0 +1,269 @@
+"use client";
+import { useState } from "react";
+import PageGrid from "../components/PageGrid";
+
+// 천 단위 콤마
+const addComma = (value) => {
+  if (!value && value !== 0) return "";
+  return value.toLocaleString();
+};
+
+// 툴팁 컴포넌트
+function Tooltip({ text }) {
+  const [show, setShow] = useState(false);
+  return (
+    <span className="relative ml-1 inline-block align-middle">
+      <button
+        type="button"
+        className="w-5 h-5 rounded-full bg-gray-200 text-gray-600 text-xs font-bold leading-none"
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
+        tabIndex={-1}
+        aria-label="설명 툴팁"
+      >
+        ?
+      </button>
+      {show && (
+        <span className="absolute z-10 left-6 top-0 w-80 bg-white text-gray-900 text-base rounded px-4 py-3 shadow-xl border border-gray-300 whitespace-pre-line">
+          {text}
+        </span>
+      )}
+    </span>
+  );
+}
+
+// InputRow 컴포넌트
+function InputRow({ label, tooltip, children }) {
+  return (
+    <div className="flex items-center gap-3 mb-4 min-h-[48px]">
+      <label className="w-48 shrink-0 flex items-center text-gray-700 font-medium">
+        {label}
+        {tooltip && <Tooltip text={tooltip} />}
+      </label>
+      <div className="flex-1 flex items-center gap-2">{children}</div>
+    </div>
+  );
+}
+
+// 주휴수당 계산 함수
+function calcWeeklyBonus({ wage, unit, hoursPerDay, daysPerWeek, includeBonus }) {
+  let hourly = 0;
+  switch (unit) {
+    case "hourly":
+      hourly = wage;
+      break;
+    case "daily":
+      hourly = wage / hoursPerDay;
+      break;
+    default:
+      hourly = wage;
+  }
+  const totalWeeklyHours = hoursPerDay * daysPerWeek;
+  const eligible = totalWeeklyHours >= 15;
+  const weeklyBonus = eligible && includeBonus ? hourly * hoursPerDay : 0;
+  const daily = hourly * hoursPerDay;
+  const weekly = daily * daysPerWeek + (includeBonus ? weeklyBonus : 0);
+
+  return {
+    hourly: Math.round(hourly),
+    daily: Math.round(daily),
+    weekly: Math.round(weekly),
+    weeklyBonus: Math.round(weeklyBonus),
+    eligible,
+  };
+}
+
+// 토글 버튼 그룹
+function ToggleGroup({ value, options, onChange }) {
+  return (
+    <div className="flex border rounded overflow-hidden w-fit">
+      {options.map((opt) => (
+        <button
+          key={opt.value}
+          className={`px-5 py-2 text-sm font-semibold border-r last:border-r-0
+            ${value === opt.value
+              ? "bg-blue-100 text-blue-800 ring-1 ring-blue-200"
+              : "bg-white text-blue-700 hover:bg-blue-50"}
+            transition`}
+          onClick={() => onChange(opt.value)}
+          type="button"
+        >
+          {opt.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default function WeeklyBonusCalculator() {
+  const [inputValue, setInputValue] = useState("9860");
+  const [inputUnit, setInputUnit] = useState("hourly");
+  const [hoursPerDay, setHoursPerDay] = useState("8");
+  const [daysPerWeek, setDaysPerWeek] = useState("5");
+  const [includeBonus, setIncludeBonus] = useState("include");
+  const [result, setResult] = useState(null);
+
+  // 숫자만 입력
+  const handleNum = (setter) => (e) => {
+    setter(e.target.value.replace(/[^0-9]/g, ""));
+  };
+
+  const handleCalc = () => {
+    if (!inputValue || !hoursPerDay || !daysPerWeek) {
+      setResult(null);
+      return;
+    }
+    const wage = Number(inputValue);
+    const res = calcWeeklyBonus({
+      wage,
+      unit: inputUnit,
+      hoursPerDay: Number(hoursPerDay),
+      daysPerWeek: Number(daysPerWeek),
+      includeBonus: includeBonus === "include",
+    });
+    setResult(res);
+  };
+
+  const reset = () => {
+    setInputValue("9860");
+    setInputUnit("hourly");
+    setHoursPerDay("8");
+    setDaysPerWeek("5");
+    setIncludeBonus("include");
+    setResult(null);
+  };
+
+  return (
+    <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
+      <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
+        주휴수당 계산기
+      </h1>
+      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
+        {/* 좌측 입력 */}
+        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
+          <h3 className="font-semibold text-lg mb-6">근무 조건 입력</h3>
+          <InputRow
+            label="임금 입력"
+            tooltip={`시급 또는 일급을 입력하고 단위를 선택하세요.`}
+          >
+            <input
+              type="text"
+              value={inputValue}
+              onChange={handleNum(setInputValue)}
+              className="w-40 border rounded px-2 py-2 text-right"
+              min={0}
+              inputMode="numeric"
+              pattern="[0-9]*"
+              placeholder="9860"
+            />
+            <select
+              value={inputUnit}
+              onChange={(e) => setInputUnit(e.target.value)}
+              className="border rounded px-2 py-2"
+            >
+              <option value="hourly">시급</option>
+              <option value="daily">일급</option>
+            </select>
+            <span className="text-gray-500">단위</span>
+          </InputRow>
+          {inputValue && (
+            <div style={{ color: "#3b82f6", fontWeight: "bold", textAlign: "right", marginBottom: 8 }}>
+              입력값: {addComma(Number(inputValue))} {inputUnit === "daily" ? "원/일" : "원"}
+            </div>
+          )}
+          <InputRow
+            label="1일 근무시간"
+            tooltip={`하루 기준 근무시간을 입력하세요.\n예: 8`}
+          >
+            <input
+              type="text"
+              value={hoursPerDay}
+              onChange={handleNum(setHoursPerDay)}
+              className="w-40 border rounded px-2 py-2 text-right"
+              min={0}
+              inputMode="numeric"
+              pattern="[0-9]*"
+              placeholder="8"
+            />
+            <span className="text-gray-500">시간</span>
+          </InputRow>
+          <InputRow
+            label="1주 근무일수"
+            tooltip={`한 주 기준 실제 근무일수를 입력하세요.\n예: 5`}
+          >
+            <input
+              type="text"
+              value={daysPerWeek}
+              onChange={handleNum(setDaysPerWeek)}
+              className="w-40 border rounded px-2 py-2 text-right"
+              min={0}
+              inputMode="numeric"
+              pattern="[0-9]*"
+              placeholder="5"
+            />
+            <span className="text-gray-500">일</span>
+          </InputRow>
+          <InputRow
+            label="주휴수당"
+            tooltip={`주 15시간 이상 근무 시 발생하는 법정수당입니다.\n포함/제외를 선택하세요.`}
+          >
+            <ToggleGroup
+              value={includeBonus}
+              onChange={setIncludeBonus}
+              options={[
+                { value: "exclude", label: "제외" },
+                { value: "include", label: "포함" },
+              ]}
+            />
+          </InputRow>
+          <div className="flex gap-2 mt-8">
+            <button
+              onClick={handleCalc}
+              className="flex-1 py-3 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
+            >
+              계산하기
+            </button>
+            <button
+              onClick={reset}
+              className="flex-1 py-3 rounded border font-semibold"
+            >
+              초기화
+            </button>
+          </div>
+        </section>
+        {/* 우측 결과 */}
+        <section className="w-full lg:w-1/2 pt-10 lg:pt-0">
+          <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
+          {result ? (
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span>시급</span>
+                <span className="font-semibold">{addComma(result.hourly)} 원</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>일급</span>
+                <span className="font-semibold">{addComma(result.daily)} 원</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>주급</span>
+                <span className="font-semibold">{addComma(result.weekly)} 원</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>주휴수당(주)</span>
+                <span className="font-semibold">{addComma(result.weeklyBonus)} 원</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>주휴수당 적용 여부</span>
+                <span className="font-semibold">{result.eligible ? "적용" : "미적용"}</span>
+              </div>
+            </div>
+          ) : (
+            <div className="text-gray-400 text-center mt-12">계산 결과가 여기에 표시됩니다.</div>
+          )}
+        </section>
+      </div>
+      <PageGrid />
+    </main>
+  );
+}
+
