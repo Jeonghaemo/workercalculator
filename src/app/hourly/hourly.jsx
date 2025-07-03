@@ -111,7 +111,7 @@ function ToggleGroup({ value, options, onChange }) {
           key={opt.value}
           className={`px-5 py-2 text-sm font-semibold border-r last:border-r-0
             ${value === opt.value
-              ? "bg-blue-100 text-blue-800 ring-1 ring-blue-200"
+              ? "bg-blue-200 text-blue-800 ring-1 ring-blue-300"
               : "bg-white text-blue-700 hover:bg-blue-50"}
             transition`}
           onClick={() => onChange(opt.value)}

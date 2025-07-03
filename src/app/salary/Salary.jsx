@@ -91,7 +91,10 @@ export default function Salary() {
       family: Number(family),
       children: Number(children),
     });
-    setResult({ ...deductions, monthly });
+    // 세전/세후 연봉 추가
+    const annualGross = monthly * 12;
+    const annualNet = (monthly - deductions.total) * 12;
+    setResult({ ...deductions, monthly, annualGross, annualNet });
   };
 
   const inc = (setter, val, min = 0) => () => setter(Math.max(min, Number(val) + 1));
@@ -281,6 +284,17 @@ export default function Salary() {
                   {addComma(String(result.monthly - result.total))}원
                 </span>
               </div>
+              {/* 연봉 결과 추가 */}
+              <div className="mt-8 space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-gray-700">세전 연봉</span>
+                  <span className="font-semibold">{addComma(String(result.annualGross))} 원</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-700">세후 연봉</span>
+                  <span className="font-bold text-blue-700">{addComma(String(result.annualNet))} 원</span>
+                </div>
+              </div>
             </>
           )}
           {!result && (
@@ -293,5 +307,3 @@ export default function Salary() {
     </main>
   );
 }
-
-

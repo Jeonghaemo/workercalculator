@@ -13,7 +13,7 @@ export const metadata = {
   robots: "index, follow",
 };
 
-import OrdinaryCalculator from "./OrdinaryCalculator";
+import OrdinaryCalculator from "./ordinary";
 
 export default function Page() {
   return <OrdinaryCalculator />;

@@ -13,7 +13,7 @@ export const metadata = {
   robots: "index, follow",
 };
 
-import AnnualLeaveCalculator from "./AnnualLeaveCalculator";
+import AnnualLeaveCalculator from "./annual-leave";
 
 export default function Page() {
   return <AnnualLeaveCalculator />;

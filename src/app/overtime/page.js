@@ -13,7 +13,7 @@ export const metadata = {
   robots: "index, follow",
 };
 
-import OvertimeCalculator from "./OvertimeCalculator";
+import OvertimeCalculator from "./overtime";
 
 export default function Page() {
   return <OvertimeCalculator />;

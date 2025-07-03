@@ -13,7 +13,7 @@ export const metadata = {
   robots: "index, follow",
 };
 
-import ParentalLeaveCalculator from "./ParentalLeaveCalculator";
+import ParentalLeaveCalculator from "./retirement";
 
 export default function Page() {
   return <ParentalLeaveCalculator />;

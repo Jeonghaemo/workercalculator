@@ -45,8 +45,16 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
-// 주휴수당 계산 함수
-function calcWeeklyBonus({ wage, unit, hoursPerDay, daysPerWeek, includeBonus }) {
+// 주휴수당/주급/월급/세후 계산 함수
+function calcWeeklyPay({
+  wage,
+  unit,
+  hoursPerDay,
+  daysPerWeek,
+  bonusApply,
+  taxType,
+}) {
+  // 시급 환산
   let hourly = 0;
   switch (unit) {
     case "hourly":
@@ -60,9 +68,52 @@ function calcWeeklyBonus({ wage, unit, hoursPerDay, daysPerWeek, includeBonus })
   }
   const totalWeeklyHours = hoursPerDay * daysPerWeek;
   const eligible = totalWeeklyHours >= 15;
-  const weeklyBonus = eligible && includeBonus ? hourly * hoursPerDay : 0;
+  const weeklyBonus = eligible && bonusApply ? hourly * hoursPerDay : 0;
   const daily = hourly * hoursPerDay;
-  const weekly = daily * daysPerWeek + (includeBonus ? weeklyBonus : 0);
+  const weekly = daily * daysPerWeek + (bonusApply ? weeklyBonus : 0);
+
+  // 월급 환산 (주급 × 4.345)
+  const monthly = weekly * 4.345;
+
+  // 4대보험(국민연금, 건강보험, 장기요양, 고용보험) 단순 예시 계산
+  // 2025년 기준 근로자 4대보험 공제율(대략): 
+  // 국민연금 4.5%, 건강보험 3.545%, 장기요양 0.508%, 고용보험 0.9%
+  const pension = monthly * 0.045;
+  const health = monthly * 0.03545;
+  const care = monthly * 0.00508;
+  const employ = monthly * 0.009;
+  const totalInsure = pension + health + care + employ;
+  const weeklyInsure = totalInsure / 4.345;
+  const monthlyAfterInsure = monthly - totalInsure;
+  const weeklyAfterInsure = weekly - weeklyInsure;
+
+  // 3.3% 원천징수(사업소득자)
+  const tax33 = monthly * 0.033;
+  const weeklyTax33 = weekly * 0.033;
+  const monthlyAfter33 = monthly - tax33;
+  const weeklyAfter33 = weekly - weeklyTax33;
+
+  // 실제 세후 금액
+  let weeklyAfterTax = weekly;
+  let monthlyAfterTax = monthly;
+  let taxDetail = null;
+  if (taxType === "four") {
+    weeklyAfterTax = weeklyAfterInsure;
+    monthlyAfterTax = monthlyAfterInsure;
+    taxDetail = {
+      weeklyInsure: Math.round(weeklyInsure),
+      pension: Math.round(pension / 4.345),
+      health: Math.round(health / 4.345),
+      care: Math.round(care / 4.345),
+      employ: Math.round(employ / 4.345),
+    };
+  } else if (taxType === "33") {
+    weeklyAfterTax = weeklyAfter33;
+    monthlyAfterTax = monthlyAfter33;
+    taxDetail = {
+      weeklyTax33: Math.round(weeklyTax33),
+    };
+  }
 
   return {
     hourly: Math.round(hourly),
@@ -70,6 +121,11 @@ function calcWeeklyBonus({ wage, unit, hoursPerDay, daysPerWeek, includeBonus })
     weekly: Math.round(weekly),
     weeklyBonus: Math.round(weeklyBonus),
     eligible,
+    monthly: Math.round(monthly),
+    weeklyAfterTax: Math.round(weeklyAfterTax),
+    monthlyAfterTax: Math.round(monthlyAfterTax),
+    taxType,
+    ...taxDetail,
   };
 }
 
@@ -82,7 +138,7 @@ function ToggleGroup({ value, options, onChange }) {
           key={opt.value}
           className={`px-5 py-2 text-sm font-semibold border-r last:border-r-0
             ${value === opt.value
-              ? "bg-blue-100 text-blue-800 ring-1 ring-blue-200"
+              ? "bg-blue-200 text-blue-800 ring-1 ring-blue-200"
               : "bg-white text-blue-700 hover:bg-blue-50"}
             transition`}
           onClick={() => onChange(opt.value)}
@@ -96,11 +152,12 @@ function ToggleGroup({ value, options, onChange }) {
 }
 
 export default function WeeklyBonusCalculator() {
-  const [inputValue, setInputValue] = useState("9860");
+  const [inputValue, setInputValue] = useState("10030");
   const [inputUnit, setInputUnit] = useState("hourly");
   const [hoursPerDay, setHoursPerDay] = useState("8");
   const [daysPerWeek, setDaysPerWeek] = useState("5");
-  const [includeBonus, setIncludeBonus] = useState("include");
+  const [bonusApply, setBonusApply] = useState("apply");
+  const [taxType, setTaxType] = useState("four");
   const [result, setResult] = useState(null);
 
   // 숫자만 입력
@@ -114,29 +171,31 @@ export default function WeeklyBonusCalculator() {
       return;
     }
     const wage = Number(inputValue);
-    const res = calcWeeklyBonus({
+    const res = calcWeeklyPay({
       wage,
       unit: inputUnit,
       hoursPerDay: Number(hoursPerDay),
       daysPerWeek: Number(daysPerWeek),
-      includeBonus: includeBonus === "include",
+      bonusApply: bonusApply === "apply",
+      taxType,
     });
     setResult(res);
   };
 
   const reset = () => {
-    setInputValue("9860");
+    setInputValue("10030");
     setInputUnit("hourly");
     setHoursPerDay("8");
     setDaysPerWeek("5");
-    setIncludeBonus("include");
+    setBonusApply("apply");
+    setTaxType("four");
     setResult(null);
   };
 
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
-        주휴수당 계산기
+        주휴수당·주급 계산기
       </h1>
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
@@ -144,7 +203,7 @@ export default function WeeklyBonusCalculator() {
           <h3 className="font-semibold text-lg mb-6">근무 조건 입력</h3>
           <InputRow
             label="임금 입력"
-            tooltip={`시급 또는 일급을 입력하고 단위를 선택하세요.`}
+            tooltip={`시급 또는 일급을 입력하고 단위를 선택하세요.\n2025년 최저시급: 10,030원`}
           >
             <input
               type="text"
@@ -154,7 +213,7 @@ export default function WeeklyBonusCalculator() {
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
-              placeholder="9860"
+              placeholder="10030"
             />
             <select
               value={inputUnit}
@@ -205,14 +264,27 @@ export default function WeeklyBonusCalculator() {
           </InputRow>
           <InputRow
             label="주휴수당"
-            tooltip={`주 15시간 이상 근무 시 발생하는 법정수당입니다.\n포함/제외를 선택하세요.`}
+            tooltip={`주 15시간 이상 근무 시 발생하는 법정수당입니다.\n적용/미적용을 선택하세요.`}
           >
             <ToggleGroup
-              value={includeBonus}
-              onChange={setIncludeBonus}
+              value={bonusApply}
+              onChange={setBonusApply}
               options={[
-                { value: "exclude", label: "제외" },
-                { value: "include", label: "포함" },
+                { value: "not", label: "미적용" },
+                { value: "apply", label: "적용" },
+              ]}
+            />
+          </InputRow>
+          <InputRow
+            label="세금 공제 방식"
+            tooltip={`4대 보험(근로자 부담) 또는 3.3% 원천징수(사업소득자) 중 선택하세요.`}
+          >
+            <ToggleGroup
+              value={taxType}
+              onChange={setTaxType}
+              options={[
+                { value: "four", label: "4대 보험" },
+                { value: "33", label: "3.3% 원천징수" },
               ]}
             />
           </InputRow>
@@ -233,37 +305,73 @@ export default function WeeklyBonusCalculator() {
         </section>
         {/* 우측 결과 */}
         <section className="w-full lg:w-1/2 pt-10 lg:pt-0">
-          <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
-          {result ? (
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <span>시급</span>
-                <span className="font-semibold">{addComma(result.hourly)} 원</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span>일급</span>
-                <span className="font-semibold">{addComma(result.daily)} 원</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span>주급</span>
-                <span className="font-semibold">{addComma(result.weekly)} 원</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span>주휴수당(주)</span>
-                <span className="font-semibold">{addComma(result.weeklyBonus)} 원</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span>주휴수당 적용 여부</span>
-                <span className="font-semibold">{result.eligible ? "적용" : "미적용"}</span>
-              </div>
+  <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
+  {result ? (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <span>시급</span>
+        <span className="font-semibold">{addComma(result.hourly)} 원</span>
+      </div>
+      <div className="flex items-center justify-between">
+        <span>일급</span>
+        <span className="font-semibold">{addComma(result.daily)} 원</span>
+      </div>
+      <div className="flex items-center justify-between">
+        <span>주급(세전)</span>
+        <span className="font-semibold">{addComma(result.weekly)} 원</span>
+      </div>
+      <div className="flex items-center justify-between">
+        <span>월급(세전)</span>
+        <span className="font-semibold">{addComma(result.monthly)} 원</span>
+      </div>
+      <div className="flex items-center justify-between">
+        <span>주휴수당(주)</span>
+        <span className="font-semibold">{addComma(result.weeklyBonus)} 원</span>
+      </div>
+      <div className="flex items-center justify-between">
+        <span>주휴수당 적용 여부</span>
+        <span className="font-semibold">{result.eligible && bonusApply === "apply" ? "적용" : "미적용"}</span>
+      </div>
+      <div className="border-t pt-5 mt-5 space-y-3">
+        {result.taxType === "four" ? (
+          <>
+            <div className="flex items-center justify-between">
+              <span>4대 보험 공제액(주)</span>
+              <span className="font-semibold text-red-600">- {addComma(result.weeklyInsure)} 원</span>
             </div>
-          ) : (
-            <div className="text-gray-400 text-center mt-12">계산 결과가 여기에 표시됩니다.</div>
-          )}
-        </section>
+            <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+              <span>국민연금: {addComma(result.pension)}원</span>
+              <span>건강보험: {addComma(result.health)}원</span>
+              <span>장기요양: {addComma(result.care)}원</span>
+              <span>고용보험: {addComma(result.employ)}원</span>
+            </div>
+          </>
+        ) : (
+          <div className="flex items-center justify-between">
+            <span>3.3% 원천징수(주)</span>
+            <span className="font-semibold text-red-600">- {addComma(result.weeklyTax33)} 원</span>
+          </div>
+        )}
+        <div className="flex items-center justify-between mt-2">
+          <span>주급(세후)</span>
+          <span className="font-bold text-blue-600">{addComma(result.weeklyAfterTax)} 원</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span>월급(세후)</span>
+          <span className="font-bold text-blue-600">{addComma(result.monthlyAfterTax)} 원</span>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className="text-gray-400 text-center mt-12">계산 결과가 여기에 표시됩니다.</div>
+  )}
+</section>
+
       </div>
       <PageGrid />
     </main>
   );
 }
+
+
 
