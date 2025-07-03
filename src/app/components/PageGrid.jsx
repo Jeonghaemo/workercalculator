@@ -1,8 +1,3 @@
-// app/page.js
-export const metadata = {
-  title: "근로·급여 계산기 모음",
-  description: "연봉, 시급, 주휴수당, 퇴직금, 출산휴가·육아휴직 등 각종 급여와 세금 계산기를 한 곳에서 쉽게 이용하세요.",
-};
 import Link from "next/link";
 
 const pages = [
@@ -67,43 +62,38 @@ const pages = [
     icon: "📑",
   },
   {
-    href: "/maternity-leave",
-    title: "출산휴가 급여 계산기",
-    desc: "출산휴가 기간, 월급 등 입력 시 출산휴가 급여 자동 계산",
-    icon: "🤱",
-  },
-  {
-    href: "/parental-leave",
-    title: "육아휴직 급여 계산기",
-    desc: "육아휴직 기간, 월급 등 입력 시 육아휴직 급여 자동 계산",
-    icon: "🍼",
-  },
+  href: "/maternity-leave",
+  title: "출산휴가 급여 계산기",
+  desc: "출산휴가 기간, 월급 등 입력 시 출산휴가 급여 자동 계산",
+  icon: "🤱",
+},
+{
+  href: "/parental-leave",
+  title: "육아휴직 급여 계산기",
+  desc: "육아휴직 기간, 월급 등 입력 시 육아휴직 급여 자동 계산",
+  icon: "🍼",
+},
 ];
 
-export default function Home() {
+export default function PageGrid() {
   return (
-    <main className="min-h-screen bg-gray-50 flex flex-col items-center py-10">
-      <h1 className="text-3xl font-bold mb-6">근로·급여 계산기 모음</h1>
-      <p className="mb-8 text-gray-600">필요한 계산기를 선택하세요.</p>
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl my-10">
-        {pages.map((page) => (
-          <Link
-            key={page.href}
-            href={page.href}
-            className="block bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition border border-gray-100 hover:border-blue-500"
-          >
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-2xl">{page.icon}</span>
-              <h2 className="text-xl font-bold text-gray-900">{page.title}</h2>
-            </div>
-            <p className="text-gray-500">{page.desc}</p>
-          </Link>
-        ))}
-      </div>
-      <footer className="mt-10 text-gray-400 text-sm">
-        © 2025 근로·급여 계산기
-      </footer>
-    </main>
+    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto my-10">
+      {pages.map((page) => (
+        <Link
+          key={page.href}
+          href={page.href}
+          className="block bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition border border-gray-100 hover:border-blue-500"
+        >
+          {/* 아이콘과 타이틀을 한 줄에 flex로 배치 */}
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-2xl">{page.icon}</span>
+            <h2 className="text-xl font-bold text-gray-900">{page.title}</h2>
+          </div>
+          <p className="text-gray-500">{page.desc}</p>
+        </Link>
+      ))}
+    </div>
   );
 }
+
 
