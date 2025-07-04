@@ -74,6 +74,113 @@ function InputRow({ label, tooltip, children }) {
     </div>
   );
 }
+function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 이용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>연봉/월급 선택:</b>
+          <span className="ml-1">
+            세전 연봉 또는 월급 중 입력할 단위를 선택하세요. 연봉 선택 시 12로 나눠 월급을 자동 계산합니다.
+          </span>
+        </li>
+        <li>
+          <b>급여 입력:</b>
+          <span className="ml-1">
+            세전 연봉 또는 월급 금액을 입력하세요. (예: 연봉 2천만 원, 월급 200만 원)
+          </span>
+        </li>
+        <li>
+          <b>비과세액 입력:</b>
+          <span className="ml-1">
+            식대 등 세금이 부과되지 않는 비과세 금액을 입력하세요. (기본값 20만 원, 필요시 조정)
+          </span>
+        </li>
+        <li>
+          <b>부양가족수(본인 포함):</b>
+          <span className="ml-1">
+            본인, 배우자, 20세 이하 자녀, 60세 이상 부모 등 소득세 공제 대상 가족 수를 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>8세~20세 자녀수:</b>
+          <span className="ml-1">
+            소득세 추가 공제 대상인 8세~20세 자녀 수를 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 근로소득세, 지방소득세, 실수령액 등이 자동 계산됩니다.
+          </span>
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>총급여액 산정:</b>
+          <span className="ml-1">
+            입력한 연봉 또는 월급에서 비과세액(식대 등)을 제외한 금액을 기준으로 계산합니다.
+          </span>
+        </li>
+        <li>
+          <b>근로소득공제 적용:</b>
+          <span className="ml-1">
+            총급여액에 2025년 근로소득공제율을 적용해 근로소득금액을 산출합니다.
+          </span>
+        </li>
+        <li>
+          <b>인적공제 반영:</b>
+          <span className="ml-1">
+            본인 포함 가족 1인당 150만 원, 8~20세 자녀 1인당 50만 원을 추가로 공제합니다.
+          </span>
+        </li>
+        <li>
+          <b>과세표준 계산:</b>
+          <span className="ml-1">
+            근로소득금액에서 인적공제를 차감하여 과세표준을 구합니다.
+          </span>
+        </li>
+        <li>
+          <b>근로소득세 산출:</b>
+          <span className="ml-1">
+            2025년 누진세율표에 따라 과세표준 구간별 세율(6%~45%)을 적용해 산출세액을 계산합니다.
+          </span>
+        </li>
+        <li>
+          <b>지방소득세 산출:</b>
+          <span className="ml-1">
+            산출된 근로소득세의 10%를 지방소득세로 추가 계산합니다.
+          </span>
+        </li>
+        <li>
+          <b>실수령액 계산:</b>
+          <span className="ml-1">
+            월급에서 근로소득세와 지방소득세를 합산한 금액을 차감해 월 실수령액을 산출합니다.
+          </span>
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 이 계산기는 2025년 근로소득세율 및 공제 기준을 적용합니다.<br />
+        ※ 실제 연말정산 시 세액공제, 특별공제 등 추가 항목에 따라 결과가 달라질 수 있습니다.
+      </div>
+    </div>
+  );
+}
 
 export default function IncomeTaxCalculator() {
   const [mode, setMode] = useState("annual");
@@ -328,6 +435,7 @@ export default function IncomeTaxCalculator() {
           )}
         </section>
       </div>
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );

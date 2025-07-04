@@ -42,6 +42,97 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
+function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>시급 입력:</b>
+          <span className="ml-1">
+            세전 시급을 입력하세요. (예: 10,030원)
+          </span>
+        </li>
+        <li>
+          <b>연장근로시간 입력:</b>
+          <span className="ml-1">
+            1주 40시간을 초과한 연장근로 시간을 입력하세요. (1.5배 적용)
+          </span>
+        </li>
+        <li>
+          <b>야간근로시간 입력:</b>
+          <span className="ml-1">
+            야간(22:00~06:00) 근로시간 중 0.5배 가산분만 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>휴일근로시간(8시간 이하/초과) 입력:</b>
+          <span className="ml-1">
+            휴일근로(법정휴일, 일요일 등) 8시간 이하는 1.5배, 8시간 초과분은 2배 적용됩니다. 각각 시간 입력란에 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 각 수당과 총 수당이 자동 계산됩니다.
+          </span>
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">연장/야간/휴일수당 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>연장근로수당:</b>
+          <span className="ml-1">
+            <b>시급 × 1.5 × 연장근로시간</b><br />
+            <b>예시</b>: 시급 10,000원, 연장근로 4시간 → 10,000 × 1.5 × 4 = <b>60,000원</b>
+          </span>
+        </li>
+        <li>
+          <b>야간근로수당:</b>
+          <span className="ml-1">
+            <b>시급 × 0.5 × 야간근로시간</b><br />
+            <b>예시</b>: 시급 10,000원, 야간근로 3시간 → 10,000 × 0.5 × 3 = <b>15,000원</b>
+          </span>
+        </li>
+        <li>
+          <b>휴일근로수당:</b>
+          <span className="ml-1">
+            <b>시급 × 1.5 × 휴일근로시간(8시간 이하)</b> + <b>시급 × 2 × 휴일근로시간(8시간 초과)</b><br />
+            <b>예시</b>: 시급 10,000원, 휴일근로 6시간(8시간 이하) → 10,000 × 1.5 × 6 = <b>90,000원</b><br />
+            시급 10,000원, 휴일근로 10시간(8시간 이하 8시간, 초과 2시간) →<br />
+            10,000 × 1.5 × 8 + 10,000 × 2 × 2 = 120,000 + 40,000 = <b>160,000원</b>
+          </span>
+        </li>
+        <li>
+          <b>총 수당:</b>
+          <span className="ml-1">
+            연장근로수당 + 야간근로수당 + 휴일근로수당의 합계<br />
+            예시: 위 세 항목 합계가 <b>265,000원</b>이면 총 수당은 265,000원
+          </span>
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 연장·야간·휴일근로가 중복되는 경우, 각각의 가산수당을 모두 합산해 지급해야 합니다.<br />
+        ※ 실제 지급 기준은 근로기준법, 단체협약, 취업규칙 등에 따라 달라질 수 있습니다.<br />
+      </div>
+    </div>
+  );
+}
+
+
 // 수당 계산 함수
 function calcOvertimePay({ hourly, ext, night, holiday, holidayOver }) {
   // 연장: 1.5배, 야간: 0.5배 가산, 휴일: 1.5배(8시간까지), 2배(8시간 초과)
@@ -221,6 +312,7 @@ export default function OvertimeCalculator() {
           )}
         </section>
       </div>
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );

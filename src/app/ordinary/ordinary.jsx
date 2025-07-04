@@ -42,6 +42,97 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
+function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>임금 단위 선택:</b>
+          <span className="ml-1">
+            시급, 일급, 월급 중 본인 임금 단위를 선택하세요.
+          </span>
+        </li>
+        <li>
+          <b>임금 입력:</b>
+          <span className="ml-1">
+            선택한 단위에 맞는 세전 금액을 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>1일 근무시간 입력:</b>
+          <span className="ml-1">
+            시급 또는 일급 선택 시, 하루 실제 근무시간을 입력하세요. (예: 8시간)
+          </span>
+        </li>
+        <li>
+          <b>월 소정근로시간 입력:</b>
+          <span className="ml-1">
+            월급 선택 시, 월 소정근로시간(예: 209시간)을 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>통상적 수당 입력:</b>
+          <span className="ml-1">
+            월마다 정기적으로 지급되는 수당(식대, 직책수당 등)이 있으면 입력하세요. 없으면 0 또는 빈칸으로 두세요.
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 시급, 일급, 월급 기준 통상임금이 자동 계산됩니다.
+          </span>
+        </li>
+      </ul>
+
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">통상임금 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>시급 기준 통상임금:</b>
+          <span className="ml-1">
+            입력한 시급 × 1일 근무시간
+          </span>
+        </li>
+        <li>
+          <b>일급 기준 통상임금:</b>
+          <span className="ml-1">
+            입력한 일급 그대로 사용
+          </span>
+        </li>
+        <li>
+          <b>월급 기준 통상임금:</b>
+          <span className="ml-1">
+            (입력한 월급 + 통상적 수당)  
+            <br />
+            1일 통상임금 = 월급 ÷ 월평균 근무일수(21.75일)  
+            <br />
+            시급 통상임금 = 월급 ÷ 월 소정근로시간
+          </span>
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 월평균 근무일수 21.75일은 주 5일 근무 기준입니다.<br />
+        ※ 월 소정근로시간은 회사별 차이가 있을 수 있습니다.<br />
+        ※ 계산 결과는 참고용이며, 실제 통상임금 산정은 근로계약 및 법령에 따라 달라질 수 있습니다.
+      </div>
+    </div>
+  );
+}
+
+
 // 통상임금 계산 함수
 function calcOrdinary({
   wage,
@@ -248,6 +339,7 @@ export default function OrdinaryCalculator() {
           )}
         </section>
       </div>
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );

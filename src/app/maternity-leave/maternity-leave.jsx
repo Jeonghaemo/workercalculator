@@ -42,6 +42,81 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
+function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>통상임금(월) 입력:</b>
+          <span className="ml-1">
+            월 기준 통상임금을 입력하세요. (정기적·일률적으로 지급되는 기본급, 고정수당 등 포함)
+            <br />※ 상한액: 월 2,100,000원
+          </span>
+        </li>
+        <li>
+          <b>휴가일수 선택:</b>
+          <span className="ml-1">
+            출산휴가 일수를 선택하세요.
+            <br />- 단태아: 90일, 미숙아: 100일, 다태아: 120일
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 월별 지급액, 총 지급 개월수, 총 출산휴가급여가 자동 계산됩니다.
+          </span>
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">출산휴가급여 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>월별 지급액 산정:</b>
+          <span className="ml-1">
+            <b>통상임금(월)</b>과 <b>월 상한액(2,100,000원)</b> 중 작은 금액을 월별 지급액으로 산정
+          </span>
+        </li>
+        <li>
+          <b>지급 개월수 산정:</b>
+          <span className="ml-1">
+            <b>휴가일수 ÷ 30</b> (예: 90일 → 3개월, 100일 → 약 3.33개월, 120일 → 4개월)
+          </span>
+        </li>
+        <li>
+          <b>총 출산휴가급여:</b>
+          <span className="ml-1">
+            <b>월별 지급액 × 지급 개월수</b>로 산정
+          </span>
+        </li>
+        <li>
+          <b>상한액 적용:</b>
+          <span className="ml-1">
+            통상임금(월)이 2,100,000원을 초과할 경우 월별 지급액은 2,100,000원으로 제한
+          </span>
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 출산휴가급여는 고용보험에 가입된 근로자만 신청 가능하며, 실제 지급액은 고용노동부 심사 결과에 따라 달라질 수 있습니다.<br />
+        ※ 상한액(월 2,100,000원)은 2025년 기준입니다.
+      </div>
+    </div>
+  );
+}
+
+
 // 계산 함수
 function calcMaternityPay({ wage, days = 90, maxMonthly = 2100000 }) {
   // 월 상한액, 기본 210만원
@@ -176,6 +251,7 @@ export default function MaternityLeave() {
           )}
         </section>
       </div>
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );

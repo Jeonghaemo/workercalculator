@@ -44,6 +44,115 @@ function InputRow({ label, tooltip, children }) {
     </div>
   );
 }
+function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>임금 입력:</b>
+          <span className="ml-1">
+            시급 또는 일급을 선택하고 금액을 입력하세요. (예: 2025년 최저시급 10,030원)
+          </span>
+        </li>
+        <li>
+          <b>1일 근무시간 입력:</b>
+          <span className="ml-1">
+            하루 기준 실제 근무시간을 입력하세요. (예: 8시간)
+          </span>
+        </li>
+        <li>
+          <b>1주 근무일수 입력:</b>
+          <span className="ml-1">
+            한 주 기준 실제 근무일수를 입력하세요. (예: 5일)
+          </span>
+        </li>
+        <li>
+          <b>주휴수당 적용 여부 선택:</b>
+          <span className="ml-1">
+            주 15시간 이상 근무 시 주휴수당을 받을 수 있습니다. 본인 상황에 맞게 적용/미적용을 선택하세요.
+          </span>
+        </li>
+        <li>
+          <b>세금 공제 방식 선택:</b>
+          <span className="ml-1">
+            4대 보험(근로자 부담) 또는 3.3% 원천징수(사업소득자) 중 선택하세요.
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 주휴수당, 주급, 월급, 세후 금액 등이 자동 계산됩니다.
+          </span>
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">주휴수당 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>시급 환산:</b>
+          <span className="ml-1">
+            <b>시급</b>은 입력값 그대로, <b>일급</b>은 <b>일급 ÷ 1일 근무시간</b>으로 시급 환산
+          </span>
+        </li>
+        <li>
+          <b>주휴수당 발생 조건:</b>
+          <span className="ml-1">
+            1주일 근로시간(1일 근무시간 × 1주 근무일수)이 <b>15시간 이상</b>일 때 주휴수당 발생
+          </span>
+        </li>
+        <li>
+          <b>주휴수당(주):</b>
+          <span className="ml-1">
+            <b>1일 근무시간 × 시급</b> (주 15시간 이상 &amp; 적용 선택 시)
+          </span>
+        </li>
+        <li>
+          <b>주급(세전):</b>
+          <span className="ml-1">
+            <b>일급 × 1주 근무일수 + 주휴수당</b>
+          </span>
+        </li>
+        <li>
+          <b>월급(세전):</b>
+          <span className="ml-1">
+            <b>주급 × 4.345</b> (1개월 평균 주수)
+          </span>
+        </li>
+        <li>
+          <b>세금 공제:</b>
+          <span className="ml-1">
+            <b>4대 보험</b> : 국민연금(4.5%), 건강보험(3.545%), 장기요양(0.508%), 고용보험(0.9%)<br />
+            <b>3.3% 원천징수</b> : 주급 또는 월급의 3.3% 공제
+          </span>
+        </li>
+        <li>
+          <b>세후 금액:</b>
+          <span className="ml-1">
+            주급(세전) 또는 월급(세전)에서 선택한 세금 공제액을 차감한 금액
+          </span>
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 4.345는 1년(52주)을 월 단위로 환산한 평균 주 수입니다.<br />
+        ※ 주휴수당은 주 15시간 미만 근무 시 발생하지 않습니다.<br />
+        ※ 실제 지급액은 근로계약, 사업장 상황에 따라 달라질 수 있습니다.
+      </div>
+    </div>
+  );
+}
 
 // 주휴수당/주급/월급/세후 계산 함수
 function calcWeeklyPay({
@@ -368,6 +477,7 @@ export default function WeeklyBonusCalculator() {
 </section>
 
       </div>
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );

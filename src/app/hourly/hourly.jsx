@@ -46,6 +46,115 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
+function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>급여 단위 선택 및 입력:</b>
+          <span className="ml-1">
+            시급, 일급, 주급, 월급, 연봉 중 해당하는 급여 단위를 선택하고 금액을 입력하세요.
+            (예: 월급 근로자는 월급, 아르바이트는 시급)
+          </span>
+        </li>
+        <li>
+          <b>1일 근무시간 및 한 달 근무일수 입력:</b>
+          <span className="ml-1">
+            하루 근무시간(예: 8시간)과 한 달 기준 근무일수(예: 22일)를 입력하세요.
+            (주 5일제라면 22일이 일반적입니다)
+          </span>
+        </li>
+        <li>
+          <b>주휴수당 포함 여부 선택:</b>
+          <span className="ml-1">
+            주 15시간 이상 근무 시 주휴수당을 포함할 수 있습니다. 본인 상황에 맞게 포함/제외를 선택하세요.
+          </span>
+        </li>
+        <li>
+          <b>세금 적용 선택:</b>
+          <span className="ml-1">
+            4대보험(9.4%) 또는 원천징수(3.3%) 등 세금 공제 방식을 선택할 수 있습니다.
+          </span>
+        </li>
+        <li>
+          <b>수습 여부 선택:</b>
+          <span className="ml-1">
+            수습기간(최대 3개월)에는 시급의 90%만 지급할 수 있습니다. 해당 시 '예'를 선택하세요.
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목을 입력한 뒤 <b>계산하기</b> 버튼을 누르면, 시급·일급·주급·월급·연봉이 자동 계산되어 표시됩니다.
+          </span>
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">시급 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>기준 시급 환산</b>
+          <ul className="list-disc list-inside ml-5">
+            <li>시급: 입력값 그대로 사용</li>
+            <li>일급: <b>일급 ÷ 1일 근무시간</b></li>
+            <li>주급: <b>주급 ÷ (1일 근무시간 × 한 달 근무일수 ÷ 4.345)</b></li>
+            <li>월급: <b>월급 ÷ (1일 근무시간 × 한 달 근무일수)</b></li>
+            <li>연봉: <b>연봉 ÷ (1일 근무시간 × 한 달 근무일수 × 12)</b></li>
+          </ul>
+        </li>
+        <li>
+          <b>주휴수당</b>
+          <ul className="list-disc list-inside ml-5">
+            <li>
+              주 15시간 이상 근무 시, 1주일에 1일치 임금(1일 근무시간 × 시급)이 주휴수당으로 추가됩니다.
+              (포함 여부 선택 가능)
+            </li>
+          </ul>
+        </li>
+        <li>
+          <b>각 단위별 환산</b>
+          <ul className="list-disc list-inside ml-5">
+            <li>일급: <b>시급 × 1일 근무시간</b></li>
+            <li>주급: <b>일급 × (한 달 근무일수 ÷ 4.345) + 주휴수당</b></li>
+            <li>월급: <b>시급 × 1일 근무시간 × 한 달 근무일수 + 주휴수당 × 4.345</b></li>
+            <li>연봉: <b>월급 × 12</b></li>
+          </ul>
+        </li>
+        <li>
+          <b>세금 공제</b>
+          <ul className="list-disc list-inside ml-5">
+            <li>4대보험: 9.4% 차감, 원천징수: 3.3% 차감, 선택에 따라 적용</li>
+          </ul>
+        </li>
+        <li>
+          <b>수습기간</b>
+          <ul className="list-disc list-inside ml-5">
+            <li>수습기간(최대 3개월)에는 시급의 90%만 적용</li>
+          </ul>
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 4.345는 1년(52주)을 월 단위로 환산한 평균 주 수입니다.<br />
+        ※ 주휴수당은 주 15시간 미만 근무 시 발생하지 않습니다.
+      </div>
+    </div>
+  );
+}
+
+
 // 급여 단위별 환산 함수 (daysPerMonth만 사용)
 function convertSalary({ value, unit, hoursPerDay, daysPerMonth, includeWeeklyBonus }) {
   const weekPerMonth = 4.345;
@@ -367,6 +476,7 @@ export default function HourlyCalculator() {
           )}
         </section>
       </div>
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );

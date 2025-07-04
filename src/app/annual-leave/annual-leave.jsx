@@ -102,6 +102,71 @@ export default function AnnualLeaveCalculator() {
     setLeaveDays("5");
     setResult(null);
   };
+function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>임금 단위 선택 및 입력:</b> 
+          <span className="ml-1">
+            시급, 일급, 월급 중 본인에게 해당하는 급여 단위를 선택하고 해당 금액을 입력하세요. 
+            (예: 시급 근로자는 시급, 월급 근로자는 월급)
+          </span>
+        </li>
+        <li>
+          <b>1일 근무시간 입력:</b>
+          <span className="ml-1">
+            시급을 선택한 경우, 하루에 실제로 일하는 시간을 입력하세요. (예: 8시간)
+          </span>
+        </li>
+        <li>
+          <b>미사용 연차일수 입력:</b>
+          <span className="ml-1">
+            지급받을 연차(유급휴가) 미사용 일수를 입력하세요. (예: 5일)
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목을 입력한 뒤 <b>계산하기</b> 버튼을 누르면, 1일 연차수당과 총 연차수당이 자동으로 계산되어 표시됩니다.
+          </span>
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">연차수당 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>1일 연차수당 계산</b>
+          <ul className="list-disc list-inside ml-5">
+            <li>시급: <b>시급 × 1일 근무시간</b></li>
+            <li>일급: <b>입력한 일급 그대로 사용</b></li>
+            <li>월급: <b>월급 ÷ (주평균근무일수 × 4.345)</b> (주5일제 기준 21.725)</li>
+          </ul>
+        </li>
+        <li>
+          <b>총 연차수당</b> = 1일 연차수당 × 미사용 연차일수
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 4.345는 1년(52주)을 월 단위로 환산한 평균 주 수입니다.
+      </div>
+    </div>
+  );
+}
+
 
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
@@ -204,7 +269,9 @@ export default function AnnualLeaveCalculator() {
             <div className="text-gray-400 text-center mt-12">계산 결과가 여기에 표시됩니다.</div>
           )}
         </section>
+        
       </div>
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );
