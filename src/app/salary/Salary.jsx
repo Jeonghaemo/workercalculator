@@ -131,7 +131,27 @@ export default function Salary() {
               월급
             </button>
           </InputRow>
-
+<InputRow
+            label={mode === "annual" ? "연봉" : "월급"}
+            tooltip={`세전 금액을 입력하세요.\n(예: 연봉 2천만원, 월급 200만원 등)`}
+          >
+            <input
+              type="text"
+              value={salary}
+              onChange={handleSalaryChange}
+              className="w-46 border rounded px-2 py-2 text-right"
+              min={0}
+              inputMode="numeric"
+              pattern="[0-9]*"
+              placeholder="20000000"
+            />
+            <span className="text-gray-500">원</span>
+          </InputRow>
+           {salary && (
+            <div style={{ color: "#3b82f6", fontWeight: "bold", textAlign: "right", marginBottom: 8 }}>
+              입력값: {addComma(salary)} 원
+            </div>
+          )}
           <InputRow
             label="비과세액(식대포함)"
             tooltip={`비과세액은 소득세·4대보험 등 세금이 부과되지 않는 금액입니다.\n식대, 자가운전보조금 등 포함 가능 (기본값 20만원).`}
@@ -196,27 +216,6 @@ export default function Salary() {
             <span className="text-gray-500">명</span>
           </InputRow>
 
-          <InputRow
-            label={mode === "annual" ? "연봉" : "월급"}
-            tooltip={`세전 금액을 입력하세요.\n(예: 연봉 2천만원, 월급 200만원 등)`}
-          >
-            <input
-              type="text"
-              value={salary}
-              onChange={handleSalaryChange}
-              className="w-46 border rounded px-2 py-2 text-right"
-              min={0}
-              inputMode="numeric"
-              pattern="[0-9]*"
-              placeholder="20000000"
-            />
-            <span className="text-gray-500">원</span>
-          </InputRow>
-          {salary && (
-            <div style={{ color: "#3b82f6", fontWeight: "bold", textAlign: "right", marginBottom: 8 }}>
-              입력값: {addComma(salary)} 원
-            </div>
-          )}
           <div className="flex gap-2 mt-8">
             <button
               onClick={handleCalc}
@@ -241,7 +240,7 @@ export default function Salary() {
 
         {/* 우측 결과 */}
         <section className="w-full lg:w-1/2 pt-10 lg:pt-0">
-          <h3 className="font-semibold text-lg mb-6">세금 공제한 월 실수령액</h3>
+          <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result && (
             <>
               <div className="flex justify-between mb-2">

@@ -13,7 +13,7 @@ export const metadata = {
   robots: "index, follow",
 };
 
-import IncomeTaxCalculator from "./IncomeTaxCalculator";
+import IncomeTaxCalculator from "./income-tax";
 
 export default function Page() {
   return <IncomeTaxCalculator />;

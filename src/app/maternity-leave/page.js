@@ -13,7 +13,7 @@ export const metadata = {
   robots: "index, follow",
 };
 
-import MaternityLeaveCalculator from "./MaternityLeaveCalculator";
+import MaternityLeaveCalculator from "./maternity-leave";
 
 export default function Page() {
   return <MaternityLeaveCalculator />;

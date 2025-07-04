@@ -111,7 +111,7 @@ export default function UnemploymentCalculator() {
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-12">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
-          <h3 className="font-semibold text-lg mb-6">입력</h3>
+          <h3 className="font-semibold text-lg mb-6">조건 입력</h3>
           <InputRow
             label="3개월 총급여"
             tooltip="이직 전 3개월간 세전 총급여(상여·수당 포함)를 입력하세요."
@@ -121,7 +121,7 @@ export default function UnemploymentCalculator() {
               value={wage3m}
               onChange={handleNum(setWage3m)}
               className="w-40 border rounded px-2 py-2 text-right"
-              placeholder="예: 6000000"
+              placeholder="예: 6,000,000"
             />
             <span className="text-gray-500">원</span>
           </InputRow>

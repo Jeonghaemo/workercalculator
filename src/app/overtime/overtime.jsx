@@ -103,7 +103,7 @@ export default function OvertimeCalculator() {
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
-          <h3 className="font-semibold text-lg mb-6">입력</h3>
+          <h3 className="font-semibold text-lg mb-6">근무시간 입력</h3>
           <InputRow
             label="시급"
             tooltip="세전 시급을 입력하세요. (예: 10030)"
@@ -113,7 +113,7 @@ export default function OvertimeCalculator() {
               value={hourly}
               onChange={handleNum(setHourly)}
               className="w-30 border rounded px-2 py-2 text-right"
-              placeholder="10030"
+              placeholder="10,030"
             />
             <span className="text-gray-500">원</span>
           </InputRow>

@@ -115,7 +115,7 @@ export default function OrdinaryCalculator() {
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
-          <h3 className="font-semibold text-lg mb-6">입력</h3>
+          <h3 className="font-semibold text-lg mb-6">조건 입력</h3>
           <InputRow
             label="임금 단위"
             tooltip={`시급, 일급, 월급 중 하나를 선택하세요.`}
@@ -151,7 +151,7 @@ export default function OrdinaryCalculator() {
               value={wage}
               onChange={handleNum(setWage)}
               className="w-40 border rounded px-2 py-2 text-right"
-              placeholder={unit === "hourly" ? "10030" : unit === "daily" ? "80240" : "2090000"}
+              placeholder={unit === "hourly" ? "10,030" : unit === "daily" ? "80,240" : "2,090,000"}
             />
             <span className="text-gray-500">원</span>
           </InputRow>

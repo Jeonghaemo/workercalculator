@@ -111,7 +111,7 @@ export default function AnnualLeaveCalculator() {
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
-          <h3 className="font-semibold text-lg mb-6">입력</h3>
+          <h3 className="font-semibold text-lg mb-6">조건 입력</h3>
           <InputRow
             label="임금 입력"
             tooltip={`시급, 일급 또는 월급을 입력하고 단위를 선택하세요.\n2025년 최저시급: 10,030원`}

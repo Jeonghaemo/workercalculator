@@ -240,7 +240,7 @@ export default function RetirementCalculator() {
                   value={annual}
                   onChange={handleNum(setAnnual)}
                   className="w-40 border rounded px-2 py-2 text-right"
-                  placeholder="예: 30000000"
+                  placeholder="예: 30,000,000"
                 />
                 <span className="text-gray-500">원</span>
               </InputRow>
@@ -261,7 +261,7 @@ export default function RetirementCalculator() {
                   value={lastMonth}
                   onChange={handleNum(setLastMonth)}
                   className="w-40 border rounded px-2 py-2 text-right"
-                  placeholder="예: 2500000"
+                  placeholder="예: 2,500,000"
                 />
                 <span className="text-gray-500">원</span>
               </InputRow>
@@ -282,7 +282,7 @@ export default function RetirementCalculator() {
                   value={base}
                   onChange={handleNum(setBase)}
                   className="w-40 border rounded px-2 py-2 text-right"
-                  placeholder="예: 2500000"
+                  placeholder="예: 2,500,000"
                 />
                 <span className="text-gray-500">원</span>
               </InputRow>
@@ -300,7 +300,7 @@ export default function RetirementCalculator() {
                   value={bonus}
                   onChange={handleNum(setBonus)}
                   className="w-40 border rounded px-2 py-2 text-right"
-                  placeholder="예: 0"
+                  placeholder="예: 1,000,000"
                 />
                 <span className="text-gray-500">원</span>
               </InputRow>
@@ -318,7 +318,7 @@ export default function RetirementCalculator() {
                   value={leavePay}
                   onChange={handleNum(setLeavePay)}
                   className="w-40 border rounded px-2 py-2 text-right"
-                  placeholder="예: 0"
+                  placeholder="예: 500,000"
                 />
                 <span className="text-gray-500">원</span>
               </InputRow>

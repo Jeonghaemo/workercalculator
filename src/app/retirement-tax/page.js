@@ -13,7 +13,7 @@ export const metadata = {
   robots: "index, follow",
 };
 
-import RetirementTaxCalculator from "./RetirementTaxCalculator";
+import RetirementTaxCalculator from "./retirement-tax";
 
 export default function Page() {
   return <RetirementTaxCalculator />;
