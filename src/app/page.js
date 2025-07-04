@@ -44,7 +44,7 @@ const pages = [
   },
   {
     href: "/overtime",
-    title: "연장/야근/휴일수당 계산기",
+    title: "연장/야간/휴일수당 계산기",
     desc: "근무시간, 시급 등 입력 시 각종 수당 자동 계산",
     icon: "⏰",
   },

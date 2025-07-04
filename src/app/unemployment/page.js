@@ -13,7 +13,7 @@ export const metadata = {
   robots: "index, follow",
 };
 
-import UnemploymentCalculator from "./UnemploymentCalculator";
+import UnemploymentCalculator from "./unemployment";
 
 export default function Page() {
   return <UnemploymentCalculator />;
