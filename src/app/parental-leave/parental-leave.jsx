@@ -104,7 +104,7 @@ export default function ParentalLeave() {
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
-          <h3 className="font-semibold text-lg mb-6">입력</h3>
+          <h3 className="font-semibold text-lg mb-6">조건 입력</h3>
           <InputRow
             label="통상임금(월)"
             tooltip={`월 기준 통상임금을 입력하세요.\n(정기적·일률적으로 지급되는 기본급, 고정수당 등 포함)\n상한액: 1~3개월 250만원, 4~6개월 200만원, 7개월~ 160만원`}
