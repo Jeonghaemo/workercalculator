@@ -70,6 +70,98 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
+function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>3개월 총급여 입력:</b>
+          <span className="ml-1">
+            이직 전 3개월간 세전 총급여(상여·수당 포함)를 입력하세요. (예: 6,000,000원)
+          </span>
+        </li>
+        <li>
+          <b>3개월 총일수 입력:</b>
+          <span className="ml-1">
+            이직 전 3개월간 실제 근무일수(기본 90일)를 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>나이 입력:</b>
+          <span className="ml-1">
+            실업급여 신청일 기준 만 나이를 입력하세요. (예: 30세)
+          </span>
+        </li>
+        <li>
+          <b>고용보험 가입기간 입력:</b>
+          <span className="ml-1">
+            고용보험 누적 가입기간(년 단위, 예: 3년)을 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 1일 평균임금, 1일 실업급여, 지급일수, 총 실업급여가 자동 계산됩니다.
+          </span>
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">실업급여 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>1일 평균임금 산정:</b>
+          <span className="ml-1">
+            3개월 총급여 ÷ 3개월 총일수<br />
+            예시: 6,000,000원 ÷ 90일 = 66,666원
+          </span>
+        </li>
+        <li>
+          <b>1일 실업급여 산정:</b>
+          <span className="ml-1">
+            1일 평균임금 × 60%<br />
+            예시: 66,666원 × 0.6 = 40,000원<br />
+            ※ 2025년 기준 일일 상한(77,000원), 하한(69,040원) 적용. 하한보다 작으면 69,040원, 상한보다 크면 77,000원으로 제한
+          </span>
+        </li>
+        <li>
+          <b>지급일수 산정:</b>
+          <span className="ml-1">
+            고용보험 가입기간과 나이에 따라 지급일수 결정<br />
+            예시: 30세, 가입 3년 → 150일<br />
+            가입 6년, 52세 → 210일
+          </span>
+        </li>
+        <li>
+          <b>총 실업급여 산정:</b>
+          <span className="ml-1">
+            1일 실업급여 × 지급일수<br />
+            예시: 69,040원 × 150일 = 10,356,000원
+          </span>
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 2025년 기준 실업급여 상·하한액, 지급일수 적용.<br />
+        ※ 실제 지급액은 고용노동부 심사, 근로계약, 이직사유 등 상황에 따라 달라질 수 있습니다.<br />
+        ※ 1일 평균임금이 하한액 미만이면 하한액으로, 상한액 초과면 상한액으로 지급됩니다.
+      </div>
+    </div>
+  );
+}
+
+
 export default function UnemploymentCalculator() {
   const [wage3m, setWage3m] = useState("");
   const [days3m, setDays3m] = useState("90");
@@ -211,6 +303,7 @@ export default function UnemploymentCalculator() {
           )}
         </section>
       </div>
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );

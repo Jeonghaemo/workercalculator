@@ -62,7 +62,6 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
-// 안내/계산방법 박스
 function CalculationMethodBox() {
   return (
     <div
@@ -104,32 +103,56 @@ function CalculationMethodBox() {
       <ol className="list-decimal list-inside mb-4 space-y-1">
         <li>
           <b>국민연금:</b>
-          <span className="ml-1">월급 × 9% (근로자 4.5% + 사업주 4.5%)</span>
+          <span className="ml-1">
+            월급 × 9% (근로자 4.5% + 사업주 4.5%)<br />
+            예시: 월급 2,000,000원 → 2,000,000 × 9% = 180,000원<br />
+            근로자 90,000원 / 사업주 90,000원
+          </span>
         </li>
         <li>
           <b>건강보험:</b>
-          <span className="ml-1">월급 × 7.09% (근로자 3.545% + 사업주 3.545%)</span>
+          <span className="ml-1">
+            월급 × 7.09% (근로자 3.545% + 사업주 3.545%)<br />
+            예시: 월급 2,000,000원 → 2,000,000 × 7.09% = 141,800원<br />
+            근로자 70,900원 / 사업주 70,900원
+          </span>
         </li>
         <li>
           <b>장기요양보험:</b>
-          <span className="ml-1">건강보험료 × 13.89% (근로자 50% + 사업주 50%)</span>
+          <span className="ml-1">
+            건강보험료 × 12.95% (근로자 50% + 사업주 50%)<br />
+            예시: 건강보험료 70,900원 → 70,900 × 12.95% ≈ 9,186원<br />
+            근로자 4,593원 / 사업주 4,593원
+          </span>
         </li>
         <li>
           <b>고용보험:</b>
-          <span className="ml-1">월급 × 고용보험 요율(기업 규모별 상이)</span>
+          <span className="ml-1">
+            월급 × 고용보험 요율(기업 규모별 상이, 예: 0.9% 근로자/사업주 각)<br />
+            예시: 월급 2,000,000원 → 2,000,000 × 0.9% = 18,000원<br />
+            근로자 18,000원 / 사업주 18,000원
+          </span>
         </li>
         <li>
           <b>합계:</b>
-          <span className="ml-1">각 항목별 근로자/사업주 부담금 합산</span>
+          <span className="ml-1">
+            각 항목별 근로자/사업주 부담금 합산<br />
+            예시(근로자): 90,000 + 70,900 + 4,593 + 18,000 = 183,493원<br />
+            예시(사업주): 90,000 + 70,900 + 4,593 + 18,000 = 183,493원<br />
+            총액: 366,986원
+          </span>
         </li>
       </ol>
       <div className="text-sm text-gray-600">
         ※ 2025년 기준 요율 적용. 실제 산재보험은 업종별로 별도 산정.<br />
+        ※ 국민연금·건강보험은 최저/최고 기준소득월액이 적용될 수 있습니다.<br />
         ※ 계산 결과는 참고용이며, 실지급액은 사업장/근로자 상황에 따라 달라질 수 있습니다.
       </div>
     </div>
   );
 }
+
+
 
 // 보험 계산 함수
 function calcInsurances(salary, companyType) {

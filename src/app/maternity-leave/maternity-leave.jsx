@@ -81,30 +81,36 @@ function CalculationMethodBox() {
           </span>
         </li>
       </ul>
-      <h2 className="text-2xl font-bold mb-4 text-blue-700">출산휴가급여 계산방법</h2>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">출산휴가 급여 계산방법</h2>
       <ol className="list-decimal list-inside mb-4 space-y-1">
         <li>
           <b>월별 지급액 산정:</b>
           <span className="ml-1">
-            <b>통상임금(월)</b>과 <b>월 상한액(2,100,000원)</b> 중 작은 금액을 월별 지급액으로 산정
+            <b>통상임금(월)</b>과 <b>월 상한액(2,100,000원)</b> 중 작은 금액을 월별 지급액으로 산정<br />
+            예시: 통상임금(월) 2,300,000원 → 월별 지급액 2,100,000원(상한 적용)<br />
+            예시: 통상임금(월) 1,900,000원 → 월별 지급액 1,900,000원
           </span>
         </li>
         <li>
           <b>지급 개월수 산정:</b>
           <span className="ml-1">
-            <b>휴가일수 ÷ 30</b> (예: 90일 → 3개월, 100일 → 약 3.33개월, 120일 → 4개월)
+            <b>휴가일수 ÷ 30</b> <br />
+            예시: 90일 → 3개월, 100일 → 3.33개월, 120일 → 4개월
           </span>
         </li>
         <li>
           <b>총 출산휴가급여:</b>
           <span className="ml-1">
-            <b>월별 지급액 × 지급 개월수</b>로 산정
+            <b>월별 지급액 × 지급 개월수</b><br />
+            예시: 월별 지급액 2,100,000원, 3개월 → 2,100,000 × 3 = 6,300,000원<br />
+            예시: 월별 지급액 1,900,000원, 4개월 → 1,900,000 × 4 = 7,600,000원
           </span>
         </li>
         <li>
           <b>상한액 적용:</b>
           <span className="ml-1">
-            통상임금(월)이 2,100,000원을 초과할 경우 월별 지급액은 2,100,000원으로 제한
+            통상임금(월)이 2,100,000원을 초과할 경우 월별 지급액은 2,100,000원으로 제한<br />
+            예시: 통상임금(월) 2,500,000원 → 월별 지급액 2,100,000원
           </span>
         </li>
       </ol>
@@ -115,6 +121,7 @@ function CalculationMethodBox() {
     </div>
   );
 }
+
 
 
 // 계산 함수
@@ -162,7 +169,7 @@ export default function MaternityLeave() {
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
-        출산휴가급여 계산기
+        출산휴가 급여 계산기
       </h1>
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}

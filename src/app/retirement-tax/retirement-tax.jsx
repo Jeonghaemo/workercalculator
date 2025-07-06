@@ -95,6 +95,120 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
+function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>입사일/퇴사일 입력:</b>
+          <span className="ml-1">
+            근무 시작일과 퇴직일을 선택하세요. 근속연수가 자동 계산됩니다.
+          </span>
+        </li>
+        <li>
+          <b>퇴직금액(세전) 입력:</b>
+          <span className="ml-1">
+            퇴직 시 받은 총 금액(세전, 비과세 포함)을 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>비과세 소득액 입력:</b>
+          <span className="ml-1">
+            퇴직금 중 비과세되는 금액(예: 장해보상금 등)이 있으면 입력하세요. 없으면 0으로 두세요.
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 근속연수, 각종 공제, 과세표준, 퇴직소득세가 자동 계산됩니다.
+          </span>
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">퇴직소득세 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>근속연수 산정:</b>
+          <span className="ml-1">
+            입사일~퇴사일 기준, 1년 미만은 월 단위로 계산(15일 이상이면 1개월 추가)<br />
+            예시: 2015.3.1~2025.3.15 → 10년 0개월, 2015.3.1~2025.3.20 → 10년 1개월
+          </span>
+        </li>
+        <li>
+          <b>퇴직소득금액 산정:</b>
+          <span className="ml-1">
+            퇴직금액(세전) - 비과세 소득액<br />
+            예시: 100,000,000원 - 0원 = 100,000,000원
+          </span>
+        </li>
+        <li>
+          <b>근속연수공제:</b>
+          <span className="ml-1">
+            근속연수에 따라 공제액 산정<br />
+            예시: 10년 근속 → 1~5년: 1,000,000×5 = 5,000,000원<br />
+            6~10년: 2,000,000×5 = 10,000,000원<br />
+            합계: 15,000,000원
+          </span>
+        </li>
+        <li>
+          <b>환산급여:</b>
+          <span className="ml-1">
+            (퇴직소득금액 - 근속연수공제) ÷ 근속연수 × 12<br />
+            예시: (100,000,000 - 15,000,000) ÷ 10 × 12 = 10,200,000원
+          </span>
+        </li>
+        <li>
+          <b>차등공제:</b>
+          <span className="ml-1">
+            환산급여 구간별로 차등공제 적용<br />
+            예시: 환산급여 10,200,000원 → 8,000,000 + (10,200,000-8,000,000)×0.6 = 9,320,000원
+          </span>
+        </li>
+        <li>
+          <b>과세표준 산정:</b>
+          <span className="ml-1">
+            환산급여 - 차등공제<br />
+            예시: 10,200,000 - 9,320,000 = 880,000원
+          </span>
+        </li>
+        <li>
+          <b>산출세액 계산:</b>
+          <span className="ml-1">
+            과세표준에 누진세율(6~45%) 적용<br />
+            예시: 880,000 × 6% = 52,800원
+          </span>
+        </li>
+        <li>
+          <b>최종 퇴직소득세:</b>
+          <span className="ml-1">
+            산출세액 × 근속연수 ÷ 12<br />
+            예시: 52,800 × 10 ÷ 12 ≈ 44,000원
+          </span>
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 실제 퇴직소득세는 퇴직소득 원천징수영수증, 근로계약, 공제항목 등에 따라 달라질 수 있습니다.<br />
+        ※ 2025년 기준 퇴직소득세율 및 공제방식 적용.<br />
+        ※ 계산 결과는 참고용입니다.
+      </div>
+    </div>
+  );
+}
+
+
 export default function RetirementTaxCalculator() {
   const [joinDate, setJoinDate] = useState("");
   const [retireDate, setRetireDate] = useState("");
@@ -260,6 +374,7 @@ export default function RetirementTaxCalculator() {
           )}
         </section>
       </div>
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );

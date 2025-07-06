@@ -64,6 +64,98 @@ function Tooltip({ text }) {
   );
 }
 
+function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>입사일/퇴사일 입력:</b>
+          <span className="ml-1">
+            근무 시작일과 종료일을 선택하면 자동으로 재직일수가 계산됩니다.
+          </span>
+        </li>
+        <li>
+          <b>간편계산/상세계산 선택:</b>
+          <ul className="ml-4 mt-1 space-y-1">
+            <li>
+              <b className="text-blue-700">간편계산</b>: 연봉 또는 최종월급만 입력해 간단히 계산
+            </li>
+            <li>
+              <b className="text-blue-700">상세계산</b>: 최근 3개월 기본급, 연간 상여금, 연차수당 등 실제 평균임금 기준으로 계산
+            </li>
+          </ul>
+        </li>
+        <li>
+          <b>급여/수당 입력:</b>
+          <span className="ml-1">
+            선택한 방식에 따라 연봉, 월급 또는 최근 3개월 기본급·상여금·연차수당을 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 1개월 평균임금, 1일 평균임금, 퇴직금이 자동 계산됩니다.
+          </span>
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">퇴직금 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>1개월 평균임금 산정</b>
+          <ul className="list-disc list-inside ml-5">
+            <li>
+              <b>간편계산</b>: 연봉 ÷ 12 또는 최종월급<br />
+              예시: 연봉 36,000,000원 → 36,000,000 ÷ 12 = 3,000,000원<br />
+              예시: 최종월급 2,800,000원 입력 시 → 2,800,000원
+            </li>
+            <li>
+              <b>상세계산</b>: (최근 3개월 기본급 + 연간 상여금/12 + 연차수당/12)<br />
+              예시: 기본급 2,500,000원, 상여금 1,200,000원, 연차수당 600,000원 →<br />
+              2,500,000 + 1,200,000/12 + 600,000/12 = 2,500,000 + 100,000 + 50,000 = 2,650,000원
+            </li>
+          </ul>
+        </li>
+        <li>
+          <b>1일 평균임금 산정</b>
+          <span className="ml-1">
+            1개월 평균임금 ÷ 30<br />
+            예시: 3,000,000 ÷ 30 = 100,000원
+          </span>
+        </li>
+        <li>
+          <b>퇴직금 산정</b>
+          <span className="ml-1">
+            1일 평균임금 × 30 × (재직일수 ÷ 365)<br />
+            예시: 1일 평균임금 100,000원, 재직일수 730일(2년) →<br />
+            100,000 × 30 × (730 ÷ 365) = 100,000 × 30 × 2 = 6,000,000원
+          </span>
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 1년 미만 근속 시에도 퇴직금이 발생합니다.<br />
+        ※ 평균임금은 퇴직 전 3개월간 지급된 임금(기본급, 상여금, 연차수당 등 포함) 기준입니다.<br />
+        ※ 실제 지급액은 근로계약, 회사 규정, 법령에 따라 달라질 수 있습니다.
+      </div>
+    </div>
+  );
+}
+
+
+
 // InputRow
 function InputRow({ label, tooltip, children }) {
   return (
@@ -399,12 +491,8 @@ export default function RetirementCalculator() {
 
         </section>
       </div>
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );
 }
-
-
-
-
-

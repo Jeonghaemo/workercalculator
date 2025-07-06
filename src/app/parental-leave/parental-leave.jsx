@@ -96,6 +96,89 @@ export default function ParentalLeave() {
     setResult(null);
   };
 
+  function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>통상임금(월) 입력:</b>
+          <span className="ml-1">
+            월 기준 통상임금을 입력하세요. (정기적·일률적으로 지급되는 기본급, 고정수당 등 포함)
+            <br />※ 상한액: 1~3개월 2,500,000원, 4~6개월 2,000,000원, 7개월~ 1,600,000원
+          </span>
+        </li>
+        <li>
+          <b>휴직 개월수 입력:</b>
+          <span className="ml-1">
+            육아휴직 개월수를 입력하세요. (최대 12개월)
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 월별 지급액, 총 지급 개월수, 총 육아휴직급여가 자동 계산됩니다.
+          </span>
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">육아휴직급여 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>월별 지급액 산정:</b>
+          <span className="ml-1">
+            <b>1~3개월차:</b> 통상임금(월)의 100% (상한 2,500,000원, 하한 700,000원)<br />
+            <b>4~6개월차:</b> 통상임금(월)의 100% (상한 2,000,000원, 하한 700,000원)<br />
+            <b>7개월차~:</b> 통상임금(월)의 80% (상한 1,600,000원, 하한 700,000원)<br />
+            예시: 통상임금(월) 2,300,000원, 12개월 육아휴직 시<br />
+            - 1~3개월차: 2,300,000원(상한 미적용)<br />
+            - 4~6개월차: 2,000,000원(상한 적용)<br />
+            - 7~12개월차: 1,600,000원(상한 적용, 2,300,000 × 0.8 = 1,840,000 → 1,600,000원)
+          </span>
+        </li>
+        <li>
+          <b>총 지급 개월수 산정:</b>
+          <span className="ml-1">
+            입력한 휴직 개월수(최대 12개월)<br />
+            예시: 12개월 입력 시 → 12개월
+          </span>
+        </li>
+        <li>
+          <b>총 육아휴직급여:</b>
+          <span className="ml-1">
+            각 월별 지급액의 합계<br />
+            예시: (2,300,000 × 3) + (2,000,000 × 3) + (1,600,000 × 6) = 6,900,000 + 6,000,000 + 9,600,000 = 22,500,000원
+          </span>
+        </li>
+        <li>
+          <b>상한/하한 적용:</b>
+          <span className="ml-1">
+            각 구간별 상한액(2,500,000/2,000,000/1,600,000원)과 하한액(700,000원) 내에서 지급<br />
+            예시: 통상임금(월) 2,800,000원, 1~3개월차는 2,500,000원(상한 적용)
+          </span>
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 육아휴직급여는 고용보험에 가입된 근로자만 신청 가능하며, 실제 지급액은 고용노동부 심사 결과에 따라 달라질 수 있습니다.<br />
+        ※ 상한/하한액은 2025년 기준입니다.
+      </div>
+    </div>
+  );
+}
+
+
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
@@ -201,6 +284,7 @@ export default function ParentalLeave() {
           )}
         </section>
       </div>
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );

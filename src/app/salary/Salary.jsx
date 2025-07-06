@@ -64,6 +64,127 @@ function InputRow({ label, tooltip, children }) {
     </div>
   );
 }
+function CalculationMethodBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li>
+          <b>연봉/월급 선택:</b>
+          <span className="ml-1">
+            세전 연봉 또는 월급 중 입력할 단위를 선택하세요. 연봉을 입력하면 12로 나눠 월급을 자동 계산합니다.
+          </span>
+        </li>
+        <li>
+          <b>급여 입력:</b>
+          <span className="ml-1">
+            선택한 단위(연봉 또는 월급)에 맞는 세전 금액을 입력하세요. (예: 연봉 2,000만원, 월급 200만원)
+          </span>
+        </li>
+        <li>
+          <b>비과세액 입력:</b>
+          <span className="ml-1">
+            식대 등 세금이 부과되지 않는 비과세 금액을 입력하세요. (기본값 20만원, 필요시 조정)
+          </span>
+        </li>
+        <li>
+          <b>부양가족수(본인 포함):</b>
+          <span className="ml-1">
+            본인, 배우자, 20세 이하 자녀, 60세 이상 부모 등 소득세 공제 대상 가족 수를 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>8세~20세 자녀수:</b>
+          <span className="ml-1">
+            소득세 추가 공제 대상인 8세~20세 자녀 수를 입력하세요.
+          </span>
+        </li>
+        <li>
+          <b>계산하기 버튼 클릭:</b>
+          <span className="ml-1">
+            모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 국민연금, 건강보험, 장기요양, 고용보험, 소득세, 지방소득세 등 공제액과 실수령액이 자동 계산됩니다.
+          </span>
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">실수령액 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li>
+          <b>과세표준 산정:</b>
+          <span className="ml-1">
+            입력한 월급(또는 연봉/12)에서 비과세액을 차감한 금액을 기준으로 공제액을 계산합니다.<br />
+            예시: 월급 2,000,000원, 비과세액 200,000원 → 과세표준 1,800,000원
+          </span>
+        </li>
+        <li>
+          <b>국민연금:</b>
+          <span className="ml-1">
+            과세표준(최소 370,000원, 최대 5,900,000원 범위 적용) × 4.5%<br />
+            예시: 1,800,000 × 4.5% = 81,000원
+          </span>
+        </li>
+        <li>
+          <b>건강보험:</b>
+          <span className="ml-1">
+            과세표준(최소 279,266원, 최대 110,332,300원 범위 적용) × 3.545%<br />
+            예시: 1,800,000 × 3.545% = 63,810원
+          </span>
+        </li>
+        <li>
+          <b>장기요양보험:</b>
+          <span className="ml-1">
+            건강보험료 × 12.81%<br />
+            예시: 63,810 × 12.81% ≈ 8,176원
+          </span>
+        </li>
+        <li>
+          <b>고용보험:</b>
+          <span className="ml-1">
+            과세표준 × 0.9%<br />
+            예시: 1,800,000 × 0.9% = 16,200원
+          </span>
+        </li>
+        <li>
+          <b>소득세(간이):</b>
+          <span className="ml-1">
+            과세표준 구간별로 1~3% 적용, 부양가족·자녀수에 따라 일부 공제<br />
+            예시: 과세표준 1,800,000원 → 1% = 18,000원, 가족 3명(2명 추가) → 18,000 - 10,000 = 8,000원
+          </span>
+        </li>
+        <li>
+          <b>지방소득세:</b>
+          <span className="ml-1">
+            소득세의 10%<br />
+            예시: 소득세 8,000원 × 10% = 800원
+          </span>
+        </li>
+        <li>
+          <b>실수령액 산정:</b>
+          <span className="ml-1">
+            월급(세전) - (공제액 합계) = 월 실수령액<br />
+            예시: 2,000,000 - 169,986 = 1,830,014원
+          </span>
+        </li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 본 계산기는 2025년 기준 공제율, 간이세액표를 참고하여 예시를 제공합니다.<br />
+        ※ 실제 지급액은 사업장, 가족관계, 기타 공제항목에 따라 다를 수 있습니다.
+      </div>
+    </div>
+  );
+}
 
 export default function Salary() {
   const [mode, setMode] = useState("annual");
@@ -302,6 +423,7 @@ export default function Salary() {
         </section>
       </div>
       {/* 광고/기타 */}
+      <CalculationMethodBox />
       <PageGrid />
     </main>
   );
