@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import PageGrid from "../components/PageGrid";
 
 // 천 단위 콤마
@@ -41,6 +42,57 @@ function InputRow({ label, tooltip, children }) {
     </div>
   );
 }
+
+
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">연장/야근/휴일수당 계산기</span>로 <span className="font-bold">법정 근로시간 초과 수당</span>을 간편하게 확인해보세요.
+        </li>
+        <li>
+          <span className="font-bold">연장근로수당</span>은 1일 8시간, 주 40시간을 초과한 근로에 대해 <span className="font-bold">통상임금의 50% 이상</span>을 가산해 지급합니다.
+        </li>
+        <li>
+          <span className="font-bold">야간근로수당</span>은 오후 10시~다음날 오전 6시 근로에 대해 <span className="font-bold">통상임금의 50% 이상</span>을 가산합니다.
+        </li>
+        <li>
+          <span className="font-bold">휴일근로수당</span>은 소정근로일이 아닌 휴일 근로 시 8시간 이내는 <span className="font-bold">통상임금의 50% 이상</span>, 8시간 초과는 <span className="font-bold">100% 가산</span>이 적용됩니다.
+        </li>
+        <li>
+          시급은{" "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/salary"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            시급 계산기
+          </Link>
+          에서 확인하세요.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
 
 function CalculationMethodBox() {
   return (
@@ -189,8 +241,9 @@ export default function OvertimeCalculator() {
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
-        연장/야근/휴일수당 계산기
+        연장/야간/휴일수당 계산기
       </h1>
+      <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">

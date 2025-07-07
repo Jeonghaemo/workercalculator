@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import PageGrid from "../components/PageGrid";
+import Link from "next/link";
 
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
@@ -74,6 +75,60 @@ function InputRow({ label, tooltip, children }) {
     </div>
   );
 }
+
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">근로소득세 계산기</span>로 <span className="font-bold">예상 세금</span>과 <span className="font-bold">실수령액</span>을 확인해보세요.
+        </li>
+        <li>
+          <span className="font-bold">근로소득세</span>는 연봉, 월급, 부양가족 수, 4대 보험료 등 다양한 항목을 반영해 산정됩니다.
+        </li>
+        <li>
+          4대 보험료는{" "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/four-insurances"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            4대보험 계산기
+          </Link>
+          에서 확인해 보세요.
+        </li>
+        <li>
+          월급 및 연봉 확인은{" "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/salary"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            시급 계산기
+          </Link>
+          에서 확인해 보세요.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
 
 function CalculationMethodBox() {
   return (
@@ -267,6 +322,7 @@ export default function IncomeTaxCalculator() {
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         근로소득세 계산기
       </h1>
+      <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">

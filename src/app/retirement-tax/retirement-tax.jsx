@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import PageGrid from "../components/PageGrid";
 
 // 천 단위 콤마 함수
@@ -91,6 +92,60 @@ function InputRow({ label, tooltip, children }) {
         {tooltip && <Tooltip text={tooltip} />}
       </label>
       <div className="flex-1 flex items-center gap-2">{children}</div>
+    </div>
+  );
+}
+
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">퇴직소득세 계산기</span>로 <span className="font-bold">예상 퇴직소득세액</span>과 <span className="font-bold">원천징수 세액</span>을 간편하게 확인해보세요.
+        </li>
+        <li>
+          퇴직소득세는 <span className="font-bold">퇴직급여액에서 비과세 소득을 제외한 금액</span>을 기준으로 합니다.
+        </li>
+        <li>
+          <span className="font-bold">근속연수 공제</span>를 적용해 환산급여를 산출하고,  
+          <span className="font-bold">연분연승법</span>에 따라 세율을 적용해 세액을 계산합니다.
+        </li>
+        <li>
+          2014년 개정된 규정이 2020년 이후 퇴직자부터 적용되며,  
+          종전 규정과 개정 규정에 따른 산출세액 비율이 점진적으로 조정되고 있습니다.
+        </li>
+        <li>
+          퇴직일, 입사일, 지급일, 제외월수 등 정확한 정보를 입력해야 정확한 계산이 가능합니다.
+        </li>
+        <li>
+          자세한 계산방법과 공식은{" "}
+          <Link
+            href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=6444&cntntsId=7880"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            국세청 퇴직소득세 계산방법
+          </Link>
+          에서 확인하세요.
+        </li>
+      </ul>
     </div>
   );
 }
@@ -265,7 +320,7 @@ export default function RetirementTaxCalculator() {
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-4 max-w-[1200px] mx-auto">
       <h1 className="text-3xl font-bold text-center mb-8">퇴직소득세 계산기</h1>
-      
+      <IntroBox />
       <div className="bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">

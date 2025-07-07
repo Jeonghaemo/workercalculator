@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import PageGrid from "../components/PageGrid";
+import Link from "next/link";
 
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
@@ -66,6 +67,55 @@ function InputRow({ label, tooltip, children }) {
         {tooltip && <Tooltip text={tooltip} />}
       </label>
       <div className="flex-1 flex items-center gap-2">{children}</div>
+    </div>
+  );
+}
+
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">실업급여 계산기</span>로 <span className="font-bold">예상 실업급여 수령액</span>과 <span className="font-bold">지급 기간</span>을 간편하게 확인해보세요.
+        </li>
+        <li>
+          <span className="font-bold">실업급여</span>는 퇴직 전 평균임금, 근속기간, 연령, 이직 사유 등에 따라 달라집니다.
+        </li>
+        <li>
+          <span className="font-bold">실업급여 지급액</span>은 퇴직 전 3개월간 평균임금의 60% × 지급일수로 계산합니다.
+        </li>
+        <li>
+          <span className="font-bold">지급 기간</span>은 고용보험 가입기간과 연령에 따라 다르니, 계산기에 입력해 정확히 확인하세요.
+        </li>
+        <li>
+          평균임금 및 월급 확인은{" "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/salary"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            시급 계산기
+          </Link>
+          에서 가능합니다.
+        </li>
+      </ul>
     </div>
   );
 }
@@ -200,6 +250,7 @@ export default function UnemploymentCalculator() {
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         실업급여(구직급여) 계산기
       </h1>
+      <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-12">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">

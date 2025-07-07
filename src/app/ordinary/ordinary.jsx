@@ -42,6 +42,52 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
+import Link from "next/link";
+
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">통상임금 계산기</span>로 <span className="font-bold">시간급·일급·월급 통상임금</span>을 쉽게 확인해보세요.
+        </li>
+        <li>
+          <span className="font-bold">통상임금</span>은 <span className="font-bold">정기적·일률적·고정적으로 지급되는 임금</span>으로, 연장·야간·휴일근로수당, 연차수당, 퇴직금 등 각종 수당의 산정 기준이 됩니다.
+        </li>
+        <li>
+          시급, 일급, 월급은{" "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/salary"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            시급 계산기
+          </Link>
+          에서 확인하세요.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+
 function CalculationMethodBox() {
   return (
     <div
@@ -206,6 +252,7 @@ export default function OrdinaryCalculator() {
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         통상임금 계산기
       </h1>
+      <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
