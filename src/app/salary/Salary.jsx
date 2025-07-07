@@ -64,7 +64,80 @@ function InputRow({ label, tooltip, children }) {
     </div>
   );
 }
-function CalculationMethodBox() {
+
+export default function Salary() {
+  const [mode, setMode] = useState("annual");
+  const [salary, setSalary] = useState("20000000");
+  const [taxFree, setTaxFree] = useState("200000");
+  const [family, setFamily] = useState(1);
+  const [children, setChildren] = useState(0);
+  const [result, setResult] = useState(null);
+
+  // 입력창에는 콤마 없이 숫자만
+  const handleSalaryChange = (e) => {
+    setSalary(e.target.value.replace(/[^0-9]/g, ""));
+  };
+  const handleTaxFreeChange = (e) => {
+    setTaxFree(e.target.value.replace(/[^0-9]/g, ""));
+  };
+
+  const handleCalc = () => {
+    const salaryNum = Number(salary);
+    const taxFreeNum = Number(taxFree);
+    let monthly = mode === "annual" ? Math.round(salaryNum / 12) : salaryNum;
+    const deductions = calcDeductions({
+      monthly,
+      taxFree: taxFreeNum,
+      family: Number(family),
+      children: Number(children),
+    });
+    // 세전/세후 연봉 추가
+    const annualGross = monthly * 12;
+    const annualNet = (monthly - deductions.total) * 12;
+    setResult({ ...deductions, monthly, annualGross, annualNet });
+  };
+
+  const inc = (setter, val, min = 0) => () => setter(Math.max(min, Number(val) + 1));
+  const dec = (setter, val, min = 0) => () => setter(Math.max(min, Number(val) - 1));
+
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">연봉(월급) 실수령액 계산기</span>를 이용해 <span className="font-bold">내 월급 실수령액</span>을 확인해보세요.
+        </li>
+        <li>
+          국민연금, 건강보험, 장기요양, 고용보험, 소득세, 지방소득세 등 <span className="font-bold">주요 공제액</span>을 반영합니다.
+        </li>
+        <li>
+          <span className="font-bold">실제 지급액</span>은 사업장, 가족관계, 비과세 항목 등에 따라 달라질 수 있습니다.
+        </li>
+        <li>
+          연말정산 및 추가 세액공제는 별도 적용될 수 있습니다.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+  function CalculationMethodBox() {
   return (
     <div
       className="
@@ -119,7 +192,7 @@ function CalculationMethodBox() {
           </span>
         </li>
       </ul>
-      <h2 className="text-2xl font-bold mb-4 text-blue-700">실수령액 계산방법</h2>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">연봉 실수령액 계산방법</h2>
       <ol className="list-decimal list-inside mb-4 space-y-1">
         <li>
           <b>과세표준 산정:</b>
@@ -186,46 +259,12 @@ function CalculationMethodBox() {
   );
 }
 
-export default function Salary() {
-  const [mode, setMode] = useState("annual");
-  const [salary, setSalary] = useState("20000000");
-  const [taxFree, setTaxFree] = useState("200000");
-  const [family, setFamily] = useState(1);
-  const [children, setChildren] = useState(0);
-  const [result, setResult] = useState(null);
-
-  // 입력창에는 콤마 없이 숫자만
-  const handleSalaryChange = (e) => {
-    setSalary(e.target.value.replace(/[^0-9]/g, ""));
-  };
-  const handleTaxFreeChange = (e) => {
-    setTaxFree(e.target.value.replace(/[^0-9]/g, ""));
-  };
-
-  const handleCalc = () => {
-    const salaryNum = Number(salary);
-    const taxFreeNum = Number(taxFree);
-    let monthly = mode === "annual" ? Math.round(salaryNum / 12) : salaryNum;
-    const deductions = calcDeductions({
-      monthly,
-      taxFree: taxFreeNum,
-      family: Number(family),
-      children: Number(children),
-    });
-    // 세전/세후 연봉 추가
-    const annualGross = monthly * 12;
-    const annualNet = (monthly - deductions.total) * 12;
-    setResult({ ...deductions, monthly, annualGross, annualNet });
-  };
-
-  const inc = (setter, val, min = 0) => () => setter(Math.max(min, Number(val) + 1));
-  const dec = (setter, val, min = 0) => () => setter(Math.max(min, Number(val) - 1));
-
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         연봉(월급) 실수령액 계산기
       </h1>
+      <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">

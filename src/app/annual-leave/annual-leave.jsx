@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import PageGrid from "../components/PageGrid";
+import Link from "next/link";
 
 // 천 단위 콤마
 const addComma = (value) => {
@@ -103,6 +104,54 @@ export default function AnnualLeaveCalculator() {
     setResult(null);
   };
 
+
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">연차수당 계산기</span>로 <span className="font-bold">미사용 연차수당</span>을 간편하게 확인해보세요.
+        </li>
+        <li>
+          <span className="font-bold">연차수당</span>은 <span className="font-bold">미사용 연차일수 × 1일 통상임금</span>으로 계산됩니다.
+        </li>
+        <li>
+          <span className="font-bold">1일 통상임금</span>은 <span className="font-bold">월급 ÷ 월 소정근로시간 × 1일 근로시간</span>으로 산정합니다.
+        </li>
+        <li>
+          통상임금은{" "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/ordinary"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            통상임금 계산기
+          </Link>
+          에서 확인하세요.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+
+
   function CalculationMethodBox() {
   return (
     <div
@@ -193,6 +242,7 @@ export default function AnnualLeaveCalculator() {
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         연차수당 계산기
       </h1>
+      <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">

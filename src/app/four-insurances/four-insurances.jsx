@@ -62,6 +62,64 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
+import Link from "next/link";
+
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">4대 보험 계산기</span>로 <span className="font-bold">월별 보험료</span>를 쉽게 확인해보세요.
+        </li>
+        <li>
+          국민연금, 건강보험, 장기요양, 고용보험 등 <span className="font-bold">근로자·사업주 부담금</span>을 모두 계산합니다.
+        </li>
+        <li>
+          실제 보험료는 사업장, 업종, 임금구성에 따라 달라질 수 있습니다.
+        </li>
+        <li>
+          산재보험은 업종별로 별도 산정됩니다.
+        </li>
+        <li>
+          월 급여는{" "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/salary"
+            target="_blank"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            연봉 계산기
+          </Link>
+          {" 또는 "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/hourly"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            시급 계산기
+          </Link>
+          에서 확인하세요.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+
 function CalculationMethodBox() {
   return (
     <div
@@ -218,6 +276,7 @@ export default function FourInsuranceCalculator() {
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">4대 보험 계산기</h1>
+      <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">

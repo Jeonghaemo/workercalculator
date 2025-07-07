@@ -265,6 +265,7 @@ export default function RetirementTaxCalculator() {
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-4 max-w-[1200px] mx-auto">
       <h1 className="text-3xl font-bold text-center mb-8">퇴직소득세 계산기</h1>
+      
       <div className="bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">

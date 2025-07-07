@@ -46,6 +46,53 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">시급 계산기</span>로 <span className="font-bold">예상 월급</span>과 <span className="font-bold">연봉</span>을 빠르게 확인해보세요.
+        </li>
+        <li>
+          근무일수, 근무시간, 각종 수당을 입력하면 <span className="font-bold">월 실수령액</span>까지 계산할 수 있습니다.
+        </li>
+        <li>
+          <span className="font-bold">시급, 일급, 주급, 월급, 연봉</span>으로 변환하여 계산해보세요.
+        </li>
+        <li>
+          월급/연봉 기준 계산은{" "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/salary"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            연봉 계산기
+          </Link>
+          에서 확인하세요.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+
+
 function CalculationMethodBox() {
   return (
     <div
@@ -299,6 +346,7 @@ export default function HourlyCalculator() {
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         시급 계산기
       </h1>
+      <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">

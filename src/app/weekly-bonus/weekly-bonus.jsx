@@ -45,6 +45,55 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
+import Link from "next/link";
+
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">주휴수당 계산기</span>로 <span className="font-bold">주휴수당</span>과 <span className="font-bold">예상 주급</span>을 간편하게 확인해보세요.
+        </li>
+        <li>
+          <span className="font-bold">주휴수당</span>은 <span className="font-bold">주 15시간 이상</span> 근무하고, 소정 근로일수를<Tooltip text={`소정근로일수란?\n\n근로계약, 취업규칙 등에서 정한 '근로자가 일하기로 정해진 날'의 수를 의미합니다.\n\n예: 주 5일 근무라면, 월~금 5일이 소정근로일수입니다.\n법정 휴일, 회사 지정 휴무일, 결근일 등은 소정근로일수에서 제외됩니다.`} />
+ 개근한 경우에만 지급됩니다.
+        </li>
+        <li>
+          실제 지급액은 근무일수, 결근 여부, 회사 규정 등에 따라 달라질 수 있습니다.
+        </li>
+        <li>
+          시급 및 일급은{" "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/hourly"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            시급 계산기
+          </Link>
+          에서 확인하세요.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+
 function CalculationMethodBox() {
   return (
     <div
@@ -315,6 +364,7 @@ export default function WeeklyBonusCalculator() {
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         주휴수당·주급 계산기
       </h1>
+      <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">

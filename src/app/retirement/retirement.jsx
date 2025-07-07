@@ -64,6 +64,53 @@ function Tooltip({ text }) {
   );
 }
 
+import Link from "next/link";
+
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">퇴직금 계산기</span>로 <span className="font-bold">예상 퇴직금</span>을 간편하게 확인해보세요.
+        </li>
+        <li>
+          <span className="font-bold">퇴직금</span>은 주 15시간 이상, 1년 이상 근무한 경우에만 지급됩니다.
+        </li>
+        <li>
+          회사마다 <span className="font-bold">평균임금·통상임금 기준</span>이 다를 수 있어 실제 지급액과 차이가 있을 수 있습니다.
+        </li>
+        <li>
+          퇴직금에 대한 소득세는{" "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/retirement-tax"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            퇴직소득세 계산기
+          </Link>
+          에서 확인하세요.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+
 function CalculationMethodBox() {
   return (
     <div
@@ -260,6 +307,7 @@ export default function RetirementCalculator() {
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         퇴직금 계산기
       </h1>
+      <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
