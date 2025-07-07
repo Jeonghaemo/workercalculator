@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import PageGrid from "../components/PageGrid";
+import Link from "next/link";
 
 // 천 단위 콤마
 const addComma = (value) => (value || value === 0 ? Number(value).toLocaleString() : "");
@@ -62,7 +63,6 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
-import Link from "next/link";
 
 function IntroBox() {
   return (
@@ -210,6 +210,64 @@ function CalculationMethodBox() {
   );
 }
 
+function SocialInsuranceFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">4대 보험 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 4대 보험은 어떤 기준으로 계산하나요?</div>
+          <div>
+            4대 보험료는 2025년 기준 <b>월급(세전 소득)</b>을 바탕으로 각 보험별 요율을 곱해 산정합니다. 국민연금 4.5%, 건강보험 3.545%, 장기요양보험 0.4591%, 고용보험 0.9%가 근로자 부담입니다. 산재보험은 업종별로 사업주가 전액 부담합니다. <b>주휴수당</b>이 월급에 포함되는 경우, 그 금액도 보험료 산정 기준이 됩니다<span className="text-gray-500 text-xs">[1][2][5][6]</span>.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 주휴수당도 4대 보험료 계산에 포함되나요?</div>
+          <div>
+            네, <b>주휴수당</b>은 근로계약서상 정기적·일률적으로 지급되는 임금이므로, 월급에 포함되어 4대 보험료 산정 기준이 됩니다. 주휴수당을 별도로 받는 일용직이나 단시간 근로자도 해당 금액이 월 소득에 포함됩니다<span className="text-gray-500 text-xs">[1][5][6]</span>.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 일용직 근로자도 4대 보험에 가입되나요?</div>
+          <div>
+            일용직도 일정 조건(월 8일 이상 또는 60시간 이상 근무 등)을 충족하면 국민연금, 건강보험, 고용보험 가입 대상이 됩니다. 단, 근무일수나 시간, 고용형태에 따라 일부 보험은 제외될 수 있으니, 본인의 근로조건을 반드시 확인해야 합니다<span className="text-gray-500 text-xs">[1][2]</span>.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 4대 보험료는 월급 외에 어떤 소득이 포함되나요?</div>
+          <div>
+            4대 보험 산정 기준에는 <b>월급(기본급, 고정수당, 주휴수당 등)</b>이 모두 포함됩니다. 비과세 수당이나 일시적·비정기적 수당은 제외될 수 있습니다. 실제 보험료 산정 시 회사의 급여명세서를 참고하세요<span className="text-gray-500 text-xs">[1][3][5]</span>.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 4대 보험료와 소득세는 어떻게 다르며, 둘 다 공제되나요?</div>
+          <div>
+            4대 보험료(국민연금, 건강보험, 장기요양, 고용보험)는 월급에서 자동 공제되며, <b>소득세</b> 역시 별도로 원천징수됩니다. 즉, 월급에서 4대 보험료와 소득세 모두 차감된 금액이 실제 실수령액입니다<span className="text-gray-500 text-xs">[1][5][6]</span>.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 2025년 4대 보험 요율과 상한·하한 기준은 어떻게 되나요?</div>
+          <div>
+            2025년 기준 국민연금은 4.5%, 건강보험 3.545%, 장기요양보험 0.4591%, 고용보험 0.9%입니다. 국민연금은 기준소득월액이 39만원~617만원(2024.7~2025.6 적용), 건강보험도 월 소득에 따라 상한·하한이 있습니다. 산재보험은 업종별로 다르니 확인이 필요합니다<span className="text-gray-500 text-xs">[1][2][3][5][6]</span>.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
 // 보험 계산 함수
@@ -398,6 +456,7 @@ export default function FourInsuranceCalculator() {
         </section>
       </div>
       <CalculationMethodBox />
+      <SocialInsuranceFAQBox />
       <PageGrid />
     </main>
   );

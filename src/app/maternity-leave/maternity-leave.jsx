@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import PageGrid from "../components/PageGrid";
+import Link from "next/link";
 
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
@@ -41,6 +42,54 @@ function InputRow({ label, tooltip, children }) {
     </div>
   );
 }
+
+
+function IntroBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        mt-6
+        mb-8
+        p-5
+        bg-gray-100
+        border border-gray-300
+        rounded-md
+        text-gray-800
+        text-base
+        leading-relaxed
+        text-left
+      "
+      role="note"
+    >
+      <ul className="list-disc list-inside space-y-1">
+        <li>
+          <span className="font-bold">출산휴가 급여 계산기</span>로 <span className="font-bold">예상 출산휴가 급여</span>와 <span className="font-bold">지급 기간</span>을 간편하게 확인해보세요.
+        </li>
+        <li>
+          <span className="font-bold">출산휴가 급여</span>는 통상임금, 근속기간, 고용보험 가입 여부에 따라 달라집니다.
+        </li>
+        <li>
+          <span className="font-bold">지급액</span>은 출산휴가 기간(통상 90일, 다태아 120일) 중 고용보험에서 지원되는 금액을 기준으로 산정됩니다.
+        </li>
+        <li>
+          <span className="font-bold">통상임금</span> 확인은{" "}
+          <Link
+            href="https://workercalculator.damoapick.co.kr/ordinary"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline font-bold"
+          >
+            통상임금 계산기
+          </Link>
+          에서 가능합니다.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
 
 function CalculationMethodBox() {
   return (
@@ -171,6 +220,7 @@ export default function MaternityLeave() {
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         출산휴가 급여 계산기
       </h1>
+      <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">

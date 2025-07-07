@@ -236,6 +236,67 @@ function IntroBox() {
   );
 }
 
+function AnnualLeaveFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">연차수당 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 연차수당은 언제, 어떤 기준으로 지급되나요?</div>
+          <div>
+            연차수당은 <b>연차휴가 발생 후 1년 이내에 사용하지 않은 연차</b>에 대해 <b>다음 연도 초에 일괄 지급</b>하는 것이 원칙입니다. 퇴직 시 미사용 연차가 남아 있다면 퇴직일 기준으로 정산하여 지급합니다. 지급기준은 근로기준법에 따라 회사마다 다를 수 있지만, 법정 기준을 반드시 따라야 합니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 연차수당 계산 시 통상임금은 어떻게 산정하나요?</div>
+          <div>
+            <b>통상임금</b>은 <b>월급(기본급 + 고정수당 등) ÷ 1개월 소정근로시간 × 1일 근로시간</b>으로 계산합니다. 미사용 연차수당은 <b>연차 미사용일수 × 1일 통상임금</b>으로 산정합니다. 통상임금은 연차를 청구할 수 있는 마지막 달의 임금을 기준으로 산정하는 것이 원칙입니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 신입사원이나 1년 미만 근로자도 연차수당을 받을 수 있나요?</div>
+          <div>
+            받을 수 있습니다. <b>1년 미만 근로자도 1개월 개근 시 1일의 연차가 발생</b>하며, 사용하지 않은 경우 연차수당을 받을 수 있습니다. 다만, 출근율 80% 미만 등 일부 조건에서는 발생하지 않을 수 있습니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 연차수당 지급 시 세금이 부과되나요?</div>
+          <div>
+            부과됩니다. 연차수당은 세금이 부과되는<b>근로소득</b>이며 회사가 원천징수 후 지급하는 것이 일반적입니다.
+실제 공제 내역과 세율은 근로자의 연간 소득, 회사의 급여 시스템 등에 따라 다를 수 있습니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 연차수당 지급기준이 회사마다 다를 수 있나요?</div>
+          <div>
+            일부 회사는 취업규칙이나 단체협약에 따라 지급 시기나 방식이 다를 수 있지만, <b>최소한 법정 기준(근로기준법)</b>은 반드시 준수해야 합니다. 회사 규정이 법정 기준보다 불리하면 법정 기준이 우선 적용됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 연차수당과 퇴직금은 별개인가요?</div>
+          <div>
+            <b>연차수당과 퇴직금은 별개</b>로 산정·지급됩니다. 퇴직 시 미사용 연차수당은 퇴직금과 별도로 지급받을 수 있습니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
@@ -342,6 +403,7 @@ function IntroBox() {
         
       </div>
       <CalculationMethodBox />
+      <AnnualLeaveFAQBox />
       <PageGrid />
     </main>
   );

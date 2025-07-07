@@ -127,21 +127,14 @@ function IntroBox() {
           <span className="font-bold">연분연승법</span>에 따라 세율을 적용해 세액을 계산합니다.
         </li>
         <li>
-          2014년 개정된 규정이 2020년 이후 퇴직자부터 적용되며,  
-          종전 규정과 개정 규정에 따른 산출세액 비율이 점진적으로 조정되고 있습니다.
-        </li>
-        <li>
-          퇴직일, 입사일, 지급일, 제외월수 등 정확한 정보를 입력해야 정확한 계산이 가능합니다.
-        </li>
-        <li>
-          자세한 계산방법과 공식은{" "}
+          정확한 퇴직금은{" "}
           <Link
-            href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=6444&cntntsId=7880"
+            href="https://workercalculator.damoapick.co.kr/retirement"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 underline font-bold"
           >
-            국세청 퇴직소득세 계산방법
+            퇴직금 계산기
           </Link>
           에서 확인하세요.
         </li>
