@@ -62,6 +62,13 @@ const pages = [
     icon: "🧳",
   },
   {
+  href: "/performancepay",
+  title: "성과급 계산기",
+  desc: "기준급·지급률 입력 시 세전·세후 성과급 자동 계산",
+  icon: "💰",
+}
+,
+  {
     href: "/income-tax",
     title: "근로소득세 계산기",
     desc: "월급, 연봉 등 입력 시 원천징수 근로소득세 계산",

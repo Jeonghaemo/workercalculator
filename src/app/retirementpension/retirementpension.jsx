@@ -92,7 +92,7 @@ function IntroBox() {
         </li>
         <li>
           <span className="font-bold text-blue-700">
-            예상 퇴직금은 <a href="https://workercalculator.damoapick.co.kr/retirement" target="_blank" rel="noopener noreferrer" className="underline">퇴직금 계산기</a>에서 확인하세요.
+            퇴직금은 <a href="https://workercalculator.damoapick.co.kr/retirement" target="_blank" rel="noopener noreferrer" className="underline">퇴직금 계산기</a>에서 확인하세요.
           </span>
         </li>
       </ul>
@@ -122,32 +122,37 @@ function CalculationMethodBox() {
         <li>
           <b>퇴직금(예상):</b>
           <span className="ml-1">
-            퇴직 시 받을 금액을 입력하세요. <b>정확한 금액은 퇴직금 계산기에서 확인</b>할 수 있습니다.
+            퇴직할 때 받을 금액을 입력하세요. <b>정확한 금액은 <a href="https://workercalculator.damoapick.co.kr/retirement" target="_blank" rel="noopener noreferrer" className="underline">퇴직금 계산기</a>에서 확인</b>할 수 있습니다.
           </span>
         </li>
         <li>
           <b>개인부담금(예상):</b>
           <span className="ml-1">
-            퇴직 전까지 본인이 추가로 적립할 금액(이익 포함)을 입력하세요.
+            퇴직 전까지 본인이 추가로 적립할 금액(이익 포함)을 입력하세요. IRP, DC형 추가 납입 등 모두 포함합니다.
           </span>
         </li>
         <li>
-          <b>거치기간(개월) 및 수익률:</b>
+          <b>IRP 거치기간(개월):</b>
           <span className="ml-1">
-            퇴직 후 연금 개시 전까지 IRP로 운용할 기간(개월)과 예상 수익률(%)을 입력하세요. <br />
-            <b>거치기간이란?</b> 퇴직금을 한 번에 받지 않고 일정 기간 IRP에 두고 운용하는 기간입니다.
+            퇴직 후 연금 개시 전까지 IRP에 두고 운용할 기간(개월)을 입력하세요. 이 기간 동안 적립금이 불어납니다.
+          </span>
+        </li>
+        <li>
+          <b>거치기간 수익률(%):</b>
+          <span className="ml-1">
+            거치기간 동안 예상되는 연평균 수익률(%)을 입력하세요. 일반적으로 2~5% 사이로 가정합니다.
           </span>
         </li>
         <li>
           <b>연금지급기간(년):</b>
           <span className="ml-1">
-            연금을 받을 기간(년 단위, 최대 50년)을 입력하세요.
+            연금을 몇 년 동안 나눠 받을지 입력하세요. 기간이 길수록 한 번에 받는 금액은 줄어듭니다.
           </span>
         </li>
         <li>
           <b>연금 지급주기:</b>
           <span className="ml-1">
-            1/3/6/12개월 중 원하는 지급주기를 선택하세요. <b>예: 1개월 → 매월 연금 수령</b>
+            연금을 받을 주기를 선택하세요. 예: 1개월(매월), 3개월(분기), 6개월(반기), 12개월(연 1회)
           </span>
         </li>
         <li>
@@ -157,7 +162,7 @@ function CalculationMethodBox() {
           </span>
         </li>
         <li>
-          <b>계산하기 버튼 클릭:</b>
+          <b>계산하기:</b>
           <span className="ml-1">
             모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 월 예상 연금액이 자동 계산됩니다.
           </span>
@@ -168,25 +173,39 @@ function CalculationMethodBox() {
         <li>
           <b>적립금 산정:</b>
           <span className="ml-1">
-            퇴직금 + 개인부담금에 거치기간 운용수익률을 반영해 최종 적립금을 산정합니다.
+            입력한 퇴직금과 개인부담금을 합산한 뒤, IRP 거치기간 동안의 운용수익률을 적용해 연금 개시 시점의 최종 적립금을 계산합니다.<br />
+            <span className="text-gray-600">예시: 8천만원 + 2천만원 = 1억원, 12개월 3% 운용 시 약 1억 3십만원</span>
           </span>
         </li>
         <li>
-          <b>연금 지급액 산정(원리금 균등분할):</b>
+          <b>연금 지급액 산정:</b>
           <span className="ml-1">
-            적립금 × [월이율 / (1 - (1+월이율)<sup>-개월수</sup>)]<br />
-            월이율 = 연금수령기간 운용수익률 ÷ 12<br />
-            예시: 1억원, 연 3%, 20년 수령 → 약 55만원/월
+            연금 개시 후, 지급기간(년), 지급주기(1/3/6/12개월), 연금수령기간 수익률(%)을 반영해 매번 받을 연금액을 원리금 균등분할 방식으로 계산합니다.<br />
+            <span className="text-gray-600">
+              공식: 적립금 × [월이율 / (1 - (1+월이율)<sup>-개월수</sup>)]<br />
+              (월이율 = 연금수령기간 수익률 ÷ 12)<br />
+              예시: 1억원, 연 3%, 20년 수령 → 약 55만원/월
+            </span>
+          </span>
+        </li>
+        <li>
+          <b>총 수령액:</b>
+          <span className="ml-1">
+            지급주기별 연금액 × 전체 지급 횟수(지급기간 × 12 ÷ 지급주기)<br />
+            <span className="text-gray-600">예시: 55만원 × 240회(20년) = 1억 3,200만원</span>
           </span>
         </li>
       </ol>
       <div className="text-sm text-gray-600">
-        ※ 실제 수령액은 수익률, 세금, 수수료, 중도인출 등에 따라 달라질 수 있습니다.<br />
-        ※ 이 계산기는 참고용으로, 금융기관의 실제 상품과 차이가 있을 수 있습니다.
+        ※ 실제 수령액은 수익률, 세금, 수수료, 중도인출 등 여러 요인에 따라 달라질 수 있습니다.<br />
+        ※ 이 계산기는 참고용이며, 금융기관의 실제 상품과는 차이가 있을 수 있습니다.
       </div>
     </div>
   );
 }
+
+
+
 
 export default function RetirementPensionCalculator() {
   const [severance, setSeverance] = useState("");
@@ -237,7 +256,7 @@ export default function RetirementPensionCalculator() {
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
-        퇴직연금(연금형) 예상 수령액 계산기
+        퇴직연금(연금형) 계산기
       </h1>
       <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
@@ -389,3 +408,4 @@ export default function RetirementPensionCalculator() {
     </main>
   );
 }
+
