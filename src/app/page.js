@@ -43,6 +43,12 @@ const pages = [
     icon: "🏦",
   },
   {
+  href: "/retirementpension",
+  title: "퇴직연금 계산기",
+  desc: "퇴직 전 3개월 임금, 재직일수 등 입력 시 퇴직연금(퇴직금) 자동 계산",
+  icon: "🏆",
+},
+  {
     href: "/ordinary",
     title: "통상임금 계산기",
     desc: "기본급, 각종 수당 입력 시 통상임금 자동 계산",
