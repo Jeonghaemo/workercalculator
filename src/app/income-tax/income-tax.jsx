@@ -245,6 +245,65 @@ function CalculationMethodBox() {
   );
 }
 
+function IncomeTaxFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">근로소득세 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 근로소득세는 어떻게 계산하나요?</div>
+          <div>
+            <b>근로소득세</b>는 <b>월급</b> 등 근로소득에서 각종 공제(인적공제, 연금보험료, 특별소득공제 등)를 뺀 <b>과세표준</b>에 <b>세율구간</b>별로 누진세율을 적용해 산출합니다. 산출세액에서 세액공제 등을 차감하면 실제 납부할 세금이 결정됩니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 2025년 근로소득세 세율구간은 어떻게 되나요?</div>
+          <div>
+            2025년 기준 <b>근로소득세율</b>은 과세표준에 따라 6%부터 최대 45%까지 적용됩니다. 예를 들어, 1,200만원 이하는 6%, 1,200만~4,600만원은 15%, 4,600만~8,800만원은 24% 등 <b>세율구간</b>별로 누진적으로 계산됩니다. <span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 월급에서 근로소득세는 어떻게 공제되나요?</div>
+          <div>
+            <b>월급</b>에서 근로소득세는 매월 원천징수(자동 공제)되며, 연말정산을 통해 1년간 실제 소득과 공제 내역을 합산해 최종 세금이 결정됩니다. 월급 명세서에서 근로소득세 항목을 확인할 수 있습니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 홈택스에서 근로소득세 내역을 확인할 수 있나요?</div>
+          <div>
+            네, <b>홈택스</b>에서 연말정산 내역, 근로소득 원천징수 영수증, 소득공제 내역 등을 모두 확인할 수 있습니다. 홈택스 로그인 후 [My홈택스 &gt; 연말정산/지급명세서] 메뉴를 이용하세요.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 세율구간별로 실제 내는 세금은 어떻게 계산되나요?</div>
+          <div>
+            <b>세율구간</b>별로 누진공제액이 적용되어, 예를 들어 과세표준이 5,000만원을 초과하면 624만원 + (5,000만원 초과분 × 24%) 식으로 계산됩니다. <b>국세청 홈페이지</b>나 <b>근로소득세 계산기</b>를 이용하면 자동으로 산출할 수 있습니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 근로소득세 계산 시 주의할 점은?</div>
+          <div>
+            소득공제, 세액공제 항목이 많을수록 실제 내는 세금이 줄어듭니다. <b>월급</b> 외 상여금, 수당 등도 과세 대상이 될 수 있으니, 연말정산 시 <b>홈택스</b>에서 내역을 꼼꼼히 확인하세요.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 export default function IncomeTaxCalculator() {
   const [mode, setMode] = useState("annual");
@@ -501,6 +560,7 @@ export default function IncomeTaxCalculator() {
         </section>
       </div>
       <CalculationMethodBox />
+      <IncomeTaxFAQBox />
       <PageGrid />
     </main>
   );

@@ -201,6 +201,58 @@ function CalculationMethodBox() {
   );
 }
 
+function SeveranceFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">퇴직금 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 퇴직금 계산 시 세전·세후 금액은 어떻게 다르나요?</div>
+          <div>
+            <b>세전 퇴직금</b>은 퇴직금 계산 공식에 따라 산출된 총 금액(공제 전)입니다. <b>세후 퇴직금</b>은 여기에서 퇴직소득세 등 관련 세금이 차감된 실제 수령액을 의미합니다. 세금은 퇴직금 규모, 근속연수, 평균임금 등에 따라 달라지며, 국세청 홈택스에서 세액을 확인할 수 있습니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 퇴직금 지급 기준은 어떻게 되나요?</div>
+          <div>
+            <b>퇴직금 지급 기준</b>은 근로자가 1년 이상 계속 근무하고, 주 15시간 이상 근무한 경우입니다. 계약직, 정규직, 아르바이트 등 고용형태와 무관하게 해당 조건을 충족하면 지급 대상이 됩니다. 지급 시점은 퇴직일로부터 14일 이내가 원칙입니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 퇴직금 계산 공식과 평균임금 산정 방법은?</div>
+          <div>
+            <b>퇴직금</b>은 <b>1일 평균임금 × 30일 × 근속연수</b> 공식으로 계산합니다. 1일 평균임금은 퇴직 전 3개월간 받은 총 임금(세전금액)을 해당 기간 총 일수로 나눠 산정하며, 여기에는 기본급, 상여금, 각종 수당이 포함될 수 있습니다. 평균임금이 통상임금보다 적으면 통상임금이 적용됩니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 퇴직소득세는 어떻게 계산되나요?</div>
+          <div>
+            <b>퇴직소득세</b>는 퇴직금에서 일정 금액을 공제한 후, 근속연수와 퇴직금 규모에 따라 누진세율로 산출됩니다. 세후 퇴직금은 퇴직소득세, 지방소득세 등 각종 세금이 차감된 실제 지급액입니다. 보다 정확한 세액은 국세청 홈택스나 고용노동부 계산기를 활용해 확인할 수 있습니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 퇴직금 계산에 포함되는 임금 항목은 무엇인가요?</div>
+          <div>
+            퇴직금 산정 시 <b>기본급</b>뿐 아니라, 정기적·일률적으로 지급되는 <b>상여금</b>과 각종 수당도 포함될 수 있습니다. 단, 비과세 수당이나 일시적·비정기적 수당은 제외될 수 있으니, 급여명세서를 꼼꼼히 확인해야 합니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
 // InputRow
@@ -540,6 +592,7 @@ export default function RetirementCalculator() {
         </section>
       </div>
       <CalculationMethodBox />
+      <SeveranceFAQBox />
       <PageGrid />
     </main>
   );

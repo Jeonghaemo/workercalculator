@@ -186,8 +186,8 @@ function IntroBox() {
       <h2 className="text-2xl font-bold mb-4 text-blue-700">육아휴직급여 계산방법</h2>
       <ol className="list-decimal list-inside mb-4 space-y-1">
         <li>
-          <b>월별 지급액 산정:</b>
-          <span className="ml-1">
+          <b>월별 지급액 산정:</b><br />
+          <span className="ml-0">
             <b>1~3개월차:</b> 통상임금(월)의 100% (상한 2,500,000원, 하한 700,000원)<br />
             <b>4~6개월차:</b> 통상임금(월)의 100% (상한 2,000,000원, 하한 700,000원)<br />
             <b>7개월차~:</b> 통상임금(월)의 80% (상한 1,600,000원, 하한 700,000원)<br />
@@ -226,7 +226,58 @@ function IntroBox() {
     </div>
   );
 }
-
+function ParentalLeaveFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">육아휴직 급여 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 육아휴직 급여는 어떤 금액을 기준으로 계산하나요?</div>
+          <div>
+            육아휴직 급여는 <b>통상임금</b>을 기준으로 하며, 2025년 기준 최초 6개월까지는 통상임금의 100%, 이후 개월수부터는 80%로 산정됩니다. 월별 상한액(예: 1~3개월 250만원, 4~6개월 200만원, 7개월 이후 160만원)이 적용되어 실제 지급 금액이 결정됩니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 육아휴직 급여 신청방법은 어떻게 되나요?</div>
+          <div>
+            육아휴직 급여는 육아휴직 개시 후 고용센터 방문 또는 고용24 등 온라인 시스템을 통해 <b>신청</b>할 수 있습니다. 신청 시에는 육아휴직 확인서, 통상임금 확인자료 등 관련 서류가 필요하며, 회사 인사팀의 협조가 요구될 수 있습니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 육아휴직 급여는 언제, 어떤 방식으로 지급되나요? (지급일)</div>
+          <div>
+            2025년부터는 <b>사후지급제도</b>가 폐지되어, 육아휴직 기간 중 매월 전액이 지급됩니다. 신청 후 심사를 거쳐 통상적으로 14일 이내에 지급되며, 지급일은 고용센터 처리 일정과 공휴일에 따라 달라질 수 있습니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 육아휴직 급여는 최대 몇 개월까지 받을 수 있나요?</div>
+          <div>
+            육아휴직 급여는 자녀 1인당 최대 <b>18개월(1년 6개월)</b>까지 신청할 수 있습니다. 부모가 순차적으로 사용할 경우 각자 18개월씩, 동시 사용 시에도 합산하여 18개월까지 가능합니다. 급여 산정 금액은 개월수에 따라 상이합니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 육아휴직 기간 중 공휴일이나 명절이 있으면 급여에 영향이 있나요?</div>
+          <div>
+            <b>공휴일</b>이나 명절이 포함되어 있어도 육아휴직 급여 산정에는 영향을 주지 않습니다. 육아휴직 급여는 휴직 개시일을 기준으로 한 달 단위로 지급되며, 공휴일이 포함되어도 급여 금액에는 변동이 없습니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
@@ -335,6 +386,7 @@ function IntroBox() {
         </section>
       </div>
       <CalculationMethodBox />
+      <ParentalLeaveFAQBox />
       <PageGrid />
     </main>
   );

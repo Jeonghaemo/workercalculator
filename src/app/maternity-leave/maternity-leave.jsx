@@ -171,6 +171,64 @@ function CalculationMethodBox() {
   );
 }
 
+function MaternityLeaveFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">출산휴가급여 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 출산휴가급여는 어떤 금액을 기준으로 계산하나요?</div>
+          <div>
+            <b>출산휴가급여</b>는 근로자의 <b>통상임금</b>을 기준으로 산정됩니다. 통상임금에는 기본급과 매달 고정적으로 지급되는 수당이 포함되지만, 식대·교통비·상여금 등은 제외될 수 있습니다. 2025년 기준, 월 최대 상한액과 최저임금 하한액이 적용됩니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 출산휴가급여 신청방법은 어떻게 되나요?</div>
+          <div>
+            출산휴가가 종료된 후 <b>고용센터</b> 또는 <b>고용24(온라인)</b>에서 관련 서류를 제출해 <b>신청</b>할 수 있습니다. <b>출산전후휴가 급여 등 신청서</b>, <b>출산휴가 확인서</b> 등이 필요하며, 회사의 협조가 요구될 수 있습니다. 자세한 신청방법은 고용노동부 홈페이지나 고용24 자료실에서 확인할 수 있습니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 출산휴가급여는 지급일은 언제인가요?</div>
+          <div>
+            <b>출산휴가급여</b>는 출산휴가가 끝난 후 일괄 신청하여 지급받는 것이 원칙입니다. 신청 후 심사를 거쳐 통상적으로 14일 이내에 지급되며, 지급일은 고용센터의 처리 일정에 따라 다를 수 있습니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 출산휴가급여에서 회사부담과 정부지원은 어떻게 구분되나요?</div>
+          <div>
+            <b>회사부담</b>은 출산휴가 기간 중 앞부분(예: 60일) 유급휴가에 대해 회사가 지급하는 금액이며, 이후 기간(예: 61~90일)은 정부가 고용보험을 통해 지원합니다. 회사부담금 계산 방식은 유급 일수 방식, 휴가 일수 방식 등 회사 취업규칙에 따라 다를 수 있습니다. 정부지원금과 회사부담금 합계가 실제 지급액이 됩니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 통상임금은 어떻게 산정하나요?</div>
+          <div>
+            <b>통상임금</b>은 기본급과 매달 고정적으로 지급되는 수당(직책수당, 근속수당 등)을 합산한 금액입니다. 식대, 교통비, 상여금 등은 포함되지 않을 수 있으니, 회사의 임금 규정과 급여명세서를 반드시 확인해야 합니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 출산휴가급여 금액과 상한·하한 기준은 어떻게 되나요?</div>
+          <div>
+            2025년 기준, 출산휴가급여는 월 통상임금 기준 <b>상한액</b>과 <b>하한액(최저임금)</b>이 적용됩니다. 상한액은 매년 고용노동부에서 고시하며, 하한액은 출산휴가 시작일 기준 최저시급을 반영합니다. 실제 지급 금액은 회사와 정부지원금 합산액에서 결정됩니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
 // 계산 함수
@@ -309,6 +367,7 @@ export default function MaternityLeave() {
         </section>
       </div>
       <CalculationMethodBox />
+      <MaternityLeaveFAQBox />
       <PageGrid />
     </main>
   );

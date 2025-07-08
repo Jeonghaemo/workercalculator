@@ -180,6 +180,52 @@ function CalculationMethodBox() {
   );
 }
 
+function OrdinaryWageFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">통상임금 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 통상임금이란 무엇인가요?</div>
+          <div>
+            통상임금은 근로자가 정기적이고 일률적으로 받는 임금으로, 근로기준법상 연장·야간·휴일근로수당 및 퇴직금 산정의 기준이 되는 중요한 임금입니다. 2025년 대법원 판결에 따라 상여금, 근속수당 등도 일정 조건을 충족하면 통상임금에 포함될 수 있습니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 통상임금은 어떻게 계산하나요?</div>
+          <div>
+            통상임금 계산법은 기본급, 정기상여금, 각종 고정 수당을 합산한 월급을 기준으로 하며, 이를 시간급으로 환산할 때는 월 통상임금 금액을 월 통상임금 산정 기준시간(보통 월평균 소정근로시간)으로 나눕니다. 연장근로수당 등 법정수당 산정 시 이 통상임금이 기준이 됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 시급과 통상임금의 차이는 무엇인가요?</div>
+          <div>
+            시급은 근로자가 시간 단위로 받는 임금을 의미하며, 통상임금은 시급, 일급, 주급, 월급 등 다양한 임금 형태 중 근로기준법상 수당 산정 기준이 되는 임금을 말합니다. 통상임금은 시급보다 넓은 개념으로, 상여금 등도 포함될 수 있습니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 상여금도 통상임금에 포함되나요?</div>
+          <div>
+            2025년부터는 정기적이고 일률적으로 지급되는 상여금은 통상임금에 포함될 가능성이 높아졌습니다. 특히 근로자가 일정 근무 조건을 충족했을 때 지급되는 상여금은 통상임금 산정에 반영해야 하므로, 회사의 취업규칙과 근로계약서를 꼼꼼히 확인하는 것이 중요합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
 // 통상임금 계산 함수
@@ -390,6 +436,7 @@ export default function OrdinaryCalculator() {
         </section>
       </div>
       <CalculationMethodBox />
+      <OrdinaryWageFAQBox />
       <PageGrid />
     </main>
   );

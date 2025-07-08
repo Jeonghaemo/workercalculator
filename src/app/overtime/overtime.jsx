@@ -184,6 +184,53 @@ function CalculationMethodBox() {
   );
 }
 
+function OvertimeFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">연장/야간/휴일수당 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 연장·야간·휴일수당의 계산 기준은 무엇인가요?</div>
+          <div>
+            연장수당, 야간수당, 휴일수당은 모두 <b>통상임금</b>을 <b>기준</b>으로 계산합니다. 연장근로(1일 8시간, 주 40시간 초과)는 통상임금의 1.5배, 야간근로(밤 10시~익일 6시)는 1.5배, 휴일근로는 1.5~2배(법정휴일 8시간 초과분은 2배)로 산정합니다. 2025년 기준 최저임금 이상을 반드시 보장해야 하며, 근로계약서의 임금항목도 확인이 필요합니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 주휴수당이 연장·야간·휴일수당 계산에 미치는 영향은?</div>
+          <div>
+            <b>주휴수당</b>은 주 15시간 이상 근무하고 소정근로일을 모두 개근한 근로자에게 지급되는 유급휴일수당입니다. 월급제의 경우 주휴수당이 기본급에 포함되어 있으면 별도 지급하지 않지만, 시급제·알바 등에서는 주휴수당이 별도로 지급되며, <b>연장·야간·휴일수당의 기준임금(통상임금)</b>에도 포함됩니다. 즉, 주휴수당을 포함한 시급을 기준으로 각종 수당을 계산해야 실제 법정 수당을 정확히 받을 수 있습니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 연장·야간·휴일수당 지급 조건과 주요 유의점은?</div>
+          <div>
+            연장·야간·휴일수당은 근로기준법상 의무적으로 지급해야 하며, <b>근무시간, 근로형태와 무관하게</b> 지급 기준을 충족하면 모두 적용됩니다. 주휴수당 지급 조건(주 15시간 이상 근무, 소정근로일 개근 등)도 반드시 확인해야 하며, 모든 수당은 근로계약서와 임금명세서에 명확히 표기되어야 합니다. 미지급 시 노동청에 신고할 수 있습니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 2025년 최저임금과 연장·야간·휴일수당 계산 시 주의할 점은?</div>
+          <div>
+            2025년 최저시급은 10,030원으로, 연장·야간·휴일수당을 계산할 때도 <b>최저임금 기준</b>을 반드시 반영해야 합니다. 주휴수당이 포함된 시급을 기준으로 1.5배 또는 2배를 곱해 각 수당을 산정해야 하며, 실제 지급액이 최저임금 미만이 되지 않도록 유의해야 합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 // 수당 계산 함수
 function calcOvertimePay({ hourly, ext, night, holiday, holidayOver }) {
@@ -366,6 +413,7 @@ export default function OvertimeCalculator() {
         </section>
       </div>
       <CalculationMethodBox />
+      <OvertimeFAQBox />
       <PageGrid />
     </main>
   );

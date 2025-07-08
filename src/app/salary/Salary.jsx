@@ -259,6 +259,73 @@ function IntroBox() {
   );
 }
 
+// SalaryFAQBox.jsx
+
+function SalaryFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">연봉 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 연봉 계산기에서 세전·세후 연봉은 무엇이 다른가요?</div>
+          <div>
+            <b>세전 연봉</b>은 4대보험, 소득세, 지방소득세 등 공제 전 금액이며, <b>세후 연봉</b>은 모든 공제액을 차감한 뒤 실제로 받는 <b>실수령액</b> 기준 연봉입니다. 2025년 기준, 세금과 4대보험 요율이 반영되어 계산됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 월급과 연봉의 관계는 어떻게 계산하나요?</div>
+          <div>
+            <b>연봉</b>은 월급(세전 기준) × 12개월(또는 13, 14개월 등 상여금 포함 지급 기준에 따라 다름)로 계산합니다. 월급에 상여금이 포함되어 있으면 연봉에 자동 반영됩니다. <b>월 실수령액</b>은 세후 월급을 의미합니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 비과세액(식대 등)은 연봉 계산에 어떻게 반영되나요?</div>
+          <div>
+            <b>비과세액</b>은 소득세·4대보험 등에서 제외되는 금액입니다. 식대, 자가운전보조금 등 비과세 항목을 입력하면, 해당 금액만큼 세후 실수령액이 늘어납니다. 2025년 기준 월 20만원까지 비과세 식대가 인정됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 4대보험은 연봉 계산에 어떻게 적용되나요?</div>
+          <div>
+            <b>국민연금, 건강보험, 장기요양, 고용보험</b> 등 4대보험은 월급(세전)에서 각 보험별 요율을 곱해 산정하며, 연봉 계산 시 월별 공제액이 연간 합산되어 세후 연봉에 반영됩니다. 2025년 기준 요율이 적용됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 상여금(성과급)은 연봉에 포함되나요?</div>
+          <div>
+            <b>상여금</b>이 연봉에 포함되는지 여부는 회사 규정에 따라 다릅니다. 정기적으로 지급되는 상여금은 연봉에 포함되며, 별도 지급되는 성과급·인센티브는 연봉과 별개로 계산될 수 있습니다. 상여금이 연봉에 포함되면 월급에도 자동 반영됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 퇴직금은 연봉에 포함되나요?</div>
+          <div>
+            <b>퇴직금</b>은 법적으로 연봉과 별도로 산정·지급되며, 연봉 계산기에는 포함되지 않습니다. 단, 일부 회사는 연봉에 퇴직금을 포함해 표시하기도 하니, 실제 계약서를 반드시 확인하세요.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 2025년 연봉 계산기에서 달라진 점이 있나요?</div>
+          <div>
+            2025년 기준 <b>4대보험 요율</b>과 <b>소득세율</b>이 반영되어 있습니다. 비과세액 한도, 최저임금, 상여금 지급 기준 등도 최신 기준을 적용합니다. 매년 세법과 보험 요율이 바뀔 수 있으니 최신 정보를 확인하세요.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
@@ -463,6 +530,7 @@ function IntroBox() {
       </div>
       {/* 광고/기타 */}
       <CalculationMethodBox />
+      <SalaryFAQBox />
       <PageGrid />
     </main>
   );

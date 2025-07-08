@@ -201,6 +201,70 @@ function CalculationMethodBox() {
   );
 }
 
+function HourlyWageFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">시급 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 시급 계산법은 어떻게 되나요?</div>
+          <div>
+            <b>시급 계산법</b>은 기본적으로 <b>근무시간 × 시급</b>으로 일급을 구하고, 주급·월급·연봉으로 환산할 수 있습니다. <b>통상시급</b>은 월급, 상여금, 각종 수당을 모두 포함한 총임금을 총 근로시간으로 나누어 계산합니다. <span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 2025년 최저시급과 월급, 연봉 시급은 얼마인가요?</div>
+          <div>
+            2025년 <b>최저시급</b>은 <b>10,030원</b>입니다. 월급으로 환산하면 주 40시간 근무 기준 약 <b>2,096,270원</b>, 연봉으로는 약 <b>25,155,240원</b>입니다. <b>알바 시급</b>이나 <b>월급 시급</b>, <b>연봉시급</b>을 계산할 때도 최저임금 기준을 반드시 확인해야 합니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 주휴수당은 시급 계산에 어떻게 반영되나요?</div>
+          <div>
+            <b>주휴수당</b>은 주 15시간 이상 근무 시 지급되며, 1주 소정근로시간(최대 40시간)의 비율에 따라 계산됩니다. 예를 들어, 주 20시간 근로자는 (20÷40)×8×시급으로 주휴수당을 산정합니다. 주휴수당이 포함된 시급을 계산할 때는 반드시 근로계약서와 임금명세서를 확인하세요.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 알바 시급에서 3.3% 세금은 뭔가요?</div>
+          <div>
+            <b>3.3%</b>는 프리랜서·사업소득자로 신고할 때 원천징수되는 소득세(3%)와 지방소득세(0.3%)를 합친 금액입니다. 일반적인 아르바이트(근로계약)에서는 3.3%가 아니라 4대보험 및 소득세가 적용됩니다. 본인의 고용형태에 따라 세금 공제 방식이 다르니 주의해야 합니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 야간근로 시 시급은 어떻게 계산하나요?</div>
+          <div>
+            <b>야간근로(밤 10시~익일 6시)</b>는 통상시급의 1.5배(50% 가산)를 적용해야 합니다. 예를 들어, 시급이 10,030원이라면 야간 시급은 15,045원이 됩니다. 야간근로수당은 근로기준법에 따라 별도로 지급되어야 합니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 월급제, 연봉제 근로자의 시급은 어떻게 계산하나요?</div>
+          <div>
+            <b>월급 시급</b>은 <b>월급 ÷ (주 소정근로시간 + 주휴시간) × 4.345주</b>로 계산합니다. <b>연봉시급</b>은 연봉을 12로 나눠 월급으로 환산한 뒤 같은 방식으로 시급을 구하면 됩니다. 월급에 주휴수당이 포함되어 있는지도 반드시 확인하세요.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 시급 계산 시 세금과 4대보험은 어떻게 처리되나요?</div>
+          <div>
+            <b>시급</b>에서 세전 금액은 공제 전 금액이며, 실제 지급액(실수령액)은 소득세, 4대보험 등 공제 후 금액입니다. 알바·아르바이트의 경우 근로계약이면 4대보험이 적용되고, 프리랜서로 처리되면 3.3% 세금이 원천징수됩니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
 // 급여 단위별 환산 함수 (daysPerMonth만 사용)
@@ -526,6 +590,7 @@ export default function HourlyCalculator() {
         </section>
       </div>
       <CalculationMethodBox />
+      <HourlyWageFAQBox />
       <PageGrid />
     </main>
   );

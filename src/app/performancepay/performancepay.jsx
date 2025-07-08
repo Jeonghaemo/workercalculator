@@ -172,6 +172,60 @@ function CalculationMethodBox() {
   );
 }
 
+function BonusFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">성과급 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 성과급에도 세금이 부과되나요?</div>
+          <div>
+            부과됩니다. <b>성과급</b>은 근로소득에 해당하므로 <b>소득세</b>, 4대보험(국민연금, 건강보험, 고용보험 등) 등 각종 <b>세금</b>이 공제됩니다. 성과급이 지급되는 달의 월급과 합산해 원천징수하며, 연말정산 시에도 합산되어 최종 세액이 결정됩니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 상여금과 성과급은 어떻게 다르고, 계산은 어떻게 하나요?</div>
+          <div>
+            <b>상여금</b>은 정기적으로 지급되는 보너스(예: 매월, 분기, 연 1회 등)로, 연봉에 포함될 수도 있고 별도로 지급될 수도 있습니다. <b>성과급</b>은 회사의 경영실적, 개인·팀 성과 등에 따라 지급되는 일시적 보상입니다. 연봉에 상여금이 포함된 경우 월급에 나누어 반영되고, 별도라면 지급 시기에 따라 별도로 계산합니다. 상여금과 성과급 모두 세금이 공제되며, 지급 기준은 근로계약서나 취업규칙에 명시되어 있습니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 성과급 계산 시 통상임금은 어떤 역할을 하나요?</div>
+          <div>
+            <b>통상임금</b>은 연장·야간·휴일근로수당, 퇴직금 등 각종 법정수당의 산정 기준이 되는 임금입니다. 일부 회사는 성과급이나 상여금 산정 시 통상임금을 기준으로 지급률을 정하기도 하며, 정기적·일률적으로 지급되는 상여금은 통상임금에 포함될 수 있습니다. 지급 방식과 포함 여부는 회사의 규정에 따라 다르니, 반드시 근로계약서와 취업규칙을 확인하세요.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 성과급을 받으면 실수령액은 얼마나 되나요?</div>
+          <div>
+            <b>성과급</b>은 세전 금액에서 소득세, 4대보험 등 각종 세금이 공제된 후 실제 <b>실수령액</b>이 결정됩니다. 세율은 성과급 금액, 월급, 부양가족 수, 비과세 항목 등에 따라 달라질 수 있으니, 정확한 실수령액은 계산기를 통해 확인하는 것이 좋습니다.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 상여금이나 성과급이 연봉에 포함되나요?</div>
+          <div>
+            회사마다 다르며, <b>상여금</b>이나 <b>성과급</b>이 연봉에 포함되어 있으면 월급에 나누어 반영됩니다. 별도로 지급되는 경우 해당 지급 시기에만 추가로 수령하게 됩니다. 연봉 명세서, 근로계약서에서 포함 여부를 반드시 확인하세요.<span className="text-gray-500 text-xs"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 export default function BonusCalculator() {
   const [baseType, setBaseType] = useState("annual"); // 기준급 종류
   const [baseAmount, setBaseAmount] = useState("50000000");
@@ -354,6 +408,7 @@ export default function BonusCalculator() {
       </div>
       {/* 광고/기타 */}
       <CalculationMethodBox />
+      <BonusFAQBox />
       <PageGrid />
     </main>
   );

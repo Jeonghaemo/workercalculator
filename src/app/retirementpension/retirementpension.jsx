@@ -204,7 +204,58 @@ function CalculationMethodBox() {
   );
 }
 
-
+function RetirementPensionFAQBox() {
+  return (
+    <div
+      className="
+        max-w-[1200px]
+        mx-auto
+        bg-blue-50
+        border border-blue-300
+        rounded-md
+        p-6
+        mb-10
+        mt-8
+        text-gray-800
+        leading-relaxed
+      "
+    >
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">퇴직연금 계산기 자주 묻는 질문(FAQ)</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 퇴직연금과 퇴직금의 계산 기준은 어떻게 다른가요?</div>
+          <div>
+            퇴직연금은 <b>퇴직 전 3개월 평균임금</b>을 <b>기준</b>으로 하여 산정하며, 제도 유형(DB형, DC형, IRP)에 따라 운용 방식과 수령 방법이 다릅니다. 기존 퇴직금은 퇴직 시 일시금으로 지급되지만, 퇴직연금은 적립·운용 후 연금 또는 일시금으로 받을 수 있습니다. 상여금, 수당 등도 평균임금에 포함되어 계산됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q IRP(개인형퇴직연금)란 무엇이며, 어떻게 활용하나요?</div>
+          <div>
+            <b>IRP</b>(개인형퇴직연금)는 근로자 본인이 직접 가입해 퇴직금, 추가 적립금 등을 운용할 수 있는 계좌입니다. 퇴직 시 퇴직금이나 퇴직연금을 IRP로 이체해 연금 또는 일시금으로 받을 수 있고, 연간 최대 700만원까지 세액공제 혜택이 주어집니다. IRP는 자유롭게 추가 납입이 가능하며, 운용상품 선택도 본인에게 달려 있습니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 퇴직연금 수령 시 세금은 어떻게 부과되나요?</div>
+          <div>
+            퇴직연금은 수령 방식에 따라 <b>세금</b>이 달라집니다. 일시금으로 받을 경우 퇴직소득세가 부과되고, 연금으로 받을 경우 연금소득세(3~5.5%)가 적용됩니다. IRP에 이체 후 55세 이후 연금 형태로 수령하면 세금 부담이 줄어들 수 있습니다. 세액공제 한도, 과세 기준 등은 매년 달라질 수 있으니 확인이 필요합니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 퇴직연금 계산 시 유의해야 할 기준은 무엇인가요?</div>
+          <div>
+            퇴직연금은 근속연수, 평균임금, 제도 유형(DB, DC, IRP) 등 다양한 <b>기준</b>에 따라 산정됩니다. 특히 DB형은 회사가 적립·운용하고, DC형·IRP는 본인이 운용 결과에 따라 수령액이 달라질 수 있습니다. 퇴직 전 임금명세서와 제도 안내문을 반드시 확인하세요.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 퇴직연금 관련 세금·공제 혜택은 어떻게 활용할 수 있나요?</div>
+          <div>
+            <b>IRP</b> 및 퇴직연금에 추가 납입 시 연간 최대 700만원까지 세액공제 혜택이 제공됩니다. 연금 수령 시 일정 요건을 충족하면 저율의 연금소득세가 적용되며, 중도인출 등 일부 상황에서는 별도의 세금이 부과될 수 있으니, 관련 기준을 꼼꼼히 확인하는 것이 중요합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
 export default function RetirementPensionCalculator() {
@@ -404,6 +455,7 @@ export default function RetirementPensionCalculator() {
         </section>
       </div>
       <CalculationMethodBox />
+      <RetirementPensionFAQBox />
       <PageGrid />
     </main>
   );
