@@ -329,7 +329,7 @@ function SalaryFAQBox() {
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
-        연봉(월급) 실수령액 계산기
+        연봉(월급) 계산기
       </h1>
       <IntroBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
