@@ -1,6 +1,7 @@
 // app/layout.js
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,13 +19,13 @@ export const metadata = {
     template: "%s | 근로·급여 계산기 모음",
   },
   description:
-    "연봉, 시급, 주휴수당, 퇴직금, 4대 보험, 출산휴가·육아휴직 등 각종 급여와 세금 계산기를 한 곳에서 쉽게 이용하세요.",
+    "연봉, 시급, 주휴수당, 퇴직금, 4대 보험, 출산휴가·육아휴직, 연장·야간·휴일수당, 실업급여, 성과급, 통상임금, 소득세 등 각종 급여와 세금 계산기를 한 곳에서 쉽게 이용하세요.",
   keywords:
-    "연봉 계산기, 시급 계산기, 월급 계산, 주휴수당, 퇴직금, 실수령액, 4대 보험, 2025 세금, 근로소득, 소득세, 4대보험, 워커 계산기",
+    "연봉 계산기, 시급 계산기, 월급 계산, 주휴수당, 퇴직금, 실수령액, 4대 보험, 출산휴가, 육아휴직, 연차수당, 통상임금, 실업급여, 성과급, 소득세, 퇴직소득세, 2025 세금, 근로소득, 워커 계산기",
   openGraph: {
     title: "근로·급여 계산기 모음",
     description:
-      "연봉, 시급, 주휴수당, 퇴직금, 4대 보험, 출산휴가·육아휴직 등 각종 급여와 세금 계산기를 한 곳에서 쉽게 이용하세요.",
+      "연봉, 시급, 주휴수당, 퇴직금, 4대 보험, 출산휴가·육아휴직, 연장·야간·휴일수당, 실업급여, 성과급, 통상임금, 소득세 등 각종 급여와 세금 계산기를 한 곳에서 쉽게 이용하세요.",
     url: "https://workercalculator.damoapick.co.kr",
     siteName: "근로·급여 계산기 모음",
     locale: "ko_KR",
@@ -37,9 +38,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div className="h-5" /> {/* 네비게이션바 위에 24px 여백 */}
+        <Navbar />
         {children}
       </body>
     </html>
   );
 }
-

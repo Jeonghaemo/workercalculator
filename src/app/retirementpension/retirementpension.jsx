@@ -92,7 +92,7 @@ function IntroBox() {
         </li>
         <li>
           <span className="font-bold text-blue-700">
-            퇴직금은 <a href="https://workercalculator.damoapick.co.kr/retirement" target="_blank" rel="noopener noreferrer" className="underline">퇴직금 계산기</a>에서 확인하세요.
+            예상 퇴직금은 <a href="https://workercalculator.damoapick.co.kr/retirement" target="_blank" rel="noopener noreferrer" className="underline">퇴직금 계산기</a>에서 확인하세요.
           </span>
         </li>
       </ul>
@@ -313,7 +313,7 @@ export default function RetirementPensionCalculator() {
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
-          <h3 className="font-semibold text-lg mb-6">입력 정보</h3>
+          <h3 className="font-semibold text-lg mb-6">정보 입력</h3>
           <InputRow
             label="퇴직금(예상)"
             tooltip="퇴직 시 받을 금액을 입력하세요. 정확한 금액은 퇴직금 계산기에서 확인할 수 있습니다."

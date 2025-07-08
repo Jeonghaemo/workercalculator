@@ -1,14 +1,29 @@
 // app/page.js
 export const metadata = {
   title: "근로·급여 계산기 모음",
-  description: "연봉, 시급, 주휴수당, 퇴직금, 출산휴가·육아휴직 등 각종 급여와 세금 계산기를 한 곳에서 쉽게 이용하세요.",
+  description:
+    "연봉, 시급, 주휴수당, 퇴직금, 4대 보험, 출산휴가·육아휴직, 연장·야간·휴일수당, 실업급여, 성과급, 통상임금, 소득세 등 각종 급여와 세금 계산기를 한 곳에서 쉽고 빠르게 이용하세요.",
+  keywords:
+    "연봉 계산기, 시급 계산기, 월급 계산, 주휴수당, 퇴직금, 실수령액, 4대 보험, 출산휴가, 육아휴직, 연차수당, 통상임금, 실업급여, 성과급, 소득세, 퇴직소득세, 2025 세금, 근로소득, 워커 계산기",
+  openGraph: {
+    title: "근로·급여 계산기 모음",
+    description:
+      "연봉, 시급, 주휴수당, 퇴직금, 4대 보험, 출산휴가·육아휴직, 연장·야간·휴일수당, 실업급여, 성과급, 통상임금, 소득세 등 각종 급여와 세금 계산기를 한 곳에서 쉽고 빠르게 이용하세요.",
+    url: "https://workercalculator.damoapick.co.kr",
+    siteName: "근로·급여 계산기 모음",
+    locale: "ko_KR",
+    type: "website",
+  },
+  robots: "index, follow",
 };
+
+
 import Link from "next/link";
 
 const pages = [
   {
     href: "/salary",
-    title: "연봉(월급) 실수령액 계산기",
+    title: "연봉(월급) 계산기",
     desc: "연봉, 월급, 부양가족 등 입력 시 실수령액 자동 계산",
     icon: "💰",
   },
@@ -98,13 +113,22 @@ const pages = [
     icon: "🍼",
   },
 ];
-
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col items-center py-10">
-      <h1 className="text-3xl font-bold mb-6">근로·급여 계산기 모음</h1>
-      <p className="mb-8 text-gray-600">필요한 계산기를 선택하세요.</p>
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl my-10">
+      {/* SEO: h1, 소개문구, 신뢰 강조 */}
+      <section className="max-w-4xl mx-auto text-center mb-10 px-4">
+        <h1 className="text-4xl sm:text-4xl font-bold text-gray-900 mb-6">
+  대한민국 근로자와 사업자를 위한 <span className="text-blue-700"><br />급여·근로·노무 계산기 모음</span>
+</h1>
+<p className="text-lg text-gray-700 mt-4">
+  연봉, 시급, 주휴수당, 퇴직금, 4대 보험, 출산휴가·육아휴직, 연장·야간·휴일수당, 실업급여, 성과급, 통상임금, 소득세 등 각종 급여와 세금 계산기를 한 곳에서 쉽고 빠르게 이용하세요.<br />
+  <br className="mt-4" />모든 계산기는 2025년 기준 최신 데이터와 최신 법령·실무 기준을 반영한 신뢰할 수 있는 계산기 입니다.
+</p>
+      </section>
+
+      {/* 계산기 전체 목록 그리드 */}
+      <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl my-10">
         {pages.map((page) => (
           <Link
             key={page.href}
@@ -118,9 +142,10 @@ export default function Home() {
             <p className="text-gray-500">{page.desc}</p>
           </Link>
         ))}
-      </div>
+      </section>
+
       <footer className="mt-10 text-gray-400 text-sm">
-        © 2025 근로·급여 계산기
+        © 2025 근로·급여 계산기 | 최신 법령 반영 | 문의: diekgg@naver.com
       </footer>
     </main>
   );

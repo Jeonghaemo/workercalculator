@@ -3,6 +3,7 @@ import { useState } from "react";
 import PageGrid from "../components/PageGrid";
 import Link from "next/link";
 
+
 // 천 단위 콤마
 const addComma = (value) => {
   if (!value && value !== 0) return "";
@@ -299,6 +300,7 @@ function AnnualLeaveFAQBox() {
 
 
   return (
+    
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         연차수당 계산기

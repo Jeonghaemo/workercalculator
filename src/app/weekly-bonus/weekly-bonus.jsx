@@ -349,19 +349,19 @@ function calcWeeklyPay({
   };
 }
 
-// 토글 버튼 그룹
+// 토글 버튼 그룹 컴포넌트 (파란색 강조 스타일)
 function ToggleGroup({ value, options, onChange }) {
   return (
-    <div className="flex border rounded overflow-hidden w-fit">
+    <div className="flex gap-2">
       {options.map((opt) => (
         <button
           key={opt.value}
-          className={`px-5 py-2 text-sm font-semibold border-r last:border-r-0
-            ${value === opt.value
-              ? "bg-blue-200 text-blue-800 ring-1 ring-blue-200"
-              : "bg-white text-blue-700 hover:bg-blue-50"}
-            transition`}
           onClick={() => onChange(opt.value)}
+          className={`px-6 py-2 rounded border font-semibold transition
+            ${value === opt.value
+              ? "bg-blue-600 text-white border-blue-600"
+              : "bg-white text-gray-700 border-gray-300 hover:bg-blue-50"}
+          `}
           type="button"
         >
           {opt.label}
@@ -370,6 +370,7 @@ function ToggleGroup({ value, options, onChange }) {
     </div>
   );
 }
+
 
 export default function WeeklyBonusCalculator() {
   const [inputValue, setInputValue] = useState("10030");
