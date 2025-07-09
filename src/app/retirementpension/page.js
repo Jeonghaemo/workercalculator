@@ -15,7 +15,7 @@ export const metadata = {
   robots: "index, follow",
 };
 
-import RetirementPensionCalculator from "./retirementPension";
+import RetirementPensionCalculator from "./retirementpension";
 
 export default function Page() {
   return <RetirementPensionCalculator />;
