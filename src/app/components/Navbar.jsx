@@ -90,7 +90,7 @@ export default function Navbar() {
               className="flex items-center gap-1 px-3 py-1 rounded hover:bg-blue-50 text-gray-700 hover:text-blue-700 transition text-sm font-medium"
             >
               <span>{page.icon}</span>
-              <span>{page.title}</span>
+              <span className="font-bold">{page.title}</span>
             </Link>
           ))}
         </div>
@@ -98,3 +98,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
