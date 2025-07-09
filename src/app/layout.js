@@ -40,12 +40,11 @@ export default function RootLayout({ children }) {
     <html lang="ko">
       <head>
         {/* 구글 애드센스 자동광고 스크립트 */}
-        <Script
-          id="adsense-auto"
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4564123418761220"
-          crossOrigin="anonymous"
-        />
+         <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4564123418761220"
+        crossOrigin="anonymous"
+      ></script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="h-5" /> {/* 네비게이션바 위에 24px 여백 */}
