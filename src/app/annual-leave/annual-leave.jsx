@@ -4,7 +4,6 @@ import PageGrid from "../components/PageGrid";
 import Link from "next/link";
 import Script from "next/script";
 
-
 // 천 단위 콤마
 const addComma = (value) => {
   if (!value && value !== 0) return "";
@@ -38,12 +37,12 @@ function Tooltip({ text }) {
 // InputRow 컴포넌트
 function InputRow({ label, tooltip, children }) {
   return (
-    <div className="flex items-center gap-3 mb-4 min-h-[48px]">
-      <label className="w-48 shrink-0 flex items-center text-gray-700 font-medium">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-4 min-h-[48px] w-full">
+      <label className="w-full sm:w-48 shrink-0 flex items-center text-gray-700 font-medium">
         {label}
         {tooltip && <Tooltip text={tooltip} />}
       </label>
-      <div className="flex-1 flex items-center gap-2">{children}</div>
+      <div className="flex-1 flex items-center gap-2 w-full">{children}</div>
     </div>
   );
 }
@@ -59,7 +58,6 @@ function calcAnnualLeavePay({ wage, unit, hoursPerDay, leaveDays }) {
       dailyPay = wage;
       break;
     case "monthly":
-      // 월급 ÷ (주평균근무일수 × 4.345)
       dailyPay = wage / (5 * 4.345); // 기본값: 주5일제
       break;
     default:
@@ -71,41 +69,6 @@ function calcAnnualLeavePay({ wage, unit, hoursPerDay, leaveDays }) {
     total: Math.round(total),
   };
 }
-
-export default function AnnualLeaveCalculator() {
-  const [inputValue, setInputValue] = useState("10030");
-  const [inputUnit, setInputUnit] = useState("hourly");
-  const [hoursPerDay, setHoursPerDay] = useState("8");
-  const [leaveDays, setLeaveDays] = useState("5");
-  const [result, setResult] = useState(null);
-
-  const handleNum = (setter) => (e) => {
-    setter(e.target.value.replace(/[^0-9]/g, ""));
-  };
-
-  const handleCalc = () => {
-    if (!inputValue || !hoursPerDay || !leaveDays) {
-      setResult(null);
-      return;
-    }
-    const wage = Number(inputValue);
-    const res = calcAnnualLeavePay({
-      wage,
-      unit: inputUnit,
-      hoursPerDay: Number(hoursPerDay),
-      leaveDays: Number(leaveDays),
-    });
-    setResult(res);
-  };
-
-  const reset = () => {
-    setInputValue("10030");
-    setInputUnit("hourly");
-    setHoursPerDay("8");
-    setLeaveDays("5");
-    setResult(null);
-  };
-
 
 function IntroBox() {
   return (
@@ -152,9 +115,7 @@ function IntroBox() {
   );
 }
 
-
-
-  function CalculationMethodBox() {
+function CalculationMethodBox() {
   return (
     <div
       className="
@@ -298,33 +259,63 @@ function AnnualLeaveFAQBox() {
   );
 }
 
+export default function AnnualLeaveCalculator() {
+  const [inputValue, setInputValue] = useState("10030");
+  const [inputUnit, setInputUnit] = useState("hourly");
+  const [hoursPerDay, setHoursPerDay] = useState("8");
+  const [leaveDays, setLeaveDays] = useState("5");
+  const [result, setResult] = useState(null);
 
+  const handleNum = (setter) => (e) => {
+    setter(e.target.value.replace(/[^0-9]/g, ""));
+  };
+
+  const handleCalc = () => {
+    if (!inputValue || !hoursPerDay || !leaveDays) {
+      setResult(null);
+      return;
+    }
+    const wage = Number(inputValue);
+    const res = calcAnnualLeavePay({
+      wage,
+      unit: inputUnit,
+      hoursPerDay: Number(hoursPerDay),
+      leaveDays: Number(leaveDays),
+    });
+    setResult(res);
+  };
+
+  const reset = () => {
+    setInputValue("10030");
+    setInputUnit("hourly");
+    setHoursPerDay("8");
+    setLeaveDays("5");
+    setResult(null);
+  };
 
   return (
-    
-    <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
+    <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8 w-full">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         연차수당 계산기
       </h1>
       <IntroBox />
-     <div className="my-6 max-w-3xl mx-auto px-4">
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client="ca-pub-4564123418761220"
-        data-ad-slot="2809714485"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-        data-language="ko"
-      ></ins>
-      <Script id="adsbygoogle-init" strategy="afterInteractive">
-        {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-      </Script>
-    </div>
-    
-      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
+      <div className="my-6 max-w-3xl mx-auto px-2 sm:px-4 w-full">
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client="ca-pub-4564123418761220"
+          data-ad-slot="2809714485"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+          data-language="ko"
+        ></ins>
+        <Script id="adsbygoogle-init" strategy="afterInteractive">
+          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+        </Script>
+      </div>
+      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-4 sm:p-10 flex flex-col lg:flex-row gap-8 w-full">
         {/* 좌측 입력 */}
-        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
+        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8 min-w-0">
           <h3 className="font-semibold text-lg mb-6">조건 입력</h3>
           <InputRow
             label="임금 입력"
@@ -334,7 +325,7 @@ function AnnualLeaveFAQBox() {
               type="text"
               value={inputValue}
               onChange={handleNum(setInputValue)}
-              className="w-40 border rounded px-2 py-2 text-right"
+              className="w-full max-w-[180px] border rounded px-2 py-2 text-right"
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
@@ -360,7 +351,7 @@ function AnnualLeaveFAQBox() {
                 type="text"
                 value={hoursPerDay}
                 onChange={handleNum(setHoursPerDay)}
-                className="w-40 border rounded px-2 py-2 text-right"
+                className="w-full max-w-[180px] border rounded px-2 py-2 text-right"
                 min={0}
                 inputMode="numeric"
                 pattern="[0-9]*"
@@ -377,7 +368,7 @@ function AnnualLeaveFAQBox() {
               type="text"
               value={leaveDays}
               onChange={handleNum(setLeaveDays)}
-              className="w-40 border rounded px-2 py-2 text-right"
+              className="w-full max-w-[180px] border rounded px-2 py-2 text-right"
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
@@ -385,7 +376,7 @@ function AnnualLeaveFAQBox() {
             />
             <span className="text-gray-500">일</span>
           </InputRow>
-          <div className="flex gap-2 mt-8">
+          <div className="flex gap-2 mt-8 w-full">
             <button
               onClick={handleCalc}
               className="flex-1 py-3 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
@@ -401,7 +392,7 @@ function AnnualLeaveFAQBox() {
           </div>
         </section>
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0">
+        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result ? (
             <div className="space-y-4">
@@ -418,7 +409,6 @@ function AnnualLeaveFAQBox() {
             <div className="text-gray-400 text-center mt-12">계산 결과가 여기에 표시됩니다.</div>
           )}
         </section>
-        
       </div>
       <CalculationMethodBox />
       <AnnualLeaveFAQBox />
