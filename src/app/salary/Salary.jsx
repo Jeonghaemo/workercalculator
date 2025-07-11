@@ -56,50 +56,15 @@ function calcDeductions({ monthly, taxFree, family, children }) {
 // InputRow 컴포넌트
 function InputRow({ label, tooltip, children }) {
   return (
-    <div className="flex items-center gap-3 mb-4 min-h-[48px]">
-      <label className="w-48 shrink-0 flex items-center text-gray-700 font-medium">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-4 min-h-[48px] w-full">
+      <label className="w-full sm:w-48 shrink-0 flex items-center text-gray-700 font-medium">
         {label}
         {tooltip && <Tooltip text={tooltip} />}
       </label>
-      <div className="flex-1 flex items-center gap-2">{children}</div>
+      <div className="flex-1 flex items-center gap-2 w-full">{children}</div>
     </div>
   );
 }
-
-export default function Salary() {
-  const [mode, setMode] = useState("annual");
-  const [salary, setSalary] = useState("20000000");
-  const [taxFree, setTaxFree] = useState("200000");
-  const [family, setFamily] = useState(1);
-  const [children, setChildren] = useState(0);
-  const [result, setResult] = useState(null);
-
-  // 입력창에는 콤마 없이 숫자만
-  const handleSalaryChange = (e) => {
-    setSalary(e.target.value.replace(/[^0-9]/g, ""));
-  };
-  const handleTaxFreeChange = (e) => {
-    setTaxFree(e.target.value.replace(/[^0-9]/g, ""));
-  };
-
-  const handleCalc = () => {
-    const salaryNum = Number(salary);
-    const taxFreeNum = Number(taxFree);
-    let monthly = mode === "annual" ? Math.round(salaryNum / 12) : salaryNum;
-    const deductions = calcDeductions({
-      monthly,
-      taxFree: taxFreeNum,
-      family: Number(family),
-      children: Number(children),
-    });
-    // 세전/세후 연봉 추가
-    const annualGross = monthly * 12;
-    const annualNet = (monthly - deductions.total) * 12;
-    setResult({ ...deductions, monthly, annualGross, annualNet });
-  };
-
-  const inc = (setter, val, min = 0) => () => setter(Math.max(min, Number(val) + 1));
-  const dec = (setter, val, min = 0) => () => setter(Math.max(min, Number(val) - 1));
 
 function IntroBox() {
   return (
@@ -138,7 +103,7 @@ function IntroBox() {
   );
 }
 
-  function CalculationMethodBox() {
+function CalculationMethodBox() {
   return (
     <div
       className="
@@ -260,8 +225,6 @@ function IntroBox() {
   );
 }
 
-// SalaryFAQBox.jsx
-
 function SalaryFAQBox() {
   return (
     <div
@@ -327,53 +290,83 @@ function SalaryFAQBox() {
   );
 }
 
+export default function Salary() {
+  const [mode, setMode] = useState("annual");
+  const [salary, setSalary] = useState("20000000");
+  const [taxFree, setTaxFree] = useState("200000");
+  const [family, setFamily] = useState(1);
+  const [children, setChildren] = useState(0);
+  const [result, setResult] = useState(null);
+
+  // 입력창에는 콤마 없이 숫자만
+  const handleSalaryChange = (e) => {
+    setSalary(e.target.value.replace(/[^0-9]/g, ""));
+  };
+  const handleTaxFreeChange = (e) => {
+    setTaxFree(e.target.value.replace(/[^0-9]/g, ""));
+  };
+
+  const handleCalc = () => {
+    const salaryNum = Number(salary);
+    const taxFreeNum = Number(taxFree);
+    let monthly = mode === "annual" ? Math.round(salaryNum / 12) : salaryNum;
+    const deductions = calcDeductions({
+      monthly,
+      taxFree: taxFreeNum,
+      family: Number(family),
+      children: Number(children),
+    });
+    // 세전/세후 연봉 추가
+    const annualGross = monthly * 12;
+    const annualNet = (monthly - deductions.total) * 12;
+    setResult({ ...deductions, monthly, annualGross, annualNet });
+  };
+
+  const inc = (setter, val, min = 0) => () => setter(Math.max(min, Number(val) + 1));
+  const dec = (setter, val, min = 0) => () => setter(Math.max(min, Number(val) - 1));
+
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
         연봉(월급) 계산기
       </h1>
       <IntroBox />
-      <div className="my-6 max-w-3xl mx-auto px-4">
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client="ca-pub-4564123418761220"
-        data-ad-slot="2809714485"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-        data-language="ko"
-      ></ins>
-      <Script id="adsbygoogle-init" strategy="afterInteractive">
-        {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-      </Script>
-    </div>
-      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
+      <div className="my-6 max-w-3xl mx-auto px-2 sm:px-4 w-full">
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client="ca-pub-4564123418761220"
+          data-ad-slot="2809714485"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+          data-language="ko"
+        ></ins>
+        <Script id="adsbygoogle-init" strategy="afterInteractive">
+          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+        </Script>
+      </div>
+      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-4 sm:p-10 flex flex-col lg:flex-row gap-8 w-full">
         {/* 좌측 입력 */}
-        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
+        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8 min-w-0">
           <h3 className="font-semibold text-lg mb-6">현재(희망)연봉, 월급 입력</h3>
-
           <InputRow
             label="연봉/월급 선택"
             tooltip={`연봉 또는 월급 중 입력할 급여 단위를 선택하세요.\n연봉 입력 시 12로 나눠 월급을 계산합니다.`}
           >
             <button
               onClick={() => setMode("annual")}
-              className={`px-6 py-2 rounded border ${
-                mode === "annual" ? "bg-blue-600 text-white border-blue-600" : "bg-white"
-              }`}
+              className={`px-6 py-2 rounded border ${mode === "annual" ? "bg-blue-600 text-white border-blue-600" : "bg-white"}`}
             >
               연봉
             </button>
             <button
               onClick={() => setMode("monthly")}
-              className={`px-6 py-2 rounded border ${
-                mode === "monthly" ? "bg-blue-600 text-white border-blue-600" : "bg-white"
-              }`}
+              className={`px-6 py-2 rounded border ${mode === "monthly" ? "bg-blue-600 text-white border-blue-600" : "bg-white"}`}
             >
               월급
             </button>
           </InputRow>
-<InputRow
+          <InputRow
             label={mode === "annual" ? "연봉" : "월급"}
             tooltip={`세전 금액을 입력하세요.\n(예: 연봉 2천만원, 월급 200만원 등)`}
           >
@@ -381,7 +374,7 @@ function SalaryFAQBox() {
               type="text"
               value={salary}
               onChange={handleSalaryChange}
-              className="w-46 border rounded px-2 py-2 text-right"
+              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
@@ -389,8 +382,8 @@ function SalaryFAQBox() {
             />
             <span className="text-gray-500">원</span>
           </InputRow>
-           {salary && (
-            <div style={{ color: "#3b82f6", fontWeight: "bold", textAlign: "right", marginBottom: 8 }}>
+          {salary && (
+            <div className="text-right text-blue-600 font-bold mb-2">
               입력값: {addComma(salary)} 원
             </div>
           )}
@@ -402,7 +395,7 @@ function SalaryFAQBox() {
               type="text"
               value={taxFree}
               onChange={handleTaxFreeChange}
-              className="w-40 border rounded px-2 py-2 text-right"
+              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
@@ -411,7 +404,6 @@ function SalaryFAQBox() {
             <span className="text-gray-500">원</span>
             <span className="ml-2 text-blue-600 text-sm">(기본값 20만원)</span>
           </InputRow>
-
           <InputRow
             label="부양가족수(본인포함)"
             tooltip={`소득세 공제에 반영되는 가족 수입니다.\n본인 포함, 배우자, 20세 이하 자녀, 60세 이상 부모 등.`}
@@ -425,7 +417,7 @@ function SalaryFAQBox() {
               type="text"
               value={family}
               readOnly
-              className="w-16 border rounded px-2 py-2 text-center bg-gray-50"
+              className="w-full max-w-[60px] border rounded px-2 py-2 text-center bg-gray-50"
             />
             <button
               className="w-8 h-8 border rounded text-lg"
@@ -434,7 +426,6 @@ function SalaryFAQBox() {
             >+</button>
             <span className="text-gray-500">명</span>
           </InputRow>
-
           <InputRow
             label="8세~20세 자녀수"
             tooltip={`소득세 추가 공제 대상인 8세~20세 자녀 수를 입력하세요.`}
@@ -448,7 +439,7 @@ function SalaryFAQBox() {
               type="text"
               value={children}
               readOnly
-              className="w-16 border rounded px-2 py-2 text-center bg-gray-50"
+              className="w-full max-w-[60px] border rounded px-2 py-2 text-center bg-gray-50"
             />
             <button
               className="w-8 h-8 border rounded text-lg"
@@ -457,8 +448,7 @@ function SalaryFAQBox() {
             >+</button>
             <span className="text-gray-500">명</span>
           </InputRow>
-
-          <div className="flex gap-2 mt-8">
+          <div className="flex gap-2 mt-8 w-full">
             <button
               onClick={handleCalc}
               className="flex-1 py-3 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
@@ -479,9 +469,8 @@ function SalaryFAQBox() {
             </button>
           </div>
         </section>
-
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0">
+        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result && (
             <>
@@ -543,7 +532,6 @@ function SalaryFAQBox() {
           )}
         </section>
       </div>
-      {/* 광고/기타 */}
       <CalculationMethodBox />
       <SalaryFAQBox />
       <PageGrid />

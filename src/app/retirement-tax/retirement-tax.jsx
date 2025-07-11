@@ -87,12 +87,12 @@ function Tooltip({ text }) {
 // InputRow 컴포넌트
 function InputRow({ label, tooltip, children }) {
   return (
-    <div className="flex items-center gap-3 mb-4 min-h-[48px]">
-      <label className="w-48 shrink-0 flex items-center text-gray-700 font-medium">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-4 min-h-[48px] w-full">
+      <label className="w-full sm:w-48 shrink-0 flex items-center text-gray-700 font-medium">
         {label}
         {tooltip && <Tooltip text={tooltip} />}
       </label>
-      <div className="flex-1 flex items-center gap-2">{children}</div>
+      <div className="flex-1 flex items-center gap-2 w-full">{children}</div>
     </div>
   );
 }
@@ -344,7 +344,7 @@ export default function RetirementTaxCalculator() {
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">퇴직소득세 계산기</h1>
       <IntroBox />
-      <div className="my-6 max-w-3xl mx-auto px-4">
+      <div className="my-6 max-w-3xl mx-auto px-2 sm:px-4 w-full">
         <ins
           className="adsbygoogle"
           style={{ display: "block" }}
@@ -358,16 +358,16 @@ export default function RetirementTaxCalculator() {
           {`(adsbygoogle = window.adsbygoogle || []).push({});`}
         </Script>
       </div>
-      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
+      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-4 sm:p-10 flex flex-col lg:flex-row gap-8 w-full">
         {/* 좌측 입력 */}
-        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
+        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8 min-w-0">
           <h3 className="font-semibold text-lg mb-6">조건 입력</h3>
           <InputRow label="입사일" tooltip="근무를 시작한 날짜를 선택하세요.">
             <input
               type="date"
               value={joinDate}
               onChange={(e) => setJoinDate(e.target.value)}
-              className="w-40 border rounded px-2 py-2"
+              className="w-full max-w-[120px] border rounded px-2 py-2"
               max={new Date().toISOString().split("T")[0]}
             />
           </InputRow>
@@ -376,7 +376,7 @@ export default function RetirementTaxCalculator() {
               type="date"
               value={retireDate}
               onChange={(e) => setRetireDate(e.target.value)}
-              className="w-40 border rounded px-2 py-2"
+              className="w-full max-w-[120px] border rounded px-2 py-2"
               max={new Date().toISOString().split("T")[0]}
               min={joinDate || undefined}
             />
@@ -386,13 +386,13 @@ export default function RetirementTaxCalculator() {
               type="text"
               value={retirementPay}
               onChange={handleNum(setRetirementPay)}
-              className="w-full border rounded px-2 py-2 text-right"
+              className="w-full max-w-[140px] border rounded px-2 py-2 text-right"
               placeholder="예: 100,000,000"
             />
             <span className="text-gray-500">원</span>
           </InputRow>
           {retirementPay && (
-            <div style={{ color: "#3b82f6", fontWeight: "bold", textAlign: "right", marginBottom: 8 }}>
+            <div className="text-right text-blue-600 font-bold mb-2">
               입력값: {addComma(retirementPay)} 원
             </div>
           )}
@@ -401,12 +401,12 @@ export default function RetirementTaxCalculator() {
               type="text"
               value={nonTaxIncome}
               onChange={handleNum(setNonTaxIncome)}
-              className="w-full border rounded px-2 py-2 text-right"
+              className="w-full max-w-[140px] border rounded px-2 py-2 text-right"
               placeholder="0"
             />
             <span className="text-gray-500">원</span>
           </InputRow>
-          <div className="flex gap-2 mt-8">
+          <div className="flex gap-2 mt-8 w-full">
             <button
               onClick={handleCalc}
               className="flex-1 py-3 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
@@ -423,7 +423,7 @@ export default function RetirementTaxCalculator() {
         </section>
 
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0">
+        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result ? (
             <table className="w-full text-left border-collapse">
@@ -473,3 +473,4 @@ export default function RetirementTaxCalculator() {
     </main>
   );
 }
+

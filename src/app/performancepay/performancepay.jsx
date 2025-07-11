@@ -49,12 +49,12 @@ function calcDeductions({ bonus }) {
 // InputRow 컴포넌트
 function InputRow({ label, tooltip, children }) {
   return (
-    <div className="flex items-center gap-3 mb-4 min-h-[48px]">
-      <label className="w-48 shrink-0 flex items-center text-gray-700 font-medium">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-4 min-h-[48px] w-full">
+      <label className="w-full sm:w-48 shrink-0 flex items-center text-gray-700 font-medium">
         {label}
         {tooltip && <Tooltip text={tooltip} />}
       </label>
-      <div className="flex-1 flex items-center gap-2">{children}</div>
+      <div className="flex-1 flex items-center gap-2 w-full">{children}</div>
     </div>
   );
 }
@@ -194,31 +194,31 @@ function BonusFAQBox() {
         <div>
           <div className="font-bold mb-1">Q 성과급에도 세금이 부과되나요?</div>
           <div>
-            부과됩니다. <b>성과급</b>은 근로소득에 해당하므로 <b>소득세</b>, 4대보험(국민연금, 건강보험, 고용보험 등) 등 각종 <b>세금</b>이 공제됩니다. 성과급이 지급되는 달의 월급과 합산해 원천징수하며, 연말정산 시에도 합산되어 최종 세액이 결정됩니다.<span className="text-gray-500 text-xs"></span>
+            부과됩니다. <b>성과급</b>은 근로소득에 해당하므로 <b>소득세</b>, 4대보험(국민연금, 건강보험, 고용보험 등) 등 각종 <b>세금</b>이 공제됩니다. 성과급이 지급되는 달의 월급과 합산해 원천징수하며, 연말정산 시에도 합산되어 최종 세액이 결정됩니다.
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 상여금과 성과급은 어떻게 다르고, 계산은 어떻게 하나요?</div>
           <div>
-            <b>상여금</b>은 정기적으로 지급되는 보너스(예: 매월, 분기, 연 1회 등)로, 연봉에 포함될 수도 있고 별도로 지급될 수도 있습니다. <b>성과급</b>은 회사의 경영실적, 개인·팀 성과 등에 따라 지급되는 일시적 보상입니다. 연봉에 상여금이 포함된 경우 월급에 나누어 반영되고, 별도라면 지급 시기에 따라 별도로 계산합니다. 상여금과 성과급 모두 세금이 공제되며, 지급 기준은 근로계약서나 취업규칙에 명시되어 있습니다.<span className="text-gray-500 text-xs"></span>
+            <b>상여금</b>은 정기적으로 지급되는 보너스(예: 매월, 분기, 연 1회 등)로, 연봉에 포함될 수도 있고 별도로 지급될 수도 있습니다. <b>성과급</b>은 회사의 경영실적, 개인·팀 성과 등에 따라 지급되는 일시적 보상입니다. 연봉에 상여금이 포함된 경우 월급에 나누어 반영되고, 별도라면 지급 시기에 따라 별도로 계산합니다. 상여금과 성과급 모두 세금이 공제되며, 지급 기준은 근로계약서나 취업규칙에 명시되어 있습니다.
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 성과급 계산 시 통상임금은 어떤 역할을 하나요?</div>
           <div>
-            <b>통상임금</b>은 연장·야간·휴일근로수당, 퇴직금 등 각종 법정수당의 산정 기준이 되는 임금입니다. 일부 회사는 성과급이나 상여금 산정 시 통상임금을 기준으로 지급률을 정하기도 하며, 정기적·일률적으로 지급되는 상여금은 통상임금에 포함될 수 있습니다. 지급 방식과 포함 여부는 회사의 규정에 따라 다르니, 반드시 근로계약서와 취업규칙을 확인하세요.<span className="text-gray-500 text-xs"></span>
+            <b>통상임금</b>은 연장·야간·휴일근로수당, 퇴직금 등 각종 법정수당의 산정 기준이 되는 임금입니다. 일부 회사는 성과급이나 상여금 산정 시 통상임금을 기준으로 지급률을 정하기도 하며, 정기적·일률적으로 지급되는 상여금은 통상임금에 포함될 수 있습니다. 지급 방식과 포함 여부는 회사의 규정에 따라 다르니, 반드시 근로계약서와 취업규칙을 확인하세요.
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 성과급을 받으면 실수령액은 얼마나 되나요?</div>
           <div>
-            <b>성과급</b>은 세전 금액에서 소득세, 4대보험 등 각종 세금이 공제된 후 실제 <b>실수령액</b>이 결정됩니다. 세율은 성과급 금액, 월급, 부양가족 수, 비과세 항목 등에 따라 달라질 수 있으니, 정확한 실수령액은 계산기를 통해 확인하는 것이 좋습니다.<span className="text-gray-500 text-xs"></span>
+            <b>성과급</b>은 세전 금액에서 소득세, 4대보험 등 각종 세금이 공제된 후 실제 <b>실수령액</b>이 결정됩니다. 세율은 성과급 금액, 월급, 부양가족 수, 비과세 항목 등에 따라 달라질 수 있으니, 정확한 실수령액은 계산기를 통해 확인하는 것이 좋습니다.
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 상여금이나 성과급이 연봉에 포함되나요?</div>
           <div>
-            회사마다 다르며, <b>상여금</b>이나 <b>성과급</b>이 연봉에 포함되어 있으면 월급에 나누어 반영됩니다. 별도로 지급되는 경우 해당 지급 시기에만 추가로 수령하게 됩니다. 연봉 명세서, 근로계약서에서 포함 여부를 반드시 확인하세요.<span className="text-gray-500 text-xs"></span>
+            회사마다 다르며, <b>상여금</b>이나 <b>성과급</b>이 연봉에 포함되어 있으면 월급에 나누어 반영됩니다. 별도로 지급되는 경우 해당 지급 시기에만 추가로 수령하게 됩니다. 연봉 명세서, 근로계약서에서 포함 여부를 반드시 확인하세요.
           </div>
         </div>
       </div>
@@ -226,9 +226,8 @@ function BonusFAQBox() {
   );
 }
 
-
 export default function BonusCalculator() {
-  const [baseType, setBaseType] = useState("annual"); // 기준급 종류
+  const [baseType, setBaseType] = useState("annual");
   const [baseAmount, setBaseAmount] = useState("50000000");
   const [rate, setRate] = useState("12");
   const [result, setResult] = useState(null);
@@ -244,14 +243,7 @@ export default function BonusCalculator() {
   const handleCalc = () => {
     const baseNum = Number(baseAmount);
     const rateNum = Number(rate);
-    let bonus = 0;
-    if (baseType === "annual") {
-      bonus = Math.round(baseNum * (rateNum / 100));
-    } else if (baseType === "monthly") {
-      bonus = Math.round(baseNum * (rateNum / 100));
-    } else {
-      bonus = Math.round(baseNum * (rateNum / 100));
-    }
+    let bonus = Math.round(baseNum * (rateNum / 100));
     const deductions = calcDeductions({ bonus });
     setResult({ bonus, ...deductions });
   };
@@ -269,23 +261,23 @@ export default function BonusCalculator() {
         성과급 계산기
       </h1>
       <IntroBox />
-      <div className="my-6 max-w-3xl mx-auto px-4">
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client="ca-pub-4564123418761220"
-        data-ad-slot="2809714485"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-        data-language="ko"
-      ></ins>
-      <Script id="adsbygoogle-init" strategy="afterInteractive">
-        {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-      </Script>
-    </div>
-      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
+      <div className="my-6 max-w-3xl mx-auto px-2 sm:px-4 w-full">
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client="ca-pub-4564123418761220"
+          data-ad-slot="2809714485"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+          data-language="ko"
+        ></ins>
+        <Script id="adsbygoogle-init" strategy="afterInteractive">
+          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+        </Script>
+      </div>
+      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-4 sm:p-10 flex flex-col lg:flex-row gap-8 w-full">
         {/* 좌측 입력 */}
-        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
+        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8 min-w-0">
           <h3 className="font-semibold text-lg mb-6">성과급 입력</h3>
           <InputRow
             label="기준급 종류"
@@ -293,25 +285,19 @@ export default function BonusCalculator() {
           >
             <button
               onClick={() => setBaseType("annual")}
-              className={`px-6 py-2 rounded border ${
-                baseType === "annual" ? "bg-blue-600 text-white border-blue-600" : "bg-white"
-              }`}
+              className={`px-6 py-2 rounded border ${baseType === "annual" ? "bg-blue-600 text-white border-blue-600" : "bg-white"}`}
             >
               연봉
             </button>
             <button
               onClick={() => setBaseType("monthly")}
-              className={`px-6 py-2 rounded border ${
-                baseType === "monthly" ? "bg-blue-600 text-white border-blue-600" : "bg-white"
-              }`}
+              className={`px-6 py-2 rounded border ${baseType === "monthly" ? "bg-blue-600 text-white border-blue-600" : "bg-white"}`}
             >
               월급
             </button>
             <button
               onClick={() => setBaseType("basic")}
-              className={`px-6 py-2 rounded border ${
-                baseType === "basic" ? "bg-blue-600 text-white border-blue-600" : "bg-white"
-              }`}
+              className={`px-6 py-2 rounded border ${baseType === "basic" ? "bg-blue-600 text-white border-blue-600" : "bg-white"}`}
             >
               기본급
             </button>
@@ -324,7 +310,7 @@ export default function BonusCalculator() {
               type="text"
               value={baseAmount}
               onChange={handleBaseAmountChange}
-              className="w-46 border rounded px-2 py-2 text-right"
+              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
@@ -333,7 +319,7 @@ export default function BonusCalculator() {
             <span className="text-gray-500">원</span>
           </InputRow>
           {baseAmount && (
-            <div style={{ color: "#3b82f6", fontWeight: "bold", textAlign: "right", marginBottom: 8 }}>
+            <div className="text-right text-blue-600 font-bold mb-2">
               입력값: {addComma(baseAmount)} 원
             </div>
           )}
@@ -345,7 +331,7 @@ export default function BonusCalculator() {
               type="text"
               value={rate}
               onChange={handleRateChange}
-              className="w-28 border rounded px-2 py-2 text-right"
+              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
               min={0}
               inputMode="decimal"
               pattern="[0-9.]*"
@@ -353,7 +339,7 @@ export default function BonusCalculator() {
             />
             <span className="text-gray-500">%</span>
           </InputRow>
-          <div className="flex gap-2 mt-8">
+          <div className="flex gap-2 mt-8 w-full">
             <button
               onClick={handleCalc}
               className="flex-1 py-3 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
@@ -368,9 +354,8 @@ export default function BonusCalculator() {
             </button>
           </div>
         </section>
-
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0">
+        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result && (
             <>
@@ -421,10 +406,10 @@ export default function BonusCalculator() {
           )}
         </section>
       </div>
-      {/* 광고/기타 */}
       <CalculationMethodBox />
       <BonusFAQBox />
       <PageGrid />
     </main>
   );
 }
+

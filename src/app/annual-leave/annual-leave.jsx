@@ -325,7 +325,7 @@ export default function AnnualLeaveCalculator() {
               type="text"
               value={inputValue}
               onChange={handleNum(setInputValue)}
-              className="w-full max-w-[180px] border rounded px-2 py-2 text-right"
+              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
@@ -351,7 +351,7 @@ export default function AnnualLeaveCalculator() {
                 type="text"
                 value={hoursPerDay}
                 onChange={handleNum(setHoursPerDay)}
-                className="w-full max-w-[180px] border rounded px-2 py-2 text-right"
+                className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
                 min={0}
                 inputMode="numeric"
                 pattern="[0-9]*"
@@ -368,7 +368,7 @@ export default function AnnualLeaveCalculator() {
               type="text"
               value={leaveDays}
               onChange={handleNum(setLeaveDays)}
-              className="w-full max-w-[180px] border rounded px-2 py-2 text-right"
+              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"

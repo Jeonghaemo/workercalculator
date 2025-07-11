@@ -67,12 +67,12 @@ function Tooltip({ text }) {
 // InputRow 컴포넌트
 function InputRow({ label, tooltip, children }) {
   return (
-    <div className="flex items-center gap-3 mb-4 min-h-[48px]">
-      <label className="w-48 shrink-0 flex items-center text-gray-700 font-medium whitespace-nowrap">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-4 min-h-[48px] w-full">
+      <label className="w-full sm:w-48 shrink-0 flex items-center text-gray-700 font-medium whitespace-nowrap">
         {label}
         {tooltip && <Tooltip text={tooltip} />}
       </label>
-      <div className="flex-1 flex items-center gap-2">{children}</div>
+      <div className="flex-1 flex items-center gap-2 w-full">{children}</div>
     </div>
   );
 }
@@ -129,7 +129,6 @@ function IntroBox() {
     </div>
   );
 }
-
 
 function CalculationMethodBox() {
   return (
@@ -267,44 +266,43 @@ function IncomeTaxFAQBox() {
         <div>
           <div className="font-bold mb-1">Q 근로소득세는 어떻게 계산하나요?</div>
           <div>
-            <b>근로소득세</b>는 <b>월급</b> 등 근로소득에서 각종 공제(인적공제, 연금보험료, 특별소득공제 등)를 뺀 <b>과세표준</b>에 <b>세율구간</b>별로 누진세율을 적용해 산출합니다. 산출세액에서 세액공제 등을 차감하면 실제 납부할 세금이 결정됩니다.<span className="text-gray-500 text-xs"></span>
+            <b>근로소득세</b>는 <b>월급</b> 등 근로소득에서 각종 공제(인적공제, 연금보험료, 특별소득공제 등)를 뺀 <b>과세표준</b>에 <b>세율구간</b>별로 누진세율을 적용해 산출합니다. 산출세액에서 세액공제 등을 차감하면 실제 납부할 세금이 결정됩니다.
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 2025년 근로소득세 세율구간은 어떻게 되나요?</div>
           <div>
-            2025년 기준 <b>근로소득세율</b>은 과세표준에 따라 6%부터 최대 45%까지 적용됩니다. 예를 들어, 1,200만원 이하는 6%, 1,200만~4,600만원은 15%, 4,600만~8,800만원은 24% 등 <b>세율구간</b>별로 누진적으로 계산됩니다. <span className="text-gray-500 text-xs"></span>
+            2025년 기준 <b>근로소득세율</b>은 과세표준에 따라 6%부터 최대 45%까지 적용됩니다. 예를 들어, 1,200만원 이하는 6%, 1,200만~4,600만원은 15%, 4,600만~8,800만원은 24% 등 <b>세율구간</b>별로 누진적으로 계산됩니다.
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 월급에서 근로소득세는 어떻게 공제되나요?</div>
           <div>
-            <b>월급</b>에서 근로소득세는 매월 원천징수(자동 공제)되며, 연말정산을 통해 1년간 실제 소득과 공제 내역을 합산해 최종 세금이 결정됩니다. 월급 명세서에서 근로소득세 항목을 확인할 수 있습니다.<span className="text-gray-500 text-xs"></span>
+            <b>월급</b>에서 근로소득세는 매월 원천징수(자동 공제)되며, 연말정산을 통해 1년간 실제 소득과 공제 내역을 합산해 최종 세금이 결정됩니다. 월급 명세서에서 근로소득세 항목을 확인할 수 있습니다.
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 홈택스에서 근로소득세 내역을 확인할 수 있나요?</div>
           <div>
-            네, <b>홈택스</b>에서 연말정산 내역, 근로소득 원천징수 영수증, 소득공제 내역 등을 모두 확인할 수 있습니다. 홈택스 로그인 후 [My홈택스 &gt; 연말정산/지급명세서] 메뉴를 이용하세요.<span className="text-gray-500 text-xs"></span>
+            네, <b>홈택스</b>에서 연말정산 내역, 근로소득 원천징수 영수증, 소득공제 내역 등을 모두 확인할 수 있습니다. 홈택스 로그인 후 [My홈택스 &gt; 연말정산/지급명세서] 메뉴를 이용하세요.
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 세율구간별로 실제 내는 세금은 어떻게 계산되나요?</div>
           <div>
-            <b>세율구간</b>별로 누진공제액이 적용되어, 예를 들어 과세표준이 5,000만원을 초과하면 624만원 + (5,000만원 초과분 × 24%) 식으로 계산됩니다. <b>국세청 홈페이지</b>나 <b>근로소득세 계산기</b>를 이용하면 자동으로 산출할 수 있습니다.<span className="text-gray-500 text-xs"></span>
+            <b>세율구간</b>별로 누진공제액이 적용되어, 예를 들어 과세표준이 5,000만원을 초과하면 624만원 + (5,000만원 초과분 × 24%) 식으로 계산됩니다. <b>국세청 홈페이지</b>나 <b>근로소득세 계산기</b>를 이용하면 자동으로 산출할 수 있습니다.
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 근로소득세 계산 시 주의할 점은?</div>
           <div>
-            소득공제, 세액공제 항목이 많을수록 실제 내는 세금이 줄어듭니다. <b>월급</b> 외 상여금, 수당 등도 과세 대상이 될 수 있으니, 연말정산 시 <b>홈택스</b>에서 내역을 꼼꼼히 확인하세요.<span className="text-gray-500 text-xs"></span>
+            소득공제, 세액공제 항목이 많을수록 실제 내는 세금이 줄어듭니다. <b>월급</b> 외 상여금, 수당 등도 과세 대상이 될 수 있으니, 연말정산 시 <b>홈택스</b>에서 내역을 꼼꼼히 확인하세요.
           </div>
         </div>
       </div>
     </div>
   );
 }
-
 
 export default function IncomeTaxCalculator() {
   const [mode, setMode] = useState("annual");
@@ -384,24 +382,23 @@ export default function IncomeTaxCalculator() {
       </h1>
       <IntroBox />
       <div className="my-6 max-w-3xl mx-auto px-4">
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client="ca-pub-4564123418761220"
-        data-ad-slot="2809714485"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-        data-language="ko"
-      ></ins>
-      <Script id="adsbygoogle-init" strategy="afterInteractive">
-        {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-      </Script>
-    </div>
-      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client="ca-pub-4564123418761220"
+          data-ad-slot="2809714485"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+          data-language="ko"
+        ></ins>
+        <Script id="adsbygoogle-init" strategy="afterInteractive">
+          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+        </Script>
+      </div>
+      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-4 sm:p-10 flex flex-col lg:flex-row gap-8 w-full">
         {/* 좌측 입력 */}
-        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
+        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8 min-w-0">
           <h3 className="font-semibold text-lg mb-6">조건 입력</h3>
-
           {/* 1. 연봉/월급 선택 */}
           <InputRow
             label="연봉/월급 선택"
@@ -424,7 +421,6 @@ export default function IncomeTaxCalculator() {
               월급
             </button>
           </InputRow>
-
           {/* 2. 연봉/월급 입력 */}
           <InputRow
             label={mode === "annual" ? "연봉" : "월급"}
@@ -434,7 +430,7 @@ export default function IncomeTaxCalculator() {
               type="text"
               value={salary}
               onChange={handleSalaryChange}
-              className="w-46 border rounded px-2 py-2 text-right"
+              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
@@ -447,7 +443,6 @@ export default function IncomeTaxCalculator() {
               입력값: {addComma(salary)} 원
             </div>
           )}
-
           {/* 3. 비과세액 */}
           <InputRow
             label="비과세액(식대포함)"
@@ -457,7 +452,7 @@ export default function IncomeTaxCalculator() {
               type="text"
               value={taxFree}
               onChange={handleTaxFreeChange}
-              className="w-40 border rounded px-2 py-2 text-right"
+              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
@@ -466,7 +461,6 @@ export default function IncomeTaxCalculator() {
             <span className="text-gray-500">원</span>
             <span className="ml-2 text-blue-600 text-sm">(기본값 20만원)</span>
           </InputRow>
-
           {/* 4. 부양가족수 */}
           <InputRow
             label="부양가족수(본인포함)"
@@ -481,7 +475,7 @@ export default function IncomeTaxCalculator() {
               type="text"
               value={family}
               readOnly
-              className="w-16 border rounded px-2 py-2 text-center bg-gray-50"
+              className="w-full max-w-[60px] border rounded px-2 py-2 text-center bg-gray-50"
             />
             <button
               className="w-8 h-8 border rounded text-lg"
@@ -490,7 +484,6 @@ export default function IncomeTaxCalculator() {
             >+</button>
             <span className="text-gray-500">명</span>
           </InputRow>
-
           {/* 5. 8세~20세 자녀수 */}
           <InputRow
             label="8세~20세 자녀수"
@@ -505,7 +498,7 @@ export default function IncomeTaxCalculator() {
               type="text"
               value={children}
               readOnly
-              className="w-16 border rounded px-2 py-2 text-center bg-gray-50"
+              className="w-full max-w-[60px] border rounded px-2 py-2 text-center bg-gray-50"
             />
             <button
               className="w-8 h-8 border rounded text-lg"
@@ -514,8 +507,7 @@ export default function IncomeTaxCalculator() {
             >+</button>
             <span className="text-gray-500">명</span>
           </InputRow>
-
-          <div className="flex gap-2 mt-8">
+          <div className="flex gap-2 mt-8 w-full">
             <button
               onClick={handleCalc}
               className="flex-1 py-3 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
@@ -531,7 +523,7 @@ export default function IncomeTaxCalculator() {
           </div>
         </section>
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0">
+        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result && (
             <div className="space-y-4">
@@ -580,6 +572,7 @@ export default function IncomeTaxCalculator() {
     </main>
   );
 }
+
 
 
 

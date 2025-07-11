@@ -2,6 +2,7 @@
 import { useState } from "react";
 import PageGrid from "../components/PageGrid";
 import Script from "next/script";
+import Link from "next/link";
 
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
@@ -33,17 +34,15 @@ function Tooltip({ text }) {
 // InputRow
 function InputRow({ label, tooltip, children }) {
   return (
-    <div className="flex items-center gap-3 mb-4 min-h-[48px]">
-      <label className="w-48 shrink-0 flex items-center text-gray-700 font-medium">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-4 min-h-[48px] w-full">
+      <label className="w-full sm:w-48 shrink-0 flex items-center text-gray-700 font-medium">
         {label}
         {tooltip && <Tooltip text={tooltip} />}
       </label>
-      <div className="flex-1 flex items-center gap-2">{children}</div>
+      <div className="flex-1 flex items-center gap-2 w-full">{children}</div>
     </div>
   );
 }
-
-import Link from "next/link";
 
 function IntroBox() {
   return (
@@ -87,7 +86,6 @@ function IntroBox() {
     </div>
   );
 }
-
 
 function CalculationMethodBox() {
   return (
@@ -144,7 +142,6 @@ function CalculationMethodBox() {
           </span>
         </li>
       </ul>
-
       <h2 className="text-2xl font-bold mb-4 text-blue-700">통상임금 계산방법</h2>
       <ol className="list-decimal list-inside mb-4 space-y-1">
         <li>
@@ -228,7 +225,6 @@ function OrdinaryWageFAQBox() {
   );
 }
 
-
 // 통상임금 계산 함수
 function calcOrdinary({
   wage,
@@ -300,23 +296,23 @@ export default function OrdinaryCalculator() {
         통상임금 계산기
       </h1>
       <IntroBox />
-      <div className="my-6 max-w-3xl mx-auto px-4">
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client="ca-pub-4564123418761220"
-        data-ad-slot="2809714485"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-        data-language="ko"
-      ></ins>
-      <Script id="adsbygoogle-init" strategy="afterInteractive">
-        {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-      </Script>
-    </div>
-      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-6 sm:p-10 flex flex-col lg:flex-row gap-8">
+      <div className="my-6 max-w-3xl mx-auto px-2 sm:px-4 w-full">
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client="ca-pub-4564123418761220"
+          data-ad-slot="2809714485"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+          data-language="ko"
+        ></ins>
+        <Script id="adsbygoogle-init" strategy="afterInteractive">
+          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+        </Script>
+      </div>
+      <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-4 sm:p-10 flex flex-col lg:flex-row gap-8 w-full">
         {/* 좌측 입력 */}
-        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
+        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8 min-w-0">
           <h3 className="font-semibold text-lg mb-6">조건 입력</h3>
           <InputRow
             label="임금 단위"
@@ -352,7 +348,7 @@ export default function OrdinaryCalculator() {
               type="text"
               value={wage}
               onChange={handleNum(setWage)}
-              className="w-40 border rounded px-2 py-2 text-right"
+              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
               placeholder={unit === "hourly" ? "10,030" : unit === "daily" ? "80,240" : "2,090,000"}
             />
             <span className="text-gray-500">원</span>
@@ -371,7 +367,7 @@ export default function OrdinaryCalculator() {
                 type="text"
                 value={hoursPerDay}
                 onChange={handleNum(setHoursPerDay)}
-                className="w-40 border rounded px-2 py-2 text-right"
+                className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
                 placeholder="8"
               />
               <span className="text-gray-500">시간</span>
@@ -387,7 +383,7 @@ export default function OrdinaryCalculator() {
                   type="text"
                   value={monthStdHours}
                   onChange={handleNum(setMonthStdHours)}
-                  className="w-40 border rounded px-2 py-2 text-right"
+                  className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
                   placeholder="209"
                 />
                 <span className="text-gray-500">시간</span>
@@ -400,7 +396,7 @@ export default function OrdinaryCalculator() {
                   type="text"
                   value={allowance}
                   onChange={handleNum(setAllowance)}
-                  className="w-40 border rounded px-2 py-2 text-right"
+                  className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
                   placeholder="0"
                 />
                 <span className="text-gray-500">원</span>
@@ -412,7 +408,7 @@ export default function OrdinaryCalculator() {
               )}
             </>
           )}
-          <div className="flex gap-2 mt-8">
+          <div className="flex gap-2 mt-8 w-full">
             <button
               onClick={handleCalc}
               className="flex-1 py-3 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
@@ -428,7 +424,7 @@ export default function OrdinaryCalculator() {
           </div>
         </section>
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0">
+        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result ? (
             <div className="space-y-4">
@@ -456,4 +452,5 @@ export default function OrdinaryCalculator() {
     </main>
   );
 }
+
 
