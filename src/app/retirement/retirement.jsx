@@ -4,6 +4,7 @@ import PageGrid from "../components/PageGrid";
 import Script from "next/script";
 import Link from "next/link";
 import AdsenseBox from "../components/AdsenseBox";
+import MobileToolbar from "../components/MobileToolbar";
 
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
@@ -609,6 +610,7 @@ export default function RetirementCalculator() {
       <CalculationMethodBox />
       <SeveranceFAQBox />
       <PageGrid />
+      <MobileToolbar />
     </main>
   );
 }

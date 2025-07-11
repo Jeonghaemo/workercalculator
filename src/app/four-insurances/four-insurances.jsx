@@ -4,6 +4,7 @@ import PageGrid from "../components/PageGrid";
 import Link from "next/link";
 import Script from "next/script";
 import AdsenseBox from "../components/AdsenseBox";
+import MobileToolbar from "../components/MobileToolbar";
 
 // 천 단위 콤마
 const addComma = (value) => (value || value === 0 ? Number(value).toLocaleString() : "");
@@ -459,6 +460,7 @@ export default function FourInsuranceCalculator() {
       <CalculationMethodBox />
       <SocialInsuranceFAQBox />
       <PageGrid />
+      <MobileToolbar />
     </main>
   );
 }

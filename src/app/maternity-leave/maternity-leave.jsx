@@ -4,6 +4,7 @@ import PageGrid from "../components/PageGrid";
 import Link from "next/link";
 import Script from "next/script";
 import AdsenseBox from "../components/AdsenseBox";
+import MobileToolbar from "../components/MobileToolbar";
 
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
@@ -376,6 +377,7 @@ export default function MaternityLeave() {
       <CalculationMethodBox />
       <MaternityLeaveFAQBox />
       <PageGrid />
+      <MobileToolbar />
     </main>
   );
 }

@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
 import Script from "next/script";
 import AdsenseBox from "../components/AdsenseBox";
+import MobileToolbar from "../components/MobileToolbar";
 
 // 천 단위 콤마 함수
 const addComma = (value) => {
@@ -406,6 +407,7 @@ export default function BonusCalculator() {
       <CalculationMethodBox />
       <BonusFAQBox />
       <PageGrid />
+      <MobileToolbar />
     </main>
   );
 }
