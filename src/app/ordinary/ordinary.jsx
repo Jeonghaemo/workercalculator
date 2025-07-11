@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
 import Script from "next/script";
 import Link from "next/link";
-import AdsenseBox from "./AdsenseBox";
+import AdsenseBox from "../components/AdsenseBox";
 
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
