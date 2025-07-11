@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import PageGrid from "../components/PageGrid";
 import Script from "next/script";
@@ -298,6 +298,8 @@ export default function Salary() {
   const [children, setChildren] = useState(0);
   const [result, setResult] = useState(null);
 
+  const resultRef = useRef(null); // 결과 스크롤용 ref
+
   // 입력창에는 콤마 없이 숫자만
   const handleSalaryChange = (e) => {
     setSalary(e.target.value.replace(/[^0-9]/g, ""));
@@ -320,6 +322,13 @@ export default function Salary() {
     const annualGross = monthly * 12;
     const annualNet = (monthly - deductions.total) * 12;
     setResult({ ...deductions, monthly, annualGross, annualNet });
+
+    // 계산 후 모바일에서 결과로 스크롤
+    setTimeout(() => {
+      if (typeof window !== "undefined" && window.innerWidth < 1024 && resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
   };
 
   const inc = (setter, val, min = 0) => () => setter(Math.max(min, Number(val) + 1));
@@ -470,7 +479,7 @@ export default function Salary() {
           </div>
         </section>
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
+        <section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result && (
             <>
@@ -538,3 +547,4 @@ export default function Salary() {
     </main>
   );
 }
+

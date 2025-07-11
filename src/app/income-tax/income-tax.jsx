@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
 import Link from "next/link";
 import Script from "next/script";
@@ -312,6 +312,8 @@ export default function IncomeTaxCalculator() {
   const [children, setChildren] = useState(0);
   const [result, setResult] = useState(null);
 
+  const resultRef = useRef(null); // 스크롤용 ref
+
   // 입력값 처리
   const handleSalaryChange = (e) => {
     setSalary(e.target.value.replace(/[^0-9]/g, ""));
@@ -360,6 +362,13 @@ export default function IncomeTaxCalculator() {
       annualGross: annualIncome,
       annualNet: (monthly - totalTax) * 12,
     });
+
+    // 모바일에서 결과로 스크롤
+    setTimeout(() => {
+      if (typeof window !== "undefined" && window.innerWidth < 1024 && resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
   };
 
   // 증감 버튼
@@ -523,7 +532,7 @@ export default function IncomeTaxCalculator() {
           </div>
         </section>
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
+        <section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result && (
             <div className="space-y-4">

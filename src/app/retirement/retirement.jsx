@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
 import Script from "next/script";
 import Link from "next/link";
@@ -286,6 +286,8 @@ export default function RetirementCalculator() {
   const [simpleResult, setSimpleResult] = useState(null);
   const [detailResult, setDetailResult] = useState(null);
 
+  const resultRef = useRef(null); // 결과 스크롤용 ref
+
   // 날짜 입력시 재직일수 자동 계산
   const handleStartDate = (e) => {
     setStartDate(e.target.value);
@@ -322,6 +324,13 @@ export default function RetirementCalculator() {
         serviceDays: Number(serviceDays),
       })
     );
+
+    // 계산 후 모바일에서 결과로 스크롤
+    setTimeout(() => {
+      if (typeof window !== "undefined" && window.innerWidth < 1024 && resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
   };
 
   const handleDetailCalc = () => {
@@ -337,6 +346,13 @@ export default function RetirementCalculator() {
         serviceDays: Number(serviceDays),
       })
     );
+
+    // 계산 후 모바일에서 결과로 스크롤
+    setTimeout(() => {
+      if (typeof window !== "undefined" && window.innerWidth < 1024 && resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
   };
 
   const reset = () => {
@@ -549,7 +565,7 @@ export default function RetirementCalculator() {
           </div>
         </section>
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
+        <section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {tab === "simple" && simpleResult ? (
             <div className="space-y-4">
@@ -608,3 +624,4 @@ export default function RetirementCalculator() {
     </main>
   );
 }
+

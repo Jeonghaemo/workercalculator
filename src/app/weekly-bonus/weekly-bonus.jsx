@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
 import Script from "next/script";
 import Link from "next/link";
@@ -252,7 +252,38 @@ function WeeklyHolidayPayFAQBox() {
       "
     >
       <h2 className="text-2xl font-bold mb-4 text-blue-700">주휴수당 계산기 자주 묻는 질문(FAQ)</h2>
-      {/* ...생략, 기존과 동일... */}
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 주휴수당이란 무엇인가요?</div>
+          <div>
+            <b>주휴수당</b>은 근로기준법에 따라 1주일 동안 소정근로일을 모두 출근한 근로자에게 지급되는 유급휴일수당입니다. 즉, 일하지 않아도 받는 하루치 임금으로, 사용자는 근로자에게 1주에 평균 1회 이상의 유급휴일을 보장해야 하며, 이 유급휴일에 해당하는 임금을 별도로 지급해야 합니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 주휴수당의 지급 조건 및 기준은 어떻게 되나요?</div>
+          <div>
+            <b>주휴수당 조건 및 기준</b>은 다음과 같습니다. 1주일에 소정근로시간이 15시간 이상이고, 근로계약서상 정해진 근무일을 모두 개근해야 지급 대상이 됩니다. 사업장 규모(5인 미만 포함)와 관계없이 적용되며, 감시적·단속적 근로자 등 일부 예외를 제외하고 대부분의 근로자가 해당됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 주휴수당 계산법은 어떻게 되나요?</div>
+          <div>
+            주휴수당은 근로시간에 따라 계산법이 다릅니다. 주 40시간 이상 근무자는 <b>1일 소정근로시간 × 시급</b>으로, 주 15시간 이상 40시간 미만 근무자는 <b>(1주 소정근로시간 ÷ 5) × 시급</b> 또는 <b>(1주 소정근로시간 × 8 ÷ 40) × 시급</b> 방식으로 산정합니다. 주휴수당은 최저임금 기준을 반드시 충족해야 하며, 1일 최대 8시간까지만 인정됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 주휴수당 지급에서 제외되는 경우도 있나요?</div>
+          <div>
+            제외되는 경우도 있습니다. 1주 소정근로시간이 15시간 미만인 근로자, 결근·지각 등으로 개근 요건을 충족하지 못한 경우, 감시적·단속적 근로자 등은 <b>주휴수당 지급 대상에서 제외</b>됩니다. 근로계약서상 근무일수, 실제 출근 기록을 반드시 확인해야 합니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 주휴수당을 지급하지 않으면 어떤 문제가 발생하나요?</div>
+          <div>
+            주휴수당은 근로기준법상 의무사항으로, 미지급 시 2년 이하의 징역 또는 2천만원 이하의 벌금이 부과될 수 있습니다. 정기적으로 급여를 지급할 때 반드시 주휴수당을 포함해 산정해야 하며, 근로계약서와 임금명세서를 꼼꼼히 확인하는 것이 중요합니다.
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -348,6 +379,8 @@ export default function WeeklyBonusCalculator() {
   const [taxType, setTaxType] = useState("four");
   const [result, setResult] = useState(null);
 
+  const resultRef = useRef(null); // 결과 스크롤용 ref
+
   // 숫자만 입력
   const handleNum = (setter) => (e) => {
     setter(e.target.value.replace(/[^0-9]/g, ""));
@@ -368,6 +401,13 @@ export default function WeeklyBonusCalculator() {
       taxType,
     });
     setResult(res);
+
+    // 계산 후 모바일에서 결과로 스크롤
+    setTimeout(() => {
+      if (typeof window !== "undefined" && window.innerWidth < 1024 && resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
   };
 
   const reset = () => {
@@ -507,7 +547,7 @@ export default function WeeklyBonusCalculator() {
           </div>
         </section>
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
+        <section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result ? (
             <div className="space-y-4">

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
 import Link from "next/link";
 import Script from "next/script";
@@ -247,6 +247,8 @@ export default function MaternityLeave() {
   const [days, setDays] = useState(90); // 기본 90일
   const [result, setResult] = useState(null);
 
+  const resultRef = useRef(null); // 결과 스크롤 ref
+
   // 숫자만 입력
   const handleNum = (setter) => (e) => {
     setter(e.target.value.replace(/[^0-9]/g, ""));
@@ -261,6 +263,13 @@ export default function MaternityLeave() {
       return;
     }
     setResult(calcMaternityPay({ wage: wageNum, days: daysNum }));
+
+    // 계산 후 모바일에서 결과로 스크롤
+    setTimeout(() => {
+      if (typeof window !== "undefined" && window.innerWidth < 1024 && resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
   };
 
   // 초기화
@@ -346,7 +355,7 @@ export default function MaternityLeave() {
         </section>
 
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
+        <section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result ? (
             <div className="space-y-4">

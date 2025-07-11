@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import PageGrid from "../components/PageGrid";
 import Script from "next/script";
@@ -281,7 +281,30 @@ function RetirementTaxFAQBox() {
             <b>퇴직소득세</b>는 퇴직소득금액(퇴직급여액-비과세소득)과 근속연수에 따라 누진 <b>세율</b>이 적용됩니다. 일반 소득세와 달리 근속연수만큼 세 부담이 경감되는 구조로, 국세청 <b>홈택스</b>나 공식 계산기를 통해 정확한 세액을 확인할 수 있습니다.
           </div>
         </div>
-        {/* FAQ 내용 동일하게 추가 */}
+        <div>
+          <div className="font-bold mb-1">Q 퇴직소득세는 어떻게 줄일 수 있나요?</div>
+          <div>
+            퇴직소득세는 근속연수가 길수록, 퇴직금이 분산지급될수록 세 부담이 낮아집니다. 비과세 소득(장해보상금 등)도 제외되며, 정확한 세율은 국세청 계산기에서 확인 가능합니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 퇴직소득세 계산에 포함되는 항목은?</div>
+          <div>
+            <b>퇴직소득세</b>는 퇴직급여에서 비과세 소득을 뺀 금액, 근속연수, 각종 공제액(근속연수공제, 차등공제 등)을 반영해 계산합니다. 연말정산 소득세와는 별도로 산정됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 퇴직소득세 신고 및 납부는 어떻게 하나요?</div>
+          <div>
+            회사(원천징수의무자)가 퇴직소득세를 원천징수해 국세청에 신고·납부합니다. 근로자는 별도 신고 의무가 없으나, 퇴직소득원천징수영수증을 꼭 확인하세요.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 퇴직소득세와 연말정산 소득세는 다른가요?</div>
+          <div>
+            네, <b>퇴직소득세</b>는 퇴직금에만 부과되며, 연말정산 소득세와는 별개로 계산·납부됩니다.
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -293,6 +316,8 @@ export default function RetirementTaxCalculator() {
   const [retirementPay, setRetirementPay] = useState("");
   const [nonTaxIncome, setNonTaxIncome] = useState("0");
   const [result, setResult] = useState(null);
+
+  const resultRef = useRef(null); // 결과 스크롤용 ref
 
   // 숫자만 입력
   const handleNum = (setter) => (e) => {
@@ -330,6 +355,13 @@ export default function RetirementTaxCalculator() {
       calculatedTax,
       finalTax,
     });
+
+    // 계산 후 모바일에서 결과로 스크롤
+    setTimeout(() => {
+      if (typeof window !== "undefined" && window.innerWidth < 1024 && resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
   };
 
   const reset = () => {
@@ -423,7 +455,7 @@ export default function RetirementTaxCalculator() {
         </section>
 
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
+        <section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result ? (
             <table className="w-full text-left border-collapse">
@@ -473,4 +505,5 @@ export default function RetirementTaxCalculator() {
     </main>
   );
 }
+
 

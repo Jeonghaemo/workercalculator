@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
 import Link from "next/link";
 import Script from "next/script";
@@ -227,18 +227,41 @@ function SocialInsuranceFAQBox() {
     >
       <h2 className="text-2xl font-bold mb-4 text-blue-700">4대 보험 계산기 자주 묻는 질문(FAQ)</h2>
       <div className="space-y-6">
-        {/* FAQ 내용 동일 */}
         <div>
           <div className="font-bold mb-1">Q 4대 보험은 어떤 기준으로 계산하나요?</div>
           <div>
-            4대 보험료는 2025년 기준 <b>월급(세전 소득)</b>을 바탕으로 각 보험별 요율을 곱해 산정합니다. 국민연금 4.5%, 건강보험 3.545%, 장기요양보험 0.4591%, 고용보험 0.9%가 근로자 부담입니다. 산재보험은 업종별로 사업주가 전액 부담합니다. <b>주휴수당</b>이 월급에 포함되는 경우, 그 금액도 보험료 산정 기준이 됩니다<span className="text-gray-500 text-xs"></span>.
+            4대 보험료는 2025년 기준 <b>월급(세전 소득)</b>을 바탕으로 각 보험별 요율을 곱해 산정합니다. 국민연금 4.5%, 건강보험 3.545%, 장기요양보험 0.4591%, 고용보험 0.9%가 근로자 부담입니다. 산재보험은 업종별로 사업주가 전액 부담합니다. <b>주휴수당</b>이 월급에 포함되는 경우, 그 금액도 보험료 산정 기준이 됩니다.
           </div>
         </div>
-        {/* ...이하 FAQ 동일 */}
+        <div>
+          <div className="font-bold mb-1">Q 4대 보험료는 근로자와 사업주가 어떻게 나눠 내나요?</div>
+          <div>
+            국민연금, 건강보험, 장기요양보험, 고용보험 모두 근로자와 사업주가 절반씩 부담합니다(고용보험 사업주 부담분은 기업 규모별로 차등). 산재보험은 사업주가 전액 부담합니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 4대 보험료는 연봉으로 계산할 수 있나요?</div>
+          <div>
+            네, 연봉을 12로 나눠 월급(세전 소득)으로 환산한 뒤 월별 보험료를 계산하면 됩니다. 각 보험별 요율은 월급에 적용됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 4대 보험료는 매년 바뀌나요?</div>
+          <div>
+            네, 국민연금, 건강보험, 고용보험 등은 매년 요율이 변동될 수 있으니, 최신 공시를 반드시 확인해야 합니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 산재보험은 왜 계산에 안 나오나요?</div>
+          <div>
+            산재보험은 업종별로 요율이 다르고, 사업주가 전액 부담하므로 본 계산기에서는 별도로 산정하지 않습니다.
+          </div>
+        </div>
       </div>
     </div>
   );
 }
+
 
 // 보험 계산 함수
 function calcInsurances(salary, companyType) {
@@ -281,6 +304,7 @@ export default function FourInsuranceCalculator() {
   const [salary, setSalary] = useState("");
   const [companyType, setCompanyType] = useState("150미만");
   const [result, setResult] = useState(null);
+  const resultRef = useRef(null);
 
   // 입력 처리
   const handleSalary = (e) => setSalary(e.target.value.replace(/[^0-9]/g, ""));
@@ -294,7 +318,11 @@ export default function FourInsuranceCalculator() {
     }
     setResult(calcInsurances(monthly, companyType));
   };
-
+setTimeout(() => {
+  if (typeof window !== "undefined" && window.innerWidth < 1024 && resultRef.current) {
+    resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}, 100);
   const reset = () => {
     setSalary("");
     setCompanyType("150미만");
@@ -321,7 +349,7 @@ export default function FourInsuranceCalculator() {
       </div>
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-4 sm:p-10 flex flex-col lg:flex-row gap-8 w-full">
         {/* 좌측 입력 */}
-        <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8 min-w-0">
+        <section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">급여 입력</h3>
           <InputRow
             label="월 급여"
@@ -389,7 +417,7 @@ export default function FourInsuranceCalculator() {
         </section>
 
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
+        <section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result ? (
             <div className="space-y-2">
