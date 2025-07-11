@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import PageGrid from "../components/PageGrid";
 import Script from "next/script";
+import AdsenseBox from "./AdsenseBox";
 
 // 천 단위 콤마 함수
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
@@ -131,7 +132,6 @@ function IntroBox() {
           정확한 퇴직금은{" "}
           <Link
             href="https://workercalculator.damoapick.co.kr/retirement"
-            target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 underline font-bold"
           >
@@ -376,20 +376,7 @@ export default function RetirementTaxCalculator() {
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">퇴직소득세 계산기</h1>
       <IntroBox />
-      <div className="my-6 max-w-3xl mx-auto px-2 sm:px-4 w-full">
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-4564123418761220"
-          data-ad-slot="2809714485"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-          data-language="ko"
-        ></ins>
-        <Script id="adsbygoogle-init" strategy="afterInteractive">
-          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-        </Script>
-      </div>
+      <AdsenseBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-4 sm:p-10 flex flex-col lg:flex-row gap-8 w-full">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8 min-w-0">

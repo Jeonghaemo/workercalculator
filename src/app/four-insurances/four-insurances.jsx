@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
 import Link from "next/link";
 import Script from "next/script";
+import AdsenseBox from "./AdsenseBox";
 
 // 천 단위 콤마
 const addComma = (value) => (value || value === 0 ? Number(value).toLocaleString() : "");
@@ -100,7 +101,6 @@ function IntroBox() {
           월 급여는{" "}
           <Link
             href="https://workercalculator.damoapick.co.kr/salary"
-            target="_blank"
             className="text-blue-600 hover:text-blue-800 underline font-bold"
           >
             연봉 계산기
@@ -262,7 +262,6 @@ function SocialInsuranceFAQBox() {
   );
 }
 
-
 // 보험 계산 함수
 function calcInsurances(salary, companyType) {
   const 국민연금 = salary * (RATES.국민연금.worker + RATES.국민연금.employer);
@@ -317,12 +316,15 @@ export default function FourInsuranceCalculator() {
       return;
     }
     setResult(calcInsurances(monthly, companyType));
+
+    // 계산 후 모바일에서 결과로 스크롤
+    setTimeout(() => {
+      if (typeof window !== "undefined" && window.innerWidth < 1024 && resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
   };
-setTimeout(() => {
-  if (typeof window !== "undefined" && window.innerWidth < 1024 && resultRef.current) {
-    resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}, 100);
+
   const reset = () => {
     setSalary("");
     setCompanyType("150미만");
@@ -333,23 +335,10 @@ setTimeout(() => {
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8 w-full">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">4대 보험 계산기</h1>
       <IntroBox />
-      <div className="my-6 max-w-3xl mx-auto px-2 sm:px-4 w-full">
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-4564123418761220"
-          data-ad-slot="2809714485"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-          data-language="ko"
-        ></ins>
-        <Script id="adsbygoogle-init" strategy="afterInteractive">
-          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-        </Script>
-      </div>
+      <AdsenseBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-4 sm:p-10 flex flex-col lg:flex-row gap-8 w-full">
         {/* 좌측 입력 */}
-        <section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
+        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">급여 입력</h3>
           <InputRow
             label="월 급여"
@@ -473,4 +462,5 @@ setTimeout(() => {
     </main>
   );
 }
+
 

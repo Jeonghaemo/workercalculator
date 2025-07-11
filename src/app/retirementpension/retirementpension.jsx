@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
 import Script from "next/script";
+import AdsenseBox from "./AdsenseBox";
 
 // 천 단위 콤마 함수
 const addComma = (value) => {
@@ -93,7 +94,7 @@ function IntroBox() {
         </li>
         <li>
           <span className="font-bold text-blue-700">
-            예상 퇴직금은 <a href="https://workercalculator.damoapick.co.kr/retirement" target="_blank" rel="noopener noreferrer" className="underline">퇴직금 계산기</a>에서 확인하세요.
+            예상 퇴직금은 <a href="https://workercalculator.damoapick.co.kr/retirement" rel="noopener noreferrer" className="underline">퇴직금 계산기</a>에서 확인하세요.
           </span>
         </li>
       </ul>
@@ -123,7 +124,7 @@ function CalculationMethodBox() {
         <li>
           <b>퇴직금(예상):</b>
           <span className="ml-1">
-            퇴직할 때 받을 금액을 입력하세요. <b>정확한 금액은 <a href="https://workercalculator.damoapick.co.kr/retirement" target="_blank" rel="noopener noreferrer" className="underline">퇴직금 계산기</a>에서 확인</b>할 수 있습니다.
+            퇴직할 때 받을 금액을 입력하세요. <b>정확한 금액은 <a href="https://workercalculator.damoapick.co.kr/retirement" rel="noopener noreferrer" className="underline">퇴직금 계산기</a>에서 확인</b>할 수 있습니다.
           </span>
         </li>
         <li>
@@ -319,20 +320,7 @@ export default function RetirementPensionCalculator() {
         퇴직연금(연금형) 계산기
       </h1>
       <IntroBox />
-      <div className="my-6 max-w-3xl mx-auto px-2 sm:px-4 w-full">
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-4564123418761220"
-          data-ad-slot="2809714485"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-          data-language="ko"
-        ></ins>
-        <Script id="adsbygoogle-init" strategy="afterInteractive">
-          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-        </Script>
-      </div>
+      <AdsenseBox />
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg shadow-md p-4 sm:p-10 flex flex-col lg:flex-row gap-8 w-full">
         {/* 좌측 입력 */}
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8 min-w-0">
@@ -347,7 +335,7 @@ export default function RetirementPensionCalculator() {
               value={severance}
               onChange={handleNum(setSeverance)}
               className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              placeholder="예: 80000000"
+              placeholder="예: 80,000,000"
             />
             <span className="text-gray-500">원</span>
           </InputRow>
@@ -361,7 +349,7 @@ export default function RetirementPensionCalculator() {
               value={personal}
               onChange={handleNum(setPersonal)}
               className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              placeholder="예: 20000000"
+              placeholder="예: 20,000,000"
             />
             <span className="text-gray-500">원</span>
           </InputRow>
