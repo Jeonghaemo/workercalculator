@@ -23,7 +23,7 @@ const pages = [
   },
   {
     href: "/four-insurances",
-    title: "4대보험",
+    title: "4대 보험",
     icon: "🛡️",
   },
   {
@@ -43,7 +43,7 @@ const pages = [
   },
   {
     href: "/overtime",
-    title: "야간/휴일수당",
+    title: "야간/휴일",
     icon: "⏰",
   },
   {
@@ -58,22 +58,22 @@ const pages = [
   },
   {
     href: "/income-tax",
-    title: "근로소득세",
+    title: "근로소득",
     icon: "🧾",
   },
   {
     href: "/retirement-tax",
-    title: "퇴직소득세",
+    title: "퇴직소득",
     icon: "📑",
   },
   {
     href: "/maternity-leave",
-    title: "출산휴가 급여",
+    title: "출산휴가",
     icon: "🤱",
   },
   {
     href: "/parental-leave",
-    title: "육아휴직 급여",
+    title: "육아휴직",
     icon: "🍼",
   },
 ];

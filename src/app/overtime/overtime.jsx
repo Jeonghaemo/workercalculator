@@ -78,14 +78,13 @@ function IntroBox() {
           <span className="font-bold">휴일근로수당</span>은 소정근로일이 아닌 휴일 근로 시 8시간 이내는 <span className="font-bold">통상임금의 50% 이상</span>, 8시간 초과는 <span className="font-bold">100% 가산</span>이 적용됩니다.
         </li>
         <li>
-          시급은{" "}
+          통상임금은{" "}
           <Link
-            href="https://workercalculator.damoapick.co.kr/salary"
-            target="_blank"
+            href="https://workercalculator.damoapick.co.kr/ordinary"
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 underline font-bold"
           >
-            시급 계산기
+            통상임금 계산기
           </Link>
           에서 확인하세요.
         </li>
@@ -116,7 +115,7 @@ function CalculationMethodBox() {
         <li>
           <b>시급 입력:</b>
           <span className="ml-1">
-            세전 시급을 입력하세요. (예: 10,030원)
+            세전 통상임금을 입력하세요. (예: 10,030원)
           </span>
         </li>
         <li>
@@ -311,8 +310,8 @@ export default function OvertimeCalculator() {
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8">
           <h3 className="font-semibold text-lg mb-6">근무시간 입력</h3>
           <InputRow
-            label="시급"
-            tooltip="세전 시급을 입력하세요. (예: 10030)"
+            label="통상임금"
+            tooltip="세전 통상임금을 입력하세요. (예: 10,030)"
           >
             <input
               type="text"
