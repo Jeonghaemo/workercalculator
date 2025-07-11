@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
 import Link from "next/link";
 import Script from "next/script";
@@ -265,7 +265,7 @@ export default function AnnualLeaveCalculator() {
   const [hoursPerDay, setHoursPerDay] = useState("8");
   const [leaveDays, setLeaveDays] = useState("5");
   const [result, setResult] = useState(null);
-
+  const resultRef = useRef(null);
   const handleNum = (setter) => (e) => {
     setter(e.target.value.replace(/[^0-9]/g, ""));
   };
@@ -283,6 +283,11 @@ export default function AnnualLeaveCalculator() {
       leaveDays: Number(leaveDays),
     });
     setResult(res);
+    setTimeout(() => {
+if (typeof window !== "undefined" && window.innerWidth < 1024 && resultRef.current) {
+resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+}, 100);
   };
 
   const reset = () => {
@@ -392,7 +397,7 @@ export default function AnnualLeaveCalculator() {
           </div>
         </section>
         {/* 우측 결과 */}
-        <section className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
+        <section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
           <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
           {result ? (
             <div className="space-y-4">
