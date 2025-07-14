@@ -33,6 +33,9 @@ export const metadata = {
     type: "website",
   },
   robots: "index, follow",
+    icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -45,6 +48,8 @@ export default function RootLayout({ children }) {
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4564123418761220"
         crossOrigin="anonymous"
       ></script>
+      <meta name="naver-site-verification" content="73a3aa3781c33e1ba642575d176bc05c1f13ca83" />
+      <meta name="google-site-verification" content="KpmApkyulHcG1byft5M1sBmB81JqEOjgyJBv5e1hPcE" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="h-5" /> {/* 네비게이션바 위에 24px 여백 */}
