@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://workercalculator.damoapick.co.kr
+
+# Sitemaps
+Sitemap: https://workercalculator.damoapick.co.kr/sitemap.xml
