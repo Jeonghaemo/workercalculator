@@ -480,6 +480,12 @@ export default function RetirementTaxCalculator() {
                   <td className="py-2 font-bold">최종 퇴직소득세</td>
                   <td className="py-2 text-right font-bold text-blue-700">{addComma(result.finalTax)} 원</td>
                 </tr>
+                <tr>
+                  <td className="py-2 font-bold text-green-700">실수령액</td>
+                  <td className="py-2 text-right font-bold text-green-700">
+                  {addComma(result.taxablePay - result.finalTax)} 원
+                </td>
+                </tr>
               </tbody>
             </table>
           ) : (

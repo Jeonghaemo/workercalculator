@@ -93,11 +93,21 @@ function IntroBox() {
         <li>
           실제 수령액은 세금, 수수료, 중도인출 등 여러 요인에 따라 달라질 수 있습니다.
         </li>
+        
         <li>
-          <span className="font-bold text-blue-700">
-            예상 퇴직금은 <a href="https://workercalculator.damoapick.co.kr/retirement" rel="noopener noreferrer" className="underline">퇴직금 계산기</a>에서 확인하세요.
-          </span>
-        </li>
+  <span className="font-bold">
+    예상 퇴직금은{" "}
+    <a
+      href="https://workercalculator.damoapick.co.kr/retirement"
+      rel="noopener noreferrer"
+      className="text-blue-600 hover:text-blue-800 underline font-bold"
+    >
+      퇴직금 계산기
+    </a>
+    에서 확인하세요.
+  </span>
+</li>
+
       </ul>
     </div>
   );

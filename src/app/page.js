@@ -1,16 +1,16 @@
 // app/page.js
 export const metadata = {
-  title: "근로·급여 계산기 모음",
+  title: "근로·급여 계산기",
   description:
     "연봉, 시급, 주휴수당, 퇴직금, 4대 보험, 출산휴가·육아휴직, 연장·야간·휴일수당, 실업급여, 성과급, 통상임금, 소득세 등 각종 급여와 세금 계산기를 한 곳에서 쉽고 빠르게 이용하세요.",
   keywords:
     "연봉 계산기, 시급 계산기, 월급 계산, 주휴수당, 퇴직금, 실수령액, 4대 보험, 출산휴가, 육아휴직, 연차수당, 통상임금, 실업급여, 성과급, 소득세, 퇴직소득세, 2025 세금, 근로소득, 워커 계산기",
   openGraph: {
-    title: "근로·급여 계산기 모음",
+    title: "근로·급여 계산기",
     description:
       "연봉, 시급, 주휴수당, 퇴직금, 4대 보험, 출산휴가·육아휴직, 연장·야간·휴일수당, 실업급여, 성과급, 통상임금, 소득세 등 각종 급여와 세금 계산기를 한 곳에서 쉽고 빠르게 이용하세요.",
     url: "https://workercalculator.damoapick.co.kr",
-    siteName: "근로·급여 계산기 모음",
+    siteName: "근로·급여 계산기",
     locale: "ko_KR",
     type: "website",
   },
@@ -119,7 +119,7 @@ export default function Home() {
       {/* SEO: h1, 소개문구, 신뢰 강조 */}
       <section className="max-w-4xl mx-auto text-center mb-10 px-4">
         <h1 className="text-4xl sm:text-4xl font-bold text-gray-900 mb-6">
-  대한민국 근로자와 사업자를 위한 <span className="text-blue-700"><br />급여·근로·노무 계산기 모음</span>
+  대한민국 근로자와 사업자를 위한 <span className="text-blue-700"><br />급여·근로·노무 계산기</span>
 </h1>
 <p className="text-lg text-gray-700 mt-4">
   연봉, 시급, 주휴수당, 퇴직금, 4대 보험, 출산휴가·육아휴직, 연장·야간·휴일수당, 실업급여, 성과급, 통상임금, 소득세 등 각종 급여와 세금 계산기를 한 곳에서 쉽고 빠르게 이용하세요.<br />

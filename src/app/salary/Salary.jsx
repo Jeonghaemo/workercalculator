@@ -319,11 +319,13 @@ export default function Salary() {
       taxFree: taxFreeNum,
       family: Number(family),
       children: Number(children),
+      
     });
     // 세전/세후 연봉 추가
     const annualGross = monthly * 12;
     const annualNet = (monthly - deductions.total) * 12;
-    setResult({ ...deductions, monthly, annualGross, annualNet });
+    const hourly = Math.floor(monthly / 209); 
+    setResult({ ...deductions, monthly, annualGross, annualNet, hourly });
 
     // 계산 후 모바일에서 결과로 스크롤
     setTimeout(() => {
@@ -506,14 +508,18 @@ export default function Salary() {
                   <span>{addComma(String(result.localTax))} 원</span>
                 </li>
               </ul>
-              <div className="bg-blue-50 rounded-lg p-6 mt-8 flex flex-col items-center">
+              <div className="bg-blue-50 rounded-lg p-6 mt-4 flex flex-col items-center">
                 <span className="text-gray-700 mb-2">예상 실수령액(월)</span>
                 <span className="text-3xl font-bold text-blue-700">
                   {addComma(String(result.monthly - result.total))}원
                 </span>
               </div>
               {/* 연봉 결과 추가 */}
-              <div className="mt-8 space-y-2">
+              <div className="flex justify-between mt-4">
+      <span className="text-gray-700">시급</span>
+      <span className="font-semibold">{addComma(String(result.hourly))} 원</span>
+    </div>
+              <div className="mt-4 space-y-2">
                 <div className="flex justify-between">
                   <span className="text-gray-700">세전 연봉</span>
                   <span className="font-semibold">{addComma(String(result.annualGross))} 원</span>
