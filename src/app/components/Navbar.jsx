@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // 꼭 필요!
 
 const pages = [
   { href: "/salary", title: "연봉 계산", icon: "💰" },
@@ -18,64 +20,71 @@ const pages = [
   { href: "/parental-leave", title: "육아휴직", icon: "🍼" },
 ];
 
-// PC 버전: 2줄 네비게이션 (lg 이상에서만 보임)
+// PC 버전
 export function NavbarDesktop() {
+  const pathname = usePathname();
   return (
     <nav className="hidden lg:block w-full bg-white border-b border-gray-200 py-0">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-8 gap-y-0 gap-x-2">
-          {pages.map((page) => (
-            <Link
-              key={page.href}
-              href={page.href}
-              className="
-                flex flex-col items-center justify-center
-                py-2 rounded-lg hover:bg-blue-50 transition
-                group
-              "
-            >
-              <span className="text-xl mb-1">{page.icon}</span>
-              <span className="text-base font-bold text-gray-800 group-hover:text-blue-700">
-                {page.title}
-              </span>
-            </Link>
-          ))}
+          {pages.map((page) => {
+            const isActive = pathname === page.href;
+            return (
+              <Link
+                key={page.href}
+                href={page.href}
+                className={`flex flex-col items-center justify-center py-2 rounded-lg transition group
+                  ${isActive ? "bg-blue-50" : "hover:bg-blue-50"}`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                <span className={`text-xl mb-1 transition ${isActive ? "text-blue-700" : "text-gray-700"}`}>
+                  {page.icon}
+                </span>
+                <span className={`text-base font-bold transition ${isActive ? "text-blue-700" : "text-gray-800 group-hover:text-blue-700"}`}>
+                  {page.title}
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </nav>
   );
 }
 
-// 모바일 버전: 가로 스크롤 네비게이션 (lg 미만에서만 보임)
+// 모바일 버전
 export function NavbarMobile() {
+  const pathname = usePathname();
   return (
     <nav className="block lg:hidden w-full bg-white border-b border-gray-200 py-2">
       <div className="overflow-x-auto scrollbar-hide">
         <div className="flex flex-nowrap gap-2 px-2 whitespace-nowrap">
-          {pages.map((page) => (
-            <Link
-              key={page.href}
-              href={page.href}
-              className="
-                flex flex-col items-center justify-center
-                min-w-[72px] px-2 py-1 rounded-lg
-                hover:bg-blue-50 transition
-                group
-              "
-            >
-              <span className="text-lg mb-0.5">{page.icon}</span>
-              <span className="text-xs font-bold text-gray-800 group-hover:text-blue-700">
-                {page.title}
-              </span>
-            </Link>
-          ))}
+          {pages.map((page) => {
+            const isActive = pathname === page.href;
+            return (
+              <Link
+                key={page.href}
+                href={page.href}
+                className={`flex flex-col items-center justify-center min-w-[72px] px-2 py-1 rounded-lg transition group
+                  ${isActive ? "bg-blue-50" : "hover:bg-blue-50"}`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                <span className={`text-lg mb-0.5 transition ${isActive ? "text-blue-700" : "text-gray-700"}`}>
+                  {page.icon}
+                </span>
+                <span className={`text-xs font-bold transition ${isActive ? "text-blue-700" : "text-gray-800 group-hover:text-blue-700"}`}>
+                  {page.title}
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </nav>
   );
 }
 
-// 통합 내보내기
+// 통합 내보내기 (PC+모바일)
 export default function Navbar() {
   return (
     <>
@@ -85,6 +94,7 @@ export default function Navbar() {
   );
 }
 
+// mainTools: (아래는 참고용, 실제 사용 코드 아님)
 const mainTools = [
   { href: "/salary", icon: "💰", label: "연봉" },
   { href: "/hourly", icon: "⏱️", label: "시급" },
@@ -92,6 +102,7 @@ const mainTools = [
   { href: "/four-insurances", icon: "🛡️", label: "4대보험" },
   { href: "/retirement", icon: "🏦", label: "퇴직금" },
 ];
+
 
 
 
