@@ -5,6 +5,7 @@ import PageGrid from "../components/PageGrid";
 import Script from "next/script";
 import AdsenseBox from "../components/AdsenseBox";
 import MobileToolbar from "../components/MobileToolbar";
+import KakaoShareButton from "../components/KakaoShareButton";
 
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
@@ -422,6 +423,9 @@ export default function UnemploymentCalculator() {
           ) : (
             <div className="text-gray-400 text-center mt-12">계산 결과가 여기에 표시됩니다.</div>
           )}
+          <div style={{ marginTop: 24, textAlign: "center" }}>
+            <KakaoShareButton />
+          </div>
         </section>
       </div>
       <CalculationMethodBox />

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Script from "next/script";
 import AdsenseBox from "../components/AdsenseBox";
 import MobileToolbar from "../components/MobileToolbar";
+import KakaoShareButton from "../components/KakaoShareButton";
 
 // 천 단위 콤마
 const addComma = (value) => (value || value === 0 ? Number(value).toLocaleString() : "");
@@ -455,6 +456,10 @@ export default function FourInsuranceCalculator() {
           ) : (
             <div className="text-gray-400 text-center mt-12">계산 결과가 여기에 표시됩니다.</div>
           )}
+          {/* 계산 결과 아래에 카카오 공유 버튼 */}
+          <div style={{ marginTop: 24, textAlign: "center" }}>
+            <KakaoShareButton />
+            </div>
         </section>
       </div>
       <CalculationMethodBox />
