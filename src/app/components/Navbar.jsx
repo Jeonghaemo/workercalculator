@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // 꼭 필요!
+import { usePathname } from "next/navigation";
+import { useRef, useEffect } from "react";
 
 const pages = [
   { href: "/salary", title: "연봉 계산", icon: "💰" },
@@ -55,16 +56,40 @@ export function NavbarDesktop() {
 // 모바일 버전
 export function NavbarMobile() {
   const pathname = usePathname();
+  const containerRef = useRef(null);
+  const itemRefs = useRef([]);
+
+  useEffect(() => {
+    // 현재 선택 메뉴 인덱스
+    const activeIdx = pages.findIndex(page => page.href === pathname);
+    if (activeIdx !== -1 && itemRefs.current[activeIdx] && containerRef.current) {
+      const activeItem = itemRefs.current[activeIdx];
+      const container = containerRef.current;
+
+      // 가운데 오게 스크롤
+      const itemLeft = activeItem.offsetLeft;
+      const itemWidth = activeItem.offsetWidth;
+      const containerWidth = container.offsetWidth;
+      const scrollLeft = itemLeft - containerWidth / 2 + itemWidth / 2;
+
+      container.scrollTo({
+        left: scrollLeft,
+        behavior: "smooth",
+      });
+    }
+  }, [pathname]);
+
   return (
     <nav className="block lg:hidden w-full bg-white border-b border-gray-200 py-2">
-      <div className="overflow-x-auto scrollbar-hide">
+      <div className="overflow-x-auto scrollbar-hide" ref={containerRef}>
         <div className="flex flex-nowrap gap-2 px-2 whitespace-nowrap">
-          {pages.map((page) => {
+          {pages.map((page, i) => {
             const isActive = pathname === page.href;
             return (
               <Link
                 key={page.href}
                 href={page.href}
+                ref={el => (itemRefs.current[i] = el)}
                 className={`flex flex-col items-center justify-center min-w-[72px] px-2 py-1 rounded-lg transition group
                   ${isActive ? "bg-blue-50" : "hover:bg-blue-50"}`}
                 aria-current={isActive ? "page" : undefined}
