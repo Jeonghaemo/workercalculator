@@ -7,7 +7,7 @@ export const metadata = {
     title: "연봉(월급) 실수령액 계산기",
     description: "연봉, 월급, 부양가족, 비과세액 등 입력 시 2025년 기준 실수령액을 자동으로 계산합니다.",
     url: "https://workercalculator.damoapick.co.kr/salary",
-    siteName: "근로·급여 계산기 모음",
+    siteName: "근로·급여 계산기",
     locale: "ko_KR",
     type: "website",
   },

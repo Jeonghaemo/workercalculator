@@ -7,7 +7,7 @@ export const metadata = {
     title: "시급 계산기",
     description: "시급, 근무시간, 근무일수 등 입력 시 예상 월급, 연봉, 주휴수당을 자동으로 계산합니다.",
     url: "https://workercalculator.damoapick.co.kr/hourly",
-    siteName: "근로·급여 계산기 모음",
+    siteName: "근로·급여 계산기",
     locale: "ko_KR",
     type: "website",
   },

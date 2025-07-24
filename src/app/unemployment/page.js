@@ -6,7 +6,7 @@ export const metadata = {
     title: "실업급여 계산기",
     description: "근속기간, 평균임금, 고용보험 가입기간 등 입력 시 실업급여 예상액을 자동 산출합니다. 실업급여 수급 조건, 지급 기간, 고용보험 실업급여 신청 방법까지 안내합니다.",
     url: "https://workercalculator.damoapick.co.kr/unemployment",
-    siteName: "근로·급여 계산기 모음",
+    siteName: "근로·급여 계산기",
     locale: "ko_KR",
     type: "website",
   },

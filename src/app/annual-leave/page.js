@@ -6,7 +6,7 @@ export const metadata = {
     title: "연차수당 계산기",
     description: "근속기간, 연차일수 입력 시 연차수당을 자동으로 계산합니다.",
     url: "https://workercalculator.damoapick.co.kr/annual-leave",
-    siteName: "근로·급여 계산기 모음",
+    siteName: "근로·급여 계산기",
     locale: "ko_KR",
     type: "website",
   },

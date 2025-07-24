@@ -6,7 +6,7 @@ export const metadata = {
     title: "근로소득세 계산기",
     description: "월급, 연봉 등 입력 시 원천징수 근로소득세를 자동으로 계산합니다.",
     url: "https://workercalculator.damoapick.co.kr/income-tax",
-    siteName: "근로·급여 계산기 모음",
+    siteName: "근로·급여 계산기",
     locale: "ko_KR",
     type: "website",
   },
