@@ -326,12 +326,18 @@ export default function OvertimeCalculator() {
             tooltip="1주 40시간을 초과한 연장근로 시간(1.5배 적용)을 입력하세요."
           >
             <input
-              type="text"
-              value={ext}
-              onChange={handleNum(setExt)}
-              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              placeholder="0"
-            />
+    type="text"
+    inputMode="decimal"
+    pattern="^\\d*\\.?\\d{0,2}$"
+    value={ext}
+    onChange={e => {
+      const v = e.target.value
+      // JS 리터럴로는 /^\d*\.?\d{0,2}$/
+      if (/^\d*\.?\d{0,2}$/.test(v)) setExt(v)
+    }}
+    className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
+    placeholder="0"
+  />
             <span className="text-gray-500">시간</span>
           </InputRow>
           <InputRow
@@ -339,12 +345,17 @@ export default function OvertimeCalculator() {
             tooltip="야간(22:00~06:00) 근로시간(0.5배 가산분만 입력)을 입력하세요."
           >
             <input
-              type="text"
-              value={night}
-              onChange={handleNum(setNight)}
-              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              placeholder="0"
-            />
+    type="text"
+    inputMode="decimal"
+    pattern="^\\d*\\.?\\d{0,2}$"
+    value={night}
+    onChange={e => {
+      const v = e.target.value
+      if (/^\d*\.?\d{0,2}$/.test(v)) setNight(v)
+    }}
+    className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
+    placeholder="0"
+  />
             <span className="text-gray-500">시간</span>
           </InputRow>
           <InputRow
@@ -352,12 +363,17 @@ export default function OvertimeCalculator() {
             tooltip="휴일근로(8시간 이하, 1.5배 적용) 시간을 입력하세요."
           >
             <input
-              type="text"
-              value={holiday}
-              onChange={handleNum(setHoliday)}
-              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              placeholder="0"
-            />
+    type="text"
+    inputMode="decimal"
+    pattern="^\\d*\\.?\\d{0,2}$"
+    value={holiday}
+    onChange={e => {
+      const v = e.target.value
+      if (/^\d*\.?\d{0,2}$/.test(v)) setHoliday(v)
+    }}
+    className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
+    placeholder="0"
+  />
             <span className="text-gray-500">시간</span>
           </InputRow>
           <InputRow
@@ -365,12 +381,17 @@ export default function OvertimeCalculator() {
             tooltip="휴일근로 8시간 초과분(2배 적용) 시간을 입력하세요."
           >
             <input
-              type="text"
-              value={holidayOver}
-              onChange={handleNum(setHolidayOver)}
-              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              placeholder="0"
-            />
+    type="text"
+    inputMode="decimal"
+    pattern="^\\d*\\.?\\d{0,2}$"
+    value={holidayOver}
+    onChange={e => {
+      const v = e.target.value
+      if (/^\d*\.?\d{0,2}$/.test(v)) setHolidayOver(v)
+    }}
+    className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
+    placeholder="0"
+  />
             <span className="text-gray-500">시간</span>
           </InputRow>
           <div className="flex gap-2 mt-8 w-full">
@@ -413,9 +434,7 @@ export default function OvertimeCalculator() {
           ) : (
             <div className="text-gray-400 text-center mt-12">계산 결과가 여기에 표시됩니다.</div>
           )}
-          <div style={{ marginTop: 24, textAlign: "center" }}>
-            <KakaoShareButton />
-          </div>
+          
         </section>
       </div>
       <CalculationMethodBox />

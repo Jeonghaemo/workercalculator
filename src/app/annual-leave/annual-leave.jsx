@@ -342,16 +342,18 @@ resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
               label="1일 근무시간"
               tooltip={`하루 기준 근무시간을 입력하세요.\n예: 8`}
             >
-              <input
-                type="text"
-                value={hoursPerDay}
-                onChange={handleNum(setHoursPerDay)}
-                className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-                min={0}
-                inputMode="numeric"
-                pattern="[0-9]*"
-                placeholder="8"
-              />
+                <input
+    type="text"
+    inputMode="decimal"
+    pattern="^\\d*(\\.\\d{0,2})?$"
+    value={hoursPerDay}
+    onChange={e => {
+      const v = e.target.value;
+      if (/^\d*\.?\d{0,2}$/.test(v)) setHoursPerDay(v);
+    }}
+    className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
+    placeholder="8.00"
+  />
               <span className="text-gray-500">시간</span>
             </InputRow>
           )}
@@ -359,16 +361,18 @@ resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
             label="미사용 연차일수"
             tooltip={`지급받을 연차(유급휴가) 미사용 일수를 입력하세요.`}
           >
-            <input
-              type="text"
-              value={leaveDays}
-              onChange={handleNum(setLeaveDays)}
-              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              min={0}
-              inputMode="numeric"
-              pattern="[0-9]*"
-              placeholder="5"
-            />
+             <input
+    type="text"
+    inputMode="decimal"
+    pattern="^\\d*(\\.\\d{0,2})?$"
+    value={leaveDays}
+    onChange={e => {
+      const v = e.target.value;
+      if (/^\d*\.?\d{0,2}$/.test(v)) setLeaveDays(v);
+    }}
+    className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
+    placeholder="5.00"
+  />
             <span className="text-gray-500">일</span>
           </InputRow>
           <div className="flex gap-2 mt-8 w-full">

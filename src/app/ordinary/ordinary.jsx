@@ -362,12 +362,18 @@ export default function OrdinaryCalculator() {
               tooltip="하루 근무시간(예: 8시간)을 입력하세요."
             >
               <input
-                type="text"
-                value={hoursPerDay}
-                onChange={handleNum(setHoursPerDay)}
-                className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-                placeholder="8"
-              />
+    type="text"
+    inputMode="decimal"
+    pattern="^\\d*(\\.\\d{0,2})?$"
+    value={hoursPerDay}
+    onChange={e => {
+      const v = e.target.value;
+      // 숫자+소수점 최대 두 자리까지만 허용
+      if (/^\d*\.?\d{0,2}$/.test(v)) setHoursPerDay(v);
+    }}
+    className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
+    placeholder="8.00"
+  />
               <span className="text-gray-500">시간</span>
             </InputRow>
           )}

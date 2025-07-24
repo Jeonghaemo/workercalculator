@@ -467,16 +467,18 @@ export default function WeeklyBonusCalculator() {
             label="1일 근무시간"
             tooltip={`하루 기준 근무시간을 입력하세요.\n예: 8`}
           >
-            <input
-              type="text"
-              value={hoursPerDay}
-              onChange={handleNum(setHoursPerDay)}
-              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              min={0}
-              inputMode="numeric"
-              pattern="[0-9]*"
-              placeholder="8"
-            />
+   <input
+    type="text"
+    inputMode="decimal"
+    pattern="^\\d*(\\.\\d{0,2})?$"
+    value={hoursPerDay}
+    onChange={e => {
+      const v = e.target.value;
+      if (/^\d*\.?\d{0,2}$/.test(v)) setHoursPerDay(v);
+    }}
+    className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
+    placeholder="8.00"
+  />
             <span className="text-gray-500">시간</span>
           </InputRow>
           <InputRow
@@ -484,15 +486,17 @@ export default function WeeklyBonusCalculator() {
             tooltip={`한 주 기준 실제 근무일수를 입력하세요.\n예: 5`}
           >
             <input
-              type="text"
-              value={daysPerWeek}
-              onChange={handleNum(setDaysPerWeek)}
-              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              min={0}
-              inputMode="numeric"
-              pattern="[0-9]*"
-              placeholder="5"
-            />
+    type="text"
+    inputMode="decimal"
+    pattern="^\\d*(\\.\\d{0,1})?$"
+    value={daysPerWeek}
+    onChange={e => {
+      const v = e.target.value;
+      if (/^\d*\.?\d{0,1}$/.test(v)) setDaysPerWeek(v);
+    }}
+    className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
+    placeholder="5.0"
+  />
             <span className="text-gray-500">일</span>
           </InputRow>
           <InputRow

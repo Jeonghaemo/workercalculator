@@ -456,15 +456,17 @@ export default function HourlyCalculator() {
             tooltip={`하루 기준 근무시간을 입력하세요.\n예: 8`}
           >
             <input
-              type="text"
-              value={hoursPerDay}
-              onChange={handleNum(setHoursPerDay)}
-              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              min={0}
-              inputMode="numeric"
-              pattern="[0-9]*"
-              placeholder="8"
-            />
+    type="text"
+    inputMode="decimal"
+    pattern="^\d*(\.\d{0,2})?$"
+    value={hoursPerDay}
+    onChange={e => {
+      const v = e.target.value;
+      if (/^\d*\.?\d{0,2}$/.test(v)) setHoursPerDay(v);
+    }}
+    className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
+    placeholder="8.00"
+  />
             <span className="text-gray-500">시간</span>
           </InputRow>
           <InputRow
@@ -472,15 +474,17 @@ export default function HourlyCalculator() {
             tooltip={`한 달 기준 실제 근무일수를 입력하세요.\n(평균 22일, 주 5일 근무 기준)\n주휴수당 계산 등에도 사용됩니다.`}
           >
             <input
-              type="text"
-              value={daysPerMonth}
-              onChange={handleNum(setDaysPerMonth)}
-              className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              min={1}
-              inputMode="numeric"
-              pattern="[0-9]*"
-              placeholder="22"
-            />
+    type="text"
+    inputMode="decimal"
+    pattern="^\d*(\.\d{0,1})?$"
+    value={daysPerMonth}
+    onChange={e => {
+      const v = e.target.value;
+      if (/^\d*\.?\d{0,1}$/.test(v)) setDaysPerMonth(v);
+    }}
+    className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
+    placeholder="22.0"
+  />
             <span className="text-gray-500">일</span>
           </InputRow>
           <InputRow
