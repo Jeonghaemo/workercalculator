@@ -13,6 +13,12 @@ const pages = [
     desc: "근무시간, 시급 입력 시 월급, 연봉, 주휴수당 자동 계산",
     icon: "⏱️",
   },
+   {
+  href: "/minwagecalc",
+  title: "최저시급 계산기",
+  desc: "주 근로시간, 한달 근로시간 입력 시 예상 월급 자동 계산",
+  icon: "💲",
+},
   {
     href: "/weekly-bonus",
     title: "주휴수당 계산기",

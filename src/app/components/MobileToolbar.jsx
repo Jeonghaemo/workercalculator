@@ -5,6 +5,7 @@ import { useRef, useEffect } from "react";
 const mainTools = [
   { href: "/salary", icon: "💰", label: "연봉" },
   { href: "/hourly", icon: "⏱️", label: "시급" },
+  { href: "/minwagecalc", icon: "💲", label: "최저시급"},
   { href: "/retirement", icon: "🏦", label: "퇴직금" },
   { href: "/unemployment", icon: "🧳", label: "실업급여" },
   { href: "/weekly-bonus", icon: "📆", label: "주휴" },

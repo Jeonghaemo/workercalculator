@@ -5,6 +5,7 @@ import Script from "next/script";
 import Link from "next/link";
 import AdsenseBox from "../components/AdsenseBox";
 import MobileToolbar from "../components/MobileToolbar";
+import KakaoShareButton from "../components/KakaoShareButton";
 
 
 const MIN_WAGE = 10030;
@@ -89,6 +90,65 @@ function IntroBox() {
   );
 };
 
+function CalculationMethodBox() {
+  return (
+    <div className="max-w-[1200px] mx-auto bg-blue-50 border border-gray-300 rounded-md p-6 mb-10 mt-8 text-gray-800 leading-relaxed">
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
+      <ul className="list-disc list-inside mb-6 space-y-2">
+        <li><b>주 근로시간 입력:</b> <span className="ml-1">주당 실제 근로시간을 입력하세요.</span></li>
+        <li><b>한달 근로시간 입력:</b> <span className="ml-1">(주근로시간 + 주휴시간) × 4.345주로 산출된 한달 근로시간을 입력하세요.</span></li>
+        <li><b>근로시간 입력 후:</b> <span className="ml-1">해당 근로시간의 최저 월급과 연봉을 확인할 수 있습니다.</span></li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">최저시급 계산방법</h2>
+      <ol className="list-decimal list-inside mb-4 space-y-1">
+        <li><b>주휴시간 산정:</b> (주근로시간 ÷ 40) × 8시간</li>
+        <li><b>월 근로시간 산정:</b> (주근로시간 + 주휴시간) × 4.345주</li>
+        <li><b>예상 월급여:</b> 한달 근로시간 × 10,030원</li>
+        <li><b>예상 연봉:</b> 예상 월급여 × 12개월</li>
+      </ol>
+      <div className="text-sm text-gray-600">
+        ※ 2025년도 최저임금 시급 10,030원 기준<br />
+        ※ 주휴수당은 주 40시간 기준 근로 시 발생합니다.<br />
+        ※ 결과는 참고용이며, 실제 급여는 사업장 규정에 따릅니다.
+      </div>
+    </div>
+  );
+}
+
+function MinWageFAQBox() {
+  return (
+    <div className="max-w-[1200px] mx-auto bg-blue-50 border border-gray-300 rounded-md p-6 mb-10 mt-8 text-gray-800 leading-relaxed">
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">최저시급표 FAQ</h2>
+      <div className="space-y-6">
+        <div>
+          <div className="font-bold mb-1">Q 2025년도 최저임금은 얼마인가요?</div>
+          <div>
+            2025년도 최저임금은 시간급 <b>10,030원</b>이며, 이를 바탕으로 월급과 연봉을 계산할 수 있습니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 주휴수당은 어떻게 계산되나요?</div>
+          <div>
+            주휴수당은 일주일간 40시간 이상 근로 시 발생하며, <b>(주근로시간 ÷ 40) × 8시간</b> 공식으로 산정됩니다. 이는 최저임금을 기준으로 월급에 자동 반영됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 월급 계산 시 주휴수당은 포함되나요?</div>
+          <div>
+            포함됩니다. 최저시급 계산기에서는 주휴수당을 포함해 한달 근로시간을 산정하므로, 계산된 월급과 연봉에 주휴수당이 자동 반영됩니다.
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 한달 근로시간 산정 방식은 무엇인가요?</div>
+          <div>
+            한달은 평균 4.345주의 근로주로 계산하며, <b>(주근로시간 + 주휴시간) × 4.345주</b> 공식으로 월 근로시간을 산출합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-2 sm:px-4 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
@@ -119,7 +179,7 @@ function IntroBox() {
             max={250}
             onChange={e => { setM(e.target.value.replace(/\D/g, "")); setW(""); }}
             className="w-40 h-9 px-2 border border-gray-300 rounded text-base focus:outline-none focus:ring-2 focus:ring-blue-300"
-          />
+          /><KakaoShareButton className="ml-4" />
         </div>
         {/* table wrapper */}
         <div className="overflow-x-auto">
@@ -205,6 +265,8 @@ function IntroBox() {
           </table>
         </div>
       </div>
+      <CalculationMethodBox />
+      <MinWageFAQBox />
       <PageGrid />
       <MobileToolbar />
     </main>

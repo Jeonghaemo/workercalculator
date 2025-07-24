@@ -6,6 +6,7 @@ import { useRef, useEffect } from "react";
 const pages = [
   { href: "/salary", title: "연봉 계산", icon: "💰" },
   { href: "/hourly", title: "시급 계산", icon: "⏱️" },
+  { href: "/minwagecalc", title: "최저시급", icon: "💲" },
   { href: "/weekly-bonus", title: "주휴수당", icon: "📆" },
   { href: "/annual-leave", title: "연차수당", icon: "🌴" },
   { href: "/four-insurances", title: "4대 보험", icon: "🛡️" },
