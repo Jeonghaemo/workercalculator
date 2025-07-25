@@ -86,6 +86,9 @@ function IntroBox() {
        <li>
           <span className="font-bold"> 2025년도 최저임금은 시급 10,030원</span>{' '}입니다.
         </li>
+        <li>
+          <span className="font-bold"> 2026년도 최저임금은 시급 10,320원</span>{' '}으로 확정 되었습니다.
+        </li>
     </div>
   );
 };
@@ -118,30 +121,46 @@ function CalculationMethodBox() {
 function MinWageFAQBox() {
   return (
     <div className="max-w-[1200px] mx-auto bg-blue-50 border border-gray-300 rounded-md p-6 mb-10 mt-8 text-gray-800 leading-relaxed">
-      <h2 className="text-2xl font-bold mb-4 text-blue-700">최저시급표 FAQ</h2>
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">
+        최저시급 계산기 자주 묻는 질문(FAQ)
+      </h2>
       <div className="space-y-6">
         <div>
-          <div className="font-bold mb-1">Q 2025년도 최저임금은 얼마인가요?</div>
+          <div className="font-bold mb-1">
+            Q 2025년도와 2026년도 최저임금은 얼마인가요?
+          </div>
           <div>
-            2025년도 최저임금은 시간급 <b>10,030원</b>이며, 이를 바탕으로 월급과 연봉을 계산할 수 있습니다.
+            2025년도 최저임금은 시간급 <b>10,030원</b>입니다. 2026년도 최저임금은 시간급 <b>10,320원</b>으로, 2025년 대비 <b>2.9% 인상</b>되었습니다.
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 주휴수당은 어떻게 계산되나요?</div>
           <div>
-            주휴수당은 일주일간 40시간 이상 근로 시 발생하며, <b>(주근로시간 ÷ 40) × 8시간</b> 공식으로 산정됩니다. 이는 최저임금을 기준으로 월급에 자동 반영됩니다.
+            주휴수당은 1주 동안 소정 근로시간(주근로시간)이 40시간을 초과하거나 주 15시간 이상 근로했을 때 발생합니다.<br/>
+            계산식: <b>(주근로시간 ÷ 40) × 8시간 × 시급</b><br/>
+            예시: 주근로 40시간, 시급 10,030원 → (40÷40)×8×10,030 = 80,240원
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 월급 계산 시 주휴수당은 포함되나요?</div>
           <div>
-            포함됩니다. 최저시급 계산기에서는 주휴수당을 포함해 한달 근로시간을 산정하므로, 계산된 월급과 연봉에 주휴수당이 자동 반영됩니다.
+            포함됩니다. 최저시급 계산기는 먼저 <b>주근로시간 + 주휴시간</b>을 합산하여 주당 총 근로시간을 구하고,
+            평균 주 수(<b>4.345주</b>)로 곱한 뒤 시급을 곱해 월급을 산출합니다. 따라서 주휴수당이 자동 반영됩니다.
           </div>
         </div>
         <div>
           <div className="font-bold mb-1">Q 한달 근로시간 산정 방식은 무엇인가요?</div>
           <div>
-            한달은 평균 4.345주의 근로주로 계산하며, <b>(주근로시간 + 주휴시간) × 4.345주</b> 공식으로 월 근로시간을 산출합니다.
+            한 달은 1년(52주)을 월 단위로 환산한 평균 주 수인 <b>4.345주</b>를 사용합니다.
+            계산식: <b>(주근로시간 + 주휴시간) × 4.345</b>
+          </div>
+        </div>
+        <div>
+          <div className="font-bold mb-1">Q 최저시급으로 월급은 어떻게 계산하나요?</div>
+          <div>
+            <b>월급 = 시급 × (주근로시간 + 주휴시간) × 4.345</b><br/>
+            예시: 시급 10,030원, 주근로 40시간 → 주휴 8시간
+            → (40 + 8) × 4.345 × 10,030 ≈ 2,112,768원
           </div>
         </div>
       </div>
