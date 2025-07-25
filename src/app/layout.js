@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Script from "next/script";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -51,6 +52,10 @@ export default function RootLayout({ children }) {
       <meta name="naver-site-verification" content="73a3aa3781c33e1ba642575d176bc05c1f13ca83" />
       <meta name="google-site-verification" content="KpmApkyulHcG1byft5M1sBmB81JqEOjgyJBv5e1hPcE" />
       <meta name="msvalidate.01" content="0B44CF9A8D78CD655E78790997752392" />
+     <Script
+  src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"
+  strategy="beforeInteractive"
+/>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="h-5" /> {/* 네비게이션바 위에 24px 여백 */}
