@@ -14,8 +14,8 @@ export default function KakaoShareButton() {
       window.Kakao.Share.sendDefault({
         objectType: "feed",
         content: {
-          title: "근로·급여 계산기 바로가기",
-          description: "연봉, 시급, 세금, 급여계산 한 번에!",
+          title: "근로·급여 계산기",
+          description: "연봉, 시급, 주휴수당, 퇴직금, 4대 보험, 출산휴가·육아휴직, 연장·야간·휴일수당, 실업급여, 성과급, 통상임금, 최저시급, 소득세 등 각종 급여와 세금 계산기를 한 곳에서 쉽게 이용하세요.,",
           imageUrl: "https://workercalculator.damoapick.co.kr/favicon.ico", // 썸네일 이미지 (적절히 변경)
           link: {
             mobileWebUrl: window.location.href,
@@ -24,7 +24,7 @@ export default function KakaoShareButton() {
         },
         buttons: [
           {
-            title: "사이트 방문하기",
+            title: "계산기에서 확인",
             link: {
               mobileWebUrl: window.location.href,
               webUrl: window.location.href,
@@ -48,7 +48,7 @@ export default function KakaoShareButton() {
         cursor: "pointer",
       }}
     >
-      카카오톡으로 공유하기
+      카카오톡으로 공유
     </button>
   );
 }
