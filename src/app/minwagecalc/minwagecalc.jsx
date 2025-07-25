@@ -29,21 +29,39 @@ export default function MinWageCalculator() {
   const [w, setW] = useState("");
   const [m, setM] = useState("");
   const [active, setActive] = useState(null);
+const debouncedW = useDebounce(w, 500);
+const debouncedM = useDebounce(m, 500);
 
   useEffect(() => {
-    let idx = null;
-    if (w) idx = rows.findIndex(r => String(r.weekHour) === w);
-    if (m) {
-      const mi = rows.findIndex(r => String(r.monthHour) === m);
-      if (mi !== -1) idx = mi;
-    }
-    setActive(idx >= 0 ? idx : null);
-    if (idx >= 0 && rowRefs.current[idx]) {
-      rowRefs.current[idx].scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, [w, m]);
+  let idx = null;
+  if (debouncedW) idx = rows.findIndex(r => String(r.weekHour) === debouncedW);
+  if (debouncedM) {
+    const mi = rows.findIndex(r => String(r.monthHour) === debouncedM);
+    if (mi !== -1) idx = mi;
+  }
+  setActive(idx >= 0 ? idx : null);
+  if (idx >= 0 && rowRefs.current[idx]) {
+    rowRefs.current[idx].scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}, [debouncedW, debouncedM]);
 
   const mergedSpan = 14;
+  // MinWageCalculator 컴포넌트 파일 상단 
+function useDebounce(value, delay = 500) {
+  const [debounced, setDebounced] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebounced(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debounced;
+}
   // 소개 박스 컴포넌트
 function IntroBox() {
   return (
