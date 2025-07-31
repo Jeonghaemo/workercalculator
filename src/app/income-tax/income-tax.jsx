@@ -1,11 +1,12 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import PageGrid from "../components/PageGrid";
 import Link from "next/link";
 import Script from "next/script";
 import AdsenseBox from "../components/AdsenseBox";
 import MobileToolbar from "../components/MobileToolbar";
 import KakaoShareButton from "../components/KakaoShareButton";
+import { lookupIncomeTax } from "../utils/lookupIncomeTax";
 
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
@@ -31,17 +32,6 @@ function getEarnedIncomeDeduction(total) {
   return 41400000 + (total - 150000000) * 0.02;
 }
 
-// 누진세 계산
-function calcTax(taxBase) {
-  let tax = 0;
-  for (let i = TAX_TABLE.length - 1; i >= 0; i--) {
-    if (taxBase > TAX_TABLE[i].std) {
-      tax = taxBase * TAX_TABLE[i].rate - TAX_TABLE[i].minus;
-      break;
-    }
-  }
-  return tax > 0 ? Math.floor(tax) : 0;
-}
 
 // 툴팁 컴포넌트
 function Tooltip({ text }) {
@@ -309,13 +299,21 @@ function IncomeTaxFAQBox() {
 
 export default function IncomeTaxCalculator() {
   const [mode, setMode] = useState("annual");
-  const [salary, setSalary] = useState("20000000");
+  const [salary, setSalary] = useState(mode === "annual" ? "30000000" : "2000000");
   const [taxFree, setTaxFree] = useState("200000");
   const [family, setFamily] = useState(1);
   const [children, setChildren] = useState(0);
   const [result, setResult] = useState(null);
 
   const resultRef = useRef(null); // 스크롤용 ref
+
+  useEffect(() => {
+    if (mode === "annual") {
+      setSalary("30000000"); // 연봉일 때 기본값
+    } else {
+      setSalary("2000000"); // 월급일 때 기본값
+    }
+  }, [mode]);
 
   // 입력값 처리
   const handleSalaryChange = (e) => {
@@ -325,36 +323,27 @@ export default function IncomeTaxCalculator() {
     setTaxFree(e.target.value.replace(/[^0-9]/g, ""));
   };
 
-  // 계산
+
+   // 계산
   const handleCalc = () => {
-    const salaryNum = Number(salary);
-    const taxFreeNum = Number(taxFree);
-    let monthly = mode === "annual" ? Math.round(salaryNum / 12) : salaryNum;
-    const annualIncome = monthly * 12;
+  const salaryNum = Number(salary);
+  const taxFreeNum = Number(taxFree);
 
-    // 비과세 제외
-    const taxableMonthly = Math.max(0, monthly - taxFreeNum);
+  // 월급 계산
+  const monthly = mode === "annual" ? Math.round(salaryNum / 12) : salaryNum;
+  const annualIncome = monthly * 12;
 
-    // 근로소득공제(연)
-    const earnedDeduct = getEarnedIncomeDeduction(annualIncome);
+  // 과세 대상 금액 (비과세 제외한 월 소득)
+  const taxableMonthly = Math.max(0, monthly - taxFreeNum);
 
-    // 인적공제: 본인 포함 가족 1인당 150만원 + 8~20세 자녀 1인당 50만원 (연)
-    const personalDeduct = family * 1500000 + children * 500000;
+  // 소득세: 간이세액표 기준 (월 기준)
+  const monthlyTax = lookupIncomeTax(taxableMonthly, family);
 
-    // 과세표준
-    const taxBase = Math.max(annualIncome - earnedDeduct - personalDeduct, 0);
+  // 지방소득세: 소득세의 10%
+  const localTax = Math.floor(monthlyTax * 0.1);
 
-    // 연간 근로소득세
-    const annualTax = calcTax(taxBase);
-
-    // 월 근로소득세
-    const monthlyTax = Math.floor(annualTax / 12);
-
-    // 월 지방소득세(근로소득세의 10%)
-    const localTax = Math.floor(monthlyTax * 0.1);
-
-    // 합계
-    const totalTax = monthlyTax + localTax;
+  // 총 공제세액
+  const totalTax = monthlyTax + localTax;
 
     setResult({
       taxableMonthly,

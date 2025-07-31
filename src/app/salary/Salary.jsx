@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import PageGrid from "../components/PageGrid";
 import Script from "next/script";
@@ -293,7 +293,7 @@ function SalaryFAQBox() {
 
 export default function Salary() {
   const [mode, setMode] = useState("annual");
-  const [salary, setSalary] = useState("20000000");
+  const [salary, setSalary] = useState("30000000");
   const [taxFree, setTaxFree] = useState("200000");
   const [family, setFamily] = useState(1);
   const [children, setChildren] = useState(0);
@@ -301,6 +301,14 @@ export default function Salary() {
 
   const resultRef = useRef(null); // 결과 스크롤용 ref
 
+  useEffect(() => {
+    if (mode === "annual") {
+      setSalary("30000000"); // 연봉 기본값
+    } else {
+      setSalary("2000000"); // 월급 기본값
+    }
+  }, [mode]);
+  
   // 입력창에는 콤마 없이 숫자만
   const handleSalaryChange = (e) => {
     setSalary(e.target.value.replace(/[^0-9]/g, ""));
