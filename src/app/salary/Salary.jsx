@@ -6,6 +6,7 @@ import Script from "next/script";
 import AdsenseBox from "../components/AdsenseBox";
 import MobileToolbar from "../components/MobileToolbar";
 import KakaoShareButton from "../components/KakaoShareButton";
+import { lookupIncomeTax } from "../utils/lookupIncomeTax";
 
 // 천 단위 콤마 함수
 const addComma = (value) => {
@@ -46,11 +47,8 @@ function calcDeductions({ monthly, taxFree, family, children }) {
   const health = Math.round(healthBase * 0.03545);
   const care = Math.round(health * 0.1281);
   const employment = Math.round(taxable * 0.009);
-  let incomeTax = 0;
-  if (taxable > 1500000) incomeTax = Math.round(taxable * 0.01);
-  if (taxable > 3000000) incomeTax = Math.round(taxable * 0.02);
-  if (taxable > 5000000) incomeTax = Math.round(taxable * 0.03);
-  incomeTax = Math.max(0, incomeTax - (family - 1) * 5000 - children * 2000);
+  const familyTotal = family + children;
+  const incomeTax = lookupIncomeTax(taxable, familyTotal);
   const localTax = Math.round(incomeTax * 0.1);
   const total = pension + health + care + employment + incomeTax + localTax;
   return { pension, health, care, employment, incomeTax, localTax, total, taxable };
