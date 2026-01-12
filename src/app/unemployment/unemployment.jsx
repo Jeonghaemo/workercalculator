@@ -428,6 +428,7 @@ export default function UnemploymentCalculator() {
           </div>
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <UnemploymentFAQBox />
       <PageGrid />

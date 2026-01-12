@@ -588,6 +588,7 @@ export default function HourlyCalculator() {
           </div>
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <HourlyWageFAQBox />
       <PageGrid />

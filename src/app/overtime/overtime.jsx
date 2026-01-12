@@ -437,6 +437,7 @@ export default function OvertimeCalculator() {
           
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <OvertimeFAQBox />
       <PageGrid />

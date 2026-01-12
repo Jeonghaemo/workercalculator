@@ -412,6 +412,7 @@ resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
           </div>
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <AnnualLeaveFAQBox />
       <PageGrid />

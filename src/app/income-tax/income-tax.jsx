@@ -557,6 +557,7 @@ export default function IncomeTaxCalculator() {
           </div>
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <IncomeTaxFAQBox />
       <PageGrid />

@@ -400,6 +400,7 @@ export default function ParentalLeave() {
           </div>
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <ParentalLeaveFAQBox />
       <PageGrid />

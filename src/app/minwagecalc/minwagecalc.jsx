@@ -302,6 +302,7 @@ function MinWageFAQBox() {
           </table>
         </div>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <MinWageFAQBox />
       <PageGrid />

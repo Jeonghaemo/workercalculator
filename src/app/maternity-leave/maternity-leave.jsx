@@ -378,6 +378,7 @@ export default function MaternityLeave() {
           </div>
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <MaternityLeaveFAQBox />
       <PageGrid />

@@ -611,6 +611,7 @@ export default function RetirementCalculator() {
           </div>
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <SeveranceFAQBox />
       <PageGrid />

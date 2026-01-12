@@ -480,6 +480,7 @@ export default function RetirementPensionCalculator() {
           </div>
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <RetirementPensionFAQBox />
       <PageGrid />

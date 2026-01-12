@@ -453,6 +453,7 @@ export default function OrdinaryCalculator() {
           </div>
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <OrdinaryWageFAQBox />
       <PageGrid />

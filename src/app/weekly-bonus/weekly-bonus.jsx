@@ -607,6 +607,7 @@ export default function WeeklyBonusCalculator() {
           </div>
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <WeeklyHolidayPayFAQBox />
       <PageGrid />
