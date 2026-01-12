@@ -130,7 +130,7 @@ function CalculationMethodBox() {
       "
     >
 
-      <AdsenseBox />
+      
       
       <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
       <ul className="list-disc list-inside mb-6 space-y-2">
@@ -574,6 +574,7 @@ export default function Salary() {
           </div>
         </section>
       </div>
+      <AdsenseBox />
       <CalculationMethodBox />
       <SalaryFAQBox />
       <PageGrid />

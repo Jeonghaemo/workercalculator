@@ -44,11 +44,13 @@ export default function RootLayout({ children }) {
     <html lang="ko">
       <head>
         {/* 구글 애드센스 자동광고 스크립트 */}
-         <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4564123418761220"
-        crossOrigin="anonymous"
-      ></script>
+         <Script
+  id="adsbygoogle-init"
+  strategy="afterInteractive"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4564123418761220"
+  crossOrigin="anonymous"
+/>
       <meta name="naver-site-verification" content="73a3aa3781c33e1ba642575d176bc05c1f13ca83" />
       <meta name="google-site-verification" content="KpmApkyulHcG1byft5M1sBmB81JqEOjgyJBv5e1hPcE" />
       <meta name="msvalidate.01" content="0B44CF9A8D78CD655E78790997752392" />
