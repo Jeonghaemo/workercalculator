@@ -2,7 +2,6 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import PageGrid from "../components/PageGrid";
-import Script from "next/script";
 import AdsenseBox from "../components/AdsenseBox";
 import MobileToolbar from "../components/MobileToolbar";
 import KakaoShareButton from "../components/KakaoShareButton";
@@ -136,7 +135,7 @@ function CalculationMethodBox() {
         <li>
           <b>세금 적용 선택:</b>
           <span className="ml-1">
-            4대보험(9.4%) 또는 원천징수(3.3%) 등 세금 공제 방식을 선택할 수 있습니다.
+            4대보험(대략 9.4%) 또는 원천징수(3.3%) 등 세금 공제 방식을 선택할 수 있습니다.
           </span>
         </li>
         <li>
@@ -157,11 +156,11 @@ function CalculationMethodBox() {
         <li>
           <b>기준 시급 환산</b>
           <ul className="list-disc list-inside ml-5">
-            <li>시급: 입력값 그대로 사용<br />예시: 시급 10,030원 입력 시 → 10,030원</li>
-            <li>일급: <b>일급 ÷ 1일 근무시간</b><br />예시: 일급 80,240원, 1일 8시간 → 80,240 ÷ 8 = 10,030원</li>
-            <li>주급: <b>주급 ÷ (1일 근무시간 × 한 달 근무일수 ÷ 4.345)</b><br />예시: 주급 401,200원, 1일 8시간, 22일 → 401,200 ÷ (8 × 22 ÷ 4.345) ≈ 10,030원</li>
-            <li>월급: <b>월급 ÷ (1일 근무시간 × 한 달 근무일수)</b><br />예시: 월급 1,760,640원, 8시간, 22일 → 1,760,640 ÷ (8 × 22) = 10,030원</li>
-            <li>연봉: <b>연봉 ÷ (1일 근무시간 × 한 달 근무일수 × 12)</b><br />예시: 연봉 21,127,680원, 8시간, 22일 → 21,127,680 ÷ (8 × 22 × 12) = 10,030원</li>
+            <li>시급: 입력값 그대로 사용<br />예시: 시급 10,320원 입력 시 → 10,320원</li>
+            <li>일급: <b>일급 ÷ 1일 근무시간</b><br />예시: 일급 82,560원, 1일 8시간 → 82,560 ÷ 8 = 10,320원</li>
+            <li>주급: <b>주급 ÷ (1일 근무시간 × 한 달 근무일수 ÷ 4.345)</b><br />예시: 주급 412,800원, 1일 8시간, 22일 → 412,800 ÷ (8 × 22 ÷ 4.345) ≈ 10,320원</li>
+            <li>월급: <b>월급 ÷ (1일 근무시간 × 한 달 근무일수)</b><br />예시: 월급 1,816,320원, 8시간, 22일 → 1,816,320 ÷ (8 × 22) = 10,320원</li>
+            <li>연봉: <b>연봉 ÷ (1일 근무시간 × 한 달 근무일수 × 12)</b><br />예시: 연봉 21,795,840원, 8시간, 22일 → 21,795,840 ÷ (8 × 22 × 12) = 10,320원</li>
           </ul>
         </li>
         <li>
@@ -169,29 +168,30 @@ function CalculationMethodBox() {
           <ul className="list-disc list-inside ml-5">
             <li>
               주 15시간 이상 근무 시, 1주일에 1일치 임금(1일 근무시간 × 시급)이 주휴수당으로 추가됩니다.<br />
-              예시: 1일 8시간, 시급 10,030원 → 8 × 10,030 = 80,240원(주휴수당)
+              예시: 1일 8시간, 시급 10,320원 → 8 × 10,320 = 82,560원(주휴수당)
             </li>
           </ul>
         </li>
         <li>
           <b>각 단위별 환산</b>
           <ul className="list-disc list-inside ml-5">
-            <li>일급: <b>시급 × 1일 근무시간</b><br />예시: 10,030 × 8 = 80,240원</li>
-            <li>주급: <b>일급 × (한 달 근무일수 ÷ 4.345) + 주휴수당</b><br />예시: 80,240 × (22 ÷ 4.345) + 80,240 ≈ 484,480원</li>
-            <li>월급: <b>시급 × 1일 근무시간 × 한 달 근무일수 + 주휴수당 × 4.345</b><br />예시: 10,030 × 8 × 22 + 80,240 × 4.345 ≈ 2,112,768원</li>
-            <li>연봉: <b>월급 × 12</b><br />예시: 2,112,768 × 12 = 25,353,216원</li>
+            <li>일급: <b>시급 × 1일 근무시간</b><br />예시: 10,320 × 8 = 82,560원</li>
+<li>주급: <b>일급 × (한 달 근무일수 ÷ 4.345) + 주휴수당</b><br />예시: 82,560 × (22 ÷ 4.345) + 82,560 ≈ 500,585원</li>
+<li>월급: <b>시급 × 1일 근무시간 × 한 달 근무일수 + 주휴수당 × 4.345</b><br />예시: 10,320 × 8 × 22 + 82,560 × 4.345 ≈ 2,175,043원</li>
+<li>연봉: <b>월급 × 12</b><br />예시: 2,175,043 × 12 ≈ 26,100,516원</li>
+
           </ul>
         </li>
         <li>
           <b>세금 공제</b>
-          <ul className="list-disc list-inside ml-5">
-            <li>4대보험: 9.4% 차감, 원천징수: 3.3% 차감, 선택에 따라 적용<br />예시: 월급 2,112,768원, 4대보험 선택 시 → 2,112,768 × 0.906 = 1,914,170원</li>
-          </ul>
+          <li>4대보험: 9.4% 차감, 원천징수: 3.3% 차감, 선택에 따라 적용<br />
+예시: 월급 2,112,768원, 4대보험 선택 시 → 2,112,768 × 0.906 = 1,914,170원</li>
+
         </li>
         <li>
           <b>수습기간</b>
           <ul className="list-disc list-inside ml-5">
-            <li>수습기간(최대 3개월)에는 시급의 90%만 적용<br />예시: 시급 10,030원 → 10,030 × 0.9 = 9,027원</li>
+            <li>수습기간(최대 3개월)에는 시급의 90%만 적용<br />예시: 시급 10,320원 → 10,320 × 0.9 = 9,288원</li>
           </ul>
         </li>
       </ol>
@@ -228,10 +228,14 @@ function HourlyWageFAQBox() {
           </div>
         </div>
         <div>
-          <div className="font-bold mb-1">Q 2025년 최저시급과 월급, 연봉 시급은 얼마인가요?</div>
+          <div className="font-bold mb-1">Q 2026년 최저시급과 월급, 연봉 시급은 얼마인가요?</div>
           <div>
-            2025년 <b>최저시급</b>은 <b>10,030원</b>입니다. 월급으로 환산하면 주 40시간 근무 기준 약 <b>2,096,270원</b>, 연봉으로는 약 <b>25,155,240원</b>입니다. <b>알바 시급</b>이나 <b>월급 시급</b>, <b>연봉시급</b>을 계산할 때도 최저임금 기준을 반드시 확인해야 합니다.
-          </div>
+  2026년 <b>최저시급</b>은 <b>10,320원</b>입니다.
+  주 40시간 근무(주휴 포함, 월 209시간 기준)으로 환산하면 월급은 약 <b>2,156,880원</b>,
+  연봉은 약 <b>25,882,560원</b>입니다.
+  실제 월급·연봉 환산값은 근무일수/주휴 포함 여부에 따라 달라질 수 있습니다.
+</div>
+
         </div>
         <div>
           <div className="font-bold mb-1">Q 주휴수당은 시급 계산에 어떻게 반영되나요?</div>
@@ -248,7 +252,7 @@ function HourlyWageFAQBox() {
         <div>
           <div className="font-bold mb-1">Q 야간근로 시 시급은 어떻게 계산하나요?</div>
           <div>
-            <b>야간근로(밤 10시~익일 6시)</b>는 통상시급의 1.5배(50% 가산)를 적용해야 합니다. 예를 들어, 시급이 10,030원이라면 야간 시급은 15,045원이 됩니다. 야간근로수당은 근로기준법에 따라 별도로 지급되어야 합니다.
+            <b>야간근로(밤 10시~익일 6시)</b>는 통상시급의 1.5배(50% 가산)를 적용해야 합니다. 예를 들어, 시급이 10,320원이라면 야간 시급은 15,480원이 됩니다. 야간근로수당은 근로기준법에 따라 별도로 지급되어야 합니다.
           </div>
         </div>
         <div>
@@ -345,7 +349,7 @@ function ToggleGroup({ value, options, onChange }) {
 
 export default function HourlyCalculator() {
   // 입력 상태
-  const [inputValue, setInputValue] = useState("10030");
+  const [inputValue, setInputValue] = useState("10320");
   const [inputUnit, setInputUnit] = useState("hourly");
   const [hoursPerDay, setHoursPerDay] = useState("8");
   const [daysPerMonth, setDaysPerMonth] = useState("22");
@@ -397,7 +401,7 @@ export default function HourlyCalculator() {
 
 
   const reset = () => {
-    setInputValue("10030");
+    setInputValue("10320");
     setInputUnit("hourly");
     setHoursPerDay("8");
     setDaysPerMonth("22");
@@ -430,7 +434,7 @@ export default function HourlyCalculator() {
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
-              placeholder="10030"
+              placeholder="10320"
             />
             <select
               value={inputUnit}
@@ -502,14 +506,14 @@ export default function HourlyCalculator() {
           </InputRow>
           <InputRow
             label="세금 적용"
-            tooltip={`4대보험(9.4%) 또는 원천징수(3.3%)를 선택할 수 있습니다.`}
+            tooltip={`4대보험(대략 9.4%) 또는 원천징수(3.3%)를 선택할 수 있습니다.`}
           >
             <ToggleGroup
               value={taxType}
               onChange={setTaxType}
               options={[
                 { value: "none", label: "없음" },
-                { value: "insurance", label: "9.4%" },
+                { value: "insurance", label: "4대보험(대략 9.4%)" },
                 { value: "withholding", label: "3.3%" },
               ]}
             />
