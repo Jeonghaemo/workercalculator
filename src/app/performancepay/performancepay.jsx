@@ -38,16 +38,21 @@ function Tooltip({ text }) {
 
 // 간이 공제(4대보험+소득세) 계산 함수 (간단 버전)
 function calcDeductions({ bonus }) {
-  // 국민연금 (4.5%), 건강보험(3.545%), 장기요양(건강보험의 12.81%), 고용보험(0.9%), 소득세(2%), 지방소득세(소득세의 10%)
-  const pension = Math.round(bonus * 0.045);
-  const health = Math.round(bonus * 0.03545);
-  const care = Math.round(health * 0.1281);
+  // 2026 간이 공제(참고용)
+  // 국민연금(4.75%), 건강보험(3.595%), 장기요양(건강보험료의 13.14%), 고용보험(0.9%)
+  // 소득세는 실제 지급월 급여와 합산 원천징수되어 변동폭이 커서, 여기서는 간이 가정(2%)로 처리합니다.
+  const pension = Math.round(bonus * 0.0475);
+  const health = Math.round(bonus * 0.03595);
+  const care = Math.round(health * 0.1314);
   const employment = Math.round(bonus * 0.009);
-  const incomeTax = Math.round(bonus * 0.02);
+
+  const incomeTax = Math.round(bonus * 0.02); // 간이 가정
   const localTax = Math.round(incomeTax * 0.1);
+
   const total = pension + health + care + employment + incomeTax + localTax;
   return { pension, health, care, employment, incomeTax, localTax, total };
 }
+
 
 // InputRow 컴포넌트
 function InputRow({ label, tooltip, children }) {
@@ -117,6 +122,9 @@ function CalculationMethodBox() {
         leading-relaxed
       "
     >
+
+      <AdsenseBox />
+      
       <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
       <ul className="list-disc list-inside mb-6 space-y-2">
         <li>
@@ -156,8 +164,9 @@ function CalculationMethodBox() {
         <li>
           <b>공제액 산정:</b>
           <span className="ml-1">
-            국민연금(4.5%), 건강보험(3.545%), 장기요양(건강보험의 12.81%), 고용보험(0.9%), 소득세(2%), 지방소득세(소득세의 10%)를 공제<br />
-            예시: 600만원 성과급 → 공제 총액 약 47만원, 세후 약 553만원
+            국민연금(4.75%), 건강보험(3.595%), 장기요양(건강보험료의 13.14%), 고용보험(0.9%), 소득세(간이 2%), 지방소득세(소득세의 10%)를 공제
+<br />
+            예시: 600만원 성과급 → 공제액은 약 70만 원 내외, 세후 실수령액은 약 530만 원 내외로 예상됩니다.
           </span>
         </li>
         <li>
@@ -170,7 +179,6 @@ function CalculationMethodBox() {
       </ol>
       <div className="text-sm text-gray-600">
         ※ 실제 지급액은 회사 규정, 평가등급, 세금, 4대보험, 기타 공제항목에 따라 달라질 수 있습니다.<br />
-        ※ 본 계산기는 참고용 예시입니다.
       </div>
     </div>
   );
