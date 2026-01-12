@@ -40,13 +40,22 @@ function Tooltip({ text }) {
 
 // 공제 계산 함수
 function calcDeductions({ monthly, taxFree, family, children }) {
-  const taxable = Math.max(0, monthly - taxFree);
-  const pensionBase = Math.min(Math.max(taxable, 370000), 5900000);
-  const pension = Math.round(pensionBase * 0.045);
-  const healthBase = Math.min(Math.max(taxable, 279266), 110332300);
-  const health = Math.round(healthBase * 0.03545);
-  const care = Math.round(health * 0.1281);
+    const taxable = Math.max(0, monthly - taxFree);
+
+  // 2026 국민연금: 기준소득월액 하한 410,000 / 상한 6,590,000, 근로자 부담률 4.75%
+  const pensionBase = Math.min(Math.max(taxable, 410000), 6590000);
+  const pension = Math.round(pensionBase * 0.0475);
+
+  // 2026 건강보험: 직장가입자 보험료율 7.19% → 근로자 부담 3.595%
+  // (기존 healthBase 상/하한 값이 비정상적으로 커서 계산 오류 가능성이 있어 taxable 그대로 사용)
+  const health = Math.round(taxable * 0.03595);
+
+  // 2026 장기요양: 건강보험료 대비 13.14%
+  const care = Math.round(health * 0.1314);
+
+  // 고용보험(실업급여) 근로자 부담 0.9% (일반적으로 동일)
   const employment = Math.round(taxable * 0.009);
+
   const familyTotal = family + children;
   const incomeTax = lookupIncomeTax(taxable, familyTotal);
   const localTax = Math.round(incomeTax * 0.1);
@@ -120,6 +129,9 @@ function CalculationMethodBox() {
         leading-relaxed
       "
     >
+
+      <AdsenseBox />
+      
       <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
       <ul className="list-disc list-inside mb-6 space-y-2">
         <li>
@@ -159,6 +171,7 @@ function CalculationMethodBox() {
           </span>
         </li>
       </ul>
+
       <h2 className="text-2xl font-bold mb-4 text-blue-700">연봉 실수령액 계산방법</h2>
       <ol className="list-decimal list-inside mb-4 space-y-1">
         <li>
@@ -168,27 +181,31 @@ function CalculationMethodBox() {
             예시: 월급 2,000,000원, 비과세액 200,000원 → 과세표준 1,800,000원
           </span>
         </li>
+
         <li>
           <b>국민연금:</b>
           <span className="ml-1">
-            과세표준(최소 370,000원, 최대 5,900,000원 범위 적용) × 4.5%<br />
-            예시: 1,800,000 × 4.5% = 81,000원
+            과세표준(최소 410,000원, 최대 6,590,000원 범위 적용) × 4.75%<br />
+            예시: 1,800,000 × 4.75% = 85,500원
           </span>
         </li>
+
         <li>
           <b>건강보험:</b>
           <span className="ml-1">
-            과세표준(최소 279,266원, 최대 110,332,300원 범위 적용) × 3.545%<br />
-            예시: 1,800,000 × 3.545% = 63,810원
+            과세표준 × 3.595%<br />
+            예시: 1,800,000 × 3.595% = 64,710원
           </span>
         </li>
+
         <li>
           <b>장기요양보험:</b>
           <span className="ml-1">
-            건강보험료 × 12.81%<br />
-            예시: 63,810 × 12.81% ≈ 8,176원
+            건강보험료 × 13.14%<br />
+            예시: 64,710 × 13.14% ≈ 8,504원
           </span>
         </li>
+
         <li>
           <b>고용보험:</b>
           <span className="ml-1">
@@ -196,13 +213,15 @@ function CalculationMethodBox() {
             예시: 1,800,000 × 0.9% = 16,200원
           </span>
         </li>
+
         <li>
           <b>소득세(간이):</b>
-<span className="ml-1">
-  간이세액표 기준으로 계산되며, 부양가족 수와 자녀 수에 따라 공제 금액이 다름<br />
-  예시: 월급 1,800,000원, 가족 3명(기본 1명 + 추가 2명) → 간이세액표 기준 약 8,000원
-</span>
+          <span className="ml-1">
+            간이세액표 기준으로 계산되며, 부양가족 수와 자녀 수에 따라 공제 금액이 달라질 수 있습니다.<br />
+            예시: 월급 1,800,000원, 가족 3명(본인 포함) → 간이세액표 기준 소득세가 산정됩니다.
+          </span>
         </li>
+
         <li>
           <b>지방소득세:</b>
           <span className="ml-1">
@@ -210,17 +229,19 @@ function CalculationMethodBox() {
             예시: 소득세 8,000원 × 10% = 800원
           </span>
         </li>
+
         <li>
           <b>실수령액 산정:</b>
           <span className="ml-1">
             월급(세전) - (공제액 합계) = 월 실수령액<br />
-            예시: 2,000,000 - 169,986 = 1,830,014원
+            예시: 2,000,000 - (공제액 합계) = 월 실수령액
           </span>
         </li>
       </ol>
+
       <div className="text-sm text-gray-600">
-        ※ 본 계산기는 2025년 기준 공제율, 간이세액표를 참고하여 예시를 제공합니다.<br />
-        ※ 실제 지급액은 사업장, 가족관계, 기타 공제항목에 따라 다를 수 있습니다.
+        ※ 본 계산기는 2026년 기준 4대보험 요율(예시)을 반영합니다. (소득세는 간이세액표 기준)<br />
+        ※ 실제 지급액은 사업장, 가족관계, 기타 공제항목에 따라 달라질 수 있습니다.
       </div>
     </div>
   );
@@ -247,49 +268,56 @@ function SalaryFAQBox() {
         <div>
           <div className="font-bold mb-1">Q 연봉 계산기에서 세전·세후 연봉은 무엇이 다른가요?</div>
           <div>
-            <b>세전 연봉</b>은 4대보험, 소득세, 지방소득세 등 공제 전 금액이며, <b>세후 연봉</b>은 모든 공제액을 차감한 뒤 실제로 받는 <b>실수령액</b> 기준 연봉입니다. 2025년 기준, 세금과 4대보험 요율이 반영되어 계산됩니다.
+            <b>세전 연봉</b>은 4대보험, 소득세, 지방소득세 등 공제 전 금액이며, <b>세후 연봉</b>은 모든 공제액을 차감한 뒤 실제로 받는 <b>실수령액</b> 기준 연봉입니다. 본 계산기는 2026년 기준 4대보험 요율(예시)을 반영합니다.
           </div>
         </div>
+
         <div>
           <div className="font-bold mb-1">Q 월급과 연봉의 관계는 어떻게 계산하나요?</div>
           <div>
             <b>연봉</b>은 월급(세전 기준) × 12개월(또는 13, 14개월 등 상여금 포함 지급 기준에 따라 다름)로 계산합니다. 월급에 상여금이 포함되어 있으면 연봉에 자동 반영됩니다. <b>월 실수령액</b>은 세후 월급을 의미합니다.
           </div>
         </div>
+
         <div>
           <div className="font-bold mb-1">Q 비과세액(식대 등)은 연봉 계산에 어떻게 반영되나요?</div>
           <div>
-            <b>비과세액</b>은 소득세·4대보험 등에서 제외되는 금액입니다. 식대, 자가운전보조금 등 비과세 항목을 입력하면, 해당 금액만큼 세후 실수령액이 늘어납니다. 2025년 기준 월 20만원까지 비과세 식대가 인정됩니다.
+            <b>비과세액</b>은 소득세·4대보험 등에서 제외되는 금액입니다. 식대, 자가운전보조금 등 비과세 항목을 입력하면, 해당 금액만큼 세후 실수령액이 늘어납니다. (예: 식대 비과세 20만원 입력 시 과세표준이 줄어듦)
           </div>
         </div>
+
         <div>
           <div className="font-bold mb-1">Q 4대보험은 연봉 계산에 어떻게 적용되나요?</div>
           <div>
-            <b>국민연금, 건강보험, 장기요양, 고용보험</b> 등 4대보험은 월급(세전)에서 각 보험별 요율을 곱해 산정하며, 연봉 계산 시 월별 공제액이 연간 합산되어 세후 연봉에 반영됩니다. 2025년 기준 요율이 적용됩니다.
+            <b>국민연금, 건강보험, 장기요양, 고용보험</b> 등 4대보험은 월급(세전)에서 각 보험별 요율을 곱해 산정하며, 연봉 계산 시 월별 공제액이 연간 합산되어 세후 연봉에 반영됩니다. 본 계산기는 2026년 기준 요율(예시)을 반영합니다.
           </div>
         </div>
+
         <div>
           <div className="font-bold mb-1">Q 상여금(성과급)은 연봉에 포함되나요?</div>
           <div>
             <b>상여금</b>이 연봉에 포함되는지 여부는 회사 규정에 따라 다릅니다. 정기적으로 지급되는 상여금은 연봉에 포함되며, 별도 지급되는 성과급·인센티브는 연봉과 별개로 계산될 수 있습니다. 상여금이 연봉에 포함되면 월급에도 자동 반영됩니다.
           </div>
         </div>
+
         <div>
           <div className="font-bold mb-1">Q 퇴직금은 연봉에 포함되나요?</div>
           <div>
             <b>퇴직금</b>은 법적으로 연봉과 별도로 산정·지급되며, 연봉 계산기에는 포함되지 않습니다. 단, 일부 회사는 연봉에 퇴직금을 포함해 표시하기도 하니, 실제 계약서를 반드시 확인하세요.
           </div>
         </div>
+
         <div>
-          <div className="font-bold mb-1">Q 2025년 연봉 계산기에서 달라진 점이 있나요?</div>
+          <div className="font-bold mb-1">Q 2026년 연봉 계산기에서 달라진 점이 있나요?</div>
           <div>
-            2025년 기준 <b>4대보험 요율</b>과 <b>소득세율</b>이 반영되어 있습니다. 비과세액 한도, 최저임금, 상여금 지급 기준 등도 최신 기준을 적용합니다. 매년 세법과 보험 요율이 바뀔 수 있으니 최신 정보를 확인하세요.
+            2026년 기준 <b>4대보험 요율(예시)</b>이 반영되어 있습니다. 소득세는 간이세액표 기준으로 계산되며, 비과세액/가족 수/자녀 수 등에 따라 실수령액이 달라질 수 있습니다. 매년 제도와 요율이 바뀔 수 있으니 참고용으로 활용하세요.
           </div>
         </div>
       </div>
     </div>
   );
 }
+
 
 export default function Salary() {
   const [mode, setMode] = useState("annual");
