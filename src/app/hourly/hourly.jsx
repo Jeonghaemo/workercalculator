@@ -89,10 +89,14 @@ function IntroBox() {
           </Link>
           에서 확인하세요.
         </li>
+        <li className="font-semibold text-blue-700">
+          2026년 최저시급은 <b>10,320원</b>입니다.
+        </li>
       </ul>
     </div>
   );
 }
+
 
 function CalculationMethodBox() {
   return (
@@ -135,7 +139,7 @@ function CalculationMethodBox() {
         <li>
           <b>세금 적용 선택:</b>
           <span className="ml-1">
-            4대보험(대략 9.4%) 또는 원천징수(3.3%) 등 세금 공제 방식을 선택할 수 있습니다.
+            4대보험(9.4%) 또는 원천징수(3.3%) 등 세금 공제 방식을 선택할 수 있습니다.
           </span>
         </li>
         <li>
@@ -506,14 +510,14 @@ export default function HourlyCalculator() {
           </InputRow>
           <InputRow
             label="세금 적용"
-            tooltip={`4대보험(대략 9.4%) 또는 원천징수(3.3%)를 선택할 수 있습니다.`}
+            tooltip={`4대보험(9.4%) 또는 원천징수(3.3%)를 선택할 수 있습니다.`}
           >
             <ToggleGroup
               value={taxType}
               onChange={setTaxType}
               options={[
                 { value: "none", label: "없음" },
-                { value: "insurance", label: "4대보험(대략 9.4%)" },
+                { value: "insurance", label: "4대보험(9.4%)" },
                 { value: "withholding", label: "3.3%" },
               ]}
             />
