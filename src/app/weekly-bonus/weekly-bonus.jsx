@@ -7,6 +7,8 @@ import AdsenseBox from "../components/AdsenseBox";
 import MobileToolbar from "../components/MobileToolbar";
 import KakaoShareButton from "../components/KakaoShareButton";
 
+const MIN_WAGE_2026 = 10320;
+
 // 천 단위 콤마
 const addComma = (value) => {
   if (!value && value !== 0) return "";
@@ -138,103 +140,111 @@ function CalculationMethodBox() {
       "
     >
       <h2 className="text-2xl font-bold mb-4 text-blue-700">계산기 사용방법</h2>
-      <ul className="list-disc list-inside mb-6 space-y-2">
-        <li>
-          <b>임금 입력:</b>
-          <span className="ml-1">
-            시급 또는 일급을 선택하고 금액을 입력하세요. (예: 2025년 최저시급 10,030원)
-          </span>
-        </li>
-        <li>
-          <b>1일 근무시간 입력:</b>
-          <span className="ml-1">
-            하루 기준 실제 근무시간을 입력하세요. (예: 8시간)
-          </span>
-        </li>
-        <li>
-          <b>1주 근무일수 입력:</b>
-          <span className="ml-1">
-            한 주 기준 실제 근무일수를 입력하세요. (예: 5일)
-          </span>
-        </li>
-        <li>
-          <b>주휴수당 적용 여부 선택:</b>
-          <span className="ml-1">
-            주 15시간 이상 근무 시 주휴수당을 받을 수 있습니다. 본인 상황에 맞게 적용/미적용을 선택하세요.
-          </span>
-        </li>
-        <li>
-          <b>세금 공제 방식 선택:</b>
-          <span className="ml-1">
-            4대 보험(근로자 부담) 또는 3.3% 원천징수(사업소득자) 중 선택하세요.
-          </span>
-        </li>
-        <li>
-          <b>계산하기 버튼 클릭:</b>
-          <span className="ml-1">
-            모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 주휴수당, 주급, 월급, 세후 금액 등이 자동 계산됩니다.
-          </span>
-        </li>
-      </ul>
-      <h2 className="text-2xl font-bold mb-4 text-blue-700">주휴수당 계산방법</h2>
-      <ol className="list-decimal list-inside mb-4 space-y-1">
-        <li>
-          <b>시급 환산:</b>
-          <span className="ml-1">
-            <b>시급</b>은 입력값 그대로, <b>일급</b>은 <b>일급 ÷ 1일 근무시간</b>으로 시급 환산<br />
-            예시: 일급 80,240원, 1일 8시간 → 80,240 ÷ 8 = 10,030원
-          </span>
-        </li>
-        <li>
-          <b>주휴수당 발생 조건:</b>
-          <span className="ml-1">
-            1주일 근로시간(1일 근무시간 × 1주 근무일수)이 <b>15시간 이상</b>일 때 주휴수당 발생<br />
-            예시: 1일 5시간, 주 3일 근무 → 5 × 3 = 15시간 → 주휴수당 발생
-          </span>
-        </li>
-        <li>
-          <b>주휴수당(주):</b>
-          <span className="ml-1">
-            <b>1일 근무시간 × 시급</b> (주 15시간 이상 &amp; 적용 선택 시)<br />
-            예시: 8시간 × 10,030원 = 80,240원
-          </span>
-        </li>
-        <li>
-          <b>주급(세전):</b>
-          <span className="ml-1">
-            <b>일급 × 1주 근무일수 + 주휴수당</b><br />
-            예시: 일급 80,240원 × 5일 + 80,240원 = 481,440원
-          </span>
-        </li>
-        <li>
-          <b>월급(세전):</b>
-          <span className="ml-1">
-            <b>주급 × 4.345</b> (1개월 평균 주수)<br />
-            예시: 481,440원 × 4.345 = 2,090,441원
-          </span>
-        </li>
-        <li>
-          <b>세금 공제:</b>
-          <span className="ml-1">
-            <b>4대 보험</b> : 국민연금(4.5%), 건강보험(3.545%), 장기요양(0.508%), 고용보험(0.9%)<br />
-            <b>3.3% 원천징수</b> : 주급 또는 월급의 3.3% 공제<br />
-            예시: 월급 2,090,441원, 4대 보험 선택 시 → 2,090,441 × 0.906 = 1,894,940원
-          </span>
-        </li>
-        <li>
-          <b>세후 금액:</b>
-          <span className="ml-1">
-            주급(세전) 또는 월급(세전)에서 선택한 세금 공제액을 차감한 금액<br />
-            예시: 월급 2,090,441원 - 195,501원(4대 보험) = 1,894,940원
-          </span>
-        </li>
-      </ol>
-      <div className="text-sm text-gray-600">
-        ※ 4.345는 1년(52주)을 월 단위로 환산한 평균 주 수입니다.<br />
-        ※ 주휴수당은 주 15시간 미만 근무 시 발생하지 않습니다.<br />
-        ※ 실제 지급액은 근로계약, 사업장 상황에 따라 달라질 수 있습니다.
-      </div>
-    </div>
+<ul className="list-disc list-inside mb-6 space-y-2">
+  <li>
+    <b>임금 입력:</b>
+    <span className="ml-1">
+      시급 또는 일급을 선택하고 금액을 입력하세요. (예: 2026년 최저시급 10,320원)
+    </span>
+  </li>
+  <li>
+    <b>1일 근무시간 입력:</b>
+    <span className="ml-1">
+      하루 기준 실제 근무시간을 입력하세요. (예: 8시간)
+    </span>
+  </li>
+  <li>
+    <b>1주 근무일수 입력:</b>
+    <span className="ml-1">
+      한 주 기준 실제 근무일수를 입력하세요. (예: 5일)
+    </span>
+  </li>
+  <li>
+    <b>주휴수당 적용 여부 선택:</b>
+    <span className="ml-1">
+      주 15시간 이상 근무 시 주휴수당을 받을 수 있습니다. 본인 상황에 맞게 적용/미적용을 선택하세요.
+    </span>
+  </li>
+  <li>
+    <b>세금 공제 방식 선택:</b>
+    <span className="ml-1">
+      4대 보험(근로자 부담) 또는 3.3% 원천징수(사업소득자) 중 선택하세요.
+    </span>
+  </li>
+  <li>
+    <b>계산하기 버튼 클릭:</b>
+    <span className="ml-1">
+      모든 항목 입력 후 <b>계산하기</b> 버튼을 누르면 주휴수당, 주급, 월급, 세후 금액 등이 자동 계산됩니다.
+    </span>
+  </li>
+</ul>
+
+<h2 className="text-2xl font-bold mb-4 text-blue-700">주휴수당 계산방법</h2>
+<ol className="list-decimal list-inside mb-4 space-y-1">
+  <li>
+    <b>시급 환산:</b>
+    <span className="ml-1">
+      <b>시급</b>은 입력값 그대로, <b>일급</b>은 <b>일급 ÷ 1일 근무시간</b>으로 시급 환산<br />
+      예시: 일급 82,560원, 1일 8시간 → 82,560 ÷ 8 = 10,320원
+    </span>
+  </li>
+
+  <li>
+    <b>주휴수당 발생 조건:</b>
+    <span className="ml-1">
+      1주일 근로시간(1일 근무시간 × 1주 근무일수)이 <b>15시간 이상</b>일 때 주휴수당 발생<br />
+      예시: 1일 5시간, 주 3일 근무 → 5 × 3 = 15시간 → 주휴수당 발생
+    </span>
+  </li>
+
+  <li>
+    <b>주휴수당(주):</b>
+    <span className="ml-1">
+      <b>1일 근무시간 × 시급</b> (주 15시간 이상 &amp; 적용 선택 시)<br />
+      예시: 8시간 × 10,320원 = 82,560원
+    </span>
+  </li>
+
+  <li>
+    <b>주급(세전):</b>
+    <span className="ml-1">
+      <b>일급 × 1주 근무일수 + 주휴수당</b><br />
+      예시: 일급 82,560원 × 5일 + 82,560원 = 495,360원
+    </span>
+  </li>
+
+  <li>
+    <b>월급(세전):</b>
+    <span className="ml-1">
+      <b>주급 × 4.345</b> (1개월 평균 주수)<br />
+      예시: 495,360원 × 4.345 = 2,150,792원
+    </span>
+  </li>
+
+  <li>
+    <b>세금 공제:</b>
+    <span className="ml-1">
+      <b>4대 보험</b> : 국민연금(4.5%), 건강보험(3.545%), 장기요양(0.508%), 고용보험(0.9%)<br />
+      <b>3.3% 원천징수</b> : 주급 또는 월급의 3.3% 공제<br />
+      예시: 월급 2,150,792원, 4대 보험 선택 시 → 2,150,792 × 0.906 = 1,949,607원
+    </span>
+  </li>
+
+  <li>
+    <b>세후 금액:</b>
+    <span className="ml-1">
+      주급(세전) 또는 월급(세전)에서 선택한 세금 공제액을 차감한 금액<br />
+      예시: 월급 2,150,792원 - 201,185원(4대 보험) = 1,949,607원
+    </span>
+  </li>
+</ol>
+
+<div className="text-sm text-gray-600">
+  ※ 4.345는 1년(52주)을 월 단위로 환산한 평균 주 수입니다.<br />
+  ※ 주휴수당은 주 15시간 미만 근무 시 발생하지 않습니다.<br />
+  ※ 실제 지급액은 근로계약, 사업장 상황에 따라 달라질 수 있습니다.
+</div>
+</div>
   );
 }
 
@@ -300,47 +310,64 @@ function calcWeeklyPay({
   bonusApply,
   taxType,
 }) {
+  // 방어: 0으로 나누기 방지
+  const safeHoursPerDay = Number(hoursPerDay) || 0;
+  const safeDaysPerWeek = Number(daysPerWeek) || 0;
+
   // 시급 환산
   let hourly = 0;
-  switch (unit) {
-    case "hourly":
-      hourly = wage;
-      break;
-    case "daily":
-      hourly = wage / hoursPerDay;
-      break;
-    default:
-      hourly = wage;
+  if (unit === "daily") {
+    hourly = safeHoursPerDay > 0 ? wage / safeHoursPerDay : 0;
+  } else {
+    hourly = wage;
   }
-  const totalWeeklyHours = hoursPerDay * daysPerWeek;
+
+  const totalWeeklyHours = safeHoursPerDay * safeDaysPerWeek;
+
+  // 주휴수당 발생 조건
   const eligible = totalWeeklyHours >= 15;
-  const weeklyBonus = eligible && bonusApply ? hourly * hoursPerDay : 0;
-  const daily = hourly * hoursPerDay;
-  const weekly = daily * daysPerWeek + (bonusApply ? weeklyBonus : 0);
+
+  // ✅ 주휴시간(핵심 수정)
+  // - 15시간 이상일 때만 발생
+  // - 주 40시간 이상이면 8시간
+  // - 15~40 미만이면 (주근로시간/40)*8
+  const weeklyHolidayHours = eligible
+    ? Math.min(8, Math.round((totalWeeklyHours / 40) * 8 * 10) / 10)
+    : 0;
+
+  // ✅ 주휴수당(주) = 주휴시간 × 시급
+  const weeklyBonus = eligible && bonusApply ? hourly * weeklyHolidayHours : 0;
+
+  // 일급/주급
+  const daily = hourly * safeHoursPerDay;
+  const weekly = daily * safeDaysPerWeek + weeklyBonus;
 
   // 월급 환산 (주급 × 4.345)
   const monthly = weekly * 4.345;
 
-  // 4대보험(국민연금, 건강보험, 장기요양, 고용보험) 단순 예시 계산
+  // 4대보험(근로자 부담) 간이 계산
   const pension = monthly * 0.045;
   const health = monthly * 0.03545;
   const care = monthly * 0.00508;
   const employ = monthly * 0.009;
   const totalInsure = pension + health + care + employ;
+
+  // 주 단위로도 보기 좋게 분배(월→주)
   const weeklyInsure = totalInsure / 4.345;
   const monthlyAfterInsure = monthly - totalInsure;
   const weeklyAfterInsure = weekly - weeklyInsure;
 
-  // 3.3% 원천징수(사업소득자)
-  const tax33 = monthly * 0.033;
-  const weeklyTax33 = weekly * 0.033;
-  const monthlyAfter33 = monthly - tax33;
-  const weeklyAfter33 = weekly - weeklyTax33;
+  // 3.3% 원천징수
+  const tax33Monthly = monthly * 0.033;
+  const tax33Weekly = weekly * 0.033;
+  const monthlyAfter33 = monthly - tax33Monthly;
+  const weeklyAfter33 = weekly - tax33Weekly;
 
-  // 실제 세후 금액
+  // 세후
   let weeklyAfterTax = weekly;
   let monthlyAfterTax = monthly;
   let taxDetail = null;
+
   if (taxType === "four") {
     weeklyAfterTax = weeklyAfterInsure;
     monthlyAfterTax = monthlyAfterInsure;
@@ -355,7 +382,7 @@ function calcWeeklyPay({
     weeklyAfterTax = weeklyAfter33;
     monthlyAfterTax = monthlyAfter33;
     taxDetail = {
-      weeklyTax33: Math.round(weeklyTax33),
+      weeklyTax33: Math.round(tax33Weekly),
     };
   }
 
@@ -364,6 +391,7 @@ function calcWeeklyPay({
     daily: Math.round(daily),
     weekly: Math.round(weekly),
     weeklyBonus: Math.round(weeklyBonus),
+    weeklyHolidayHours, // ✅ 추가: 주휴시간도 같이 내려줌
     eligible,
     monthly: Math.round(monthly),
     weeklyAfterTax: Math.round(weeklyAfterTax),
@@ -373,8 +401,10 @@ function calcWeeklyPay({
   };
 }
 
+
+
 export default function WeeklyBonusCalculator() {
-  const [inputValue, setInputValue] = useState("10030");
+  const [inputValue, setInputValue] = useState(String(MIN_WAGE_2026));
   const [inputUnit, setInputUnit] = useState("hourly");
   const [hoursPerDay, setHoursPerDay] = useState("8");
   const [daysPerWeek, setDaysPerWeek] = useState("5");
@@ -414,7 +444,7 @@ export default function WeeklyBonusCalculator() {
   };
 
   const reset = () => {
-    setInputValue("10030");
+    setInputValue(String(MIN_WAGE_2026));
     setInputUnit("hourly");
     setHoursPerDay("8");
     setDaysPerWeek("5");
@@ -436,7 +466,7 @@ export default function WeeklyBonusCalculator() {
           <h3 className="font-semibold text-lg mb-6">근무 조건 입력</h3>
           <InputRow
             label="임금 입력"
-            tooltip={`시급 또는 일급을 입력하고 단위를 선택하세요.\n2025년 최저시급: 10,030원`}
+            tooltip={`시급 또는 일급을 입력하고 단위를 선택하세요.\n2026년 최저시급: 10,320원`}
           >
             <input
               type="text"
@@ -446,7 +476,7 @@ export default function WeeklyBonusCalculator() {
               min={0}
               inputMode="numeric"
               pattern="[0-9]*"
-              placeholder="10030"
+              placeholder="10320"
             />
             <select
               value={inputUnit}
@@ -558,13 +588,20 @@ export default function WeeklyBonusCalculator() {
                 <span className="font-semibold">{addComma(result.weekly)} 원</span>
               </div>
               <div className="flex items-center justify-between">
-                <span>월급(세전)</span>
-                <span className="font-semibold">{addComma(result.monthly)} 원</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>주휴수당(주)</span>
-                <span className="font-semibold">{addComma(result.weeklyBonus)} 원</span>
-              </div>
+  <span>월급(세전)</span>
+  <span className="font-semibold">{addComma(result.monthly)} 원</span>
+</div>
+
+{/* ✅ 여기 추가 */}
+<div className="flex items-center justify-between">
+  <span>주휴시간(주)</span>
+  <span className="font-semibold">{result.weeklyHolidayHours} 시간</span>
+</div>
+
+<div className="flex items-center justify-between">
+  <span>주휴수당(주)</span>
+  <span className="font-semibold">{addComma(result.weeklyBonus)} 원</span>
+</div>
               <div className="flex items-center justify-between">
                 <span>주휴수당 적용 여부</span>
                 <span className="font-semibold">{result.eligible && bonusApply === "apply" ? "적용" : "미적용"}</span>
