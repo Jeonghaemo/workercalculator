@@ -116,7 +116,7 @@ function CalculationMethodBox() {
         <li>
           <b>시급 입력:</b>
           <span className="ml-1">
-            세전 통상임금을 입력하세요. (예: 10,030원)
+            세전 통상임금을 입력하세요. (예: 10,320원)
           </span>
         </li>
         <li>
@@ -222,9 +222,9 @@ function OvertimeFAQBox() {
           </div>
         </div>
         <div>
-          <div className="font-bold mb-1">Q 2025년 최저임금과 연장·야간·휴일수당 계산 시 주의할 점은?</div>
+          <div className="font-bold mb-1">Q 2026년 최저임금과 연장·야간·휴일수당 계산 시 주의할 점은?</div>
           <div>
-            2025년 최저시급은 10,030원으로, 연장·야간·휴일수당을 계산할 때도 <b>최저임금 기준</b>을 반드시 반영해야 합니다. 주휴수당이 포함된 시급을 기준으로 1.5배 또는 2배를 곱해 각 수당을 산정해야 하며, 실제 지급액이 최저임금 미만이 되지 않도록 유의해야 합니다.
+            2026년 최저시급은 10,320원으로, 연장·야간·휴일수당을 계산할 때도 <b>최저임금 기준</b>을 반드시 반영해야 합니다. 주휴수당이 포함된 시급을 기준으로 1.5배 또는 2배를 곱해 각 수당을 산정해야 하며, 실제 지급액이 최저임금 미만이 되지 않도록 유의해야 합니다.
           </div>
         </div>
       </div>
@@ -305,14 +305,14 @@ export default function OvertimeCalculator() {
           <h3 className="font-semibold text-lg mb-6">근무시간 입력</h3>
           <InputRow
             label="통상임금"
-            tooltip="세전 통상임금을 입력하세요. (예: 10,030)"
+            tooltip="세전 통상임금을 입력하세요. (예: 10,320)"
           >
             <input
               type="text"
               value={hourly}
               onChange={handleNum(setHourly)}
               className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              placeholder="10,030"
+              placeholder="10,320"
             />
             <span className="text-gray-500">원</span>
           </InputRow>
@@ -410,32 +410,41 @@ export default function OvertimeCalculator() {
           </div>
         </section>
         {/* 우측 결과 */}
-        <section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
-          <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
-          {result ? (
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span>연장근로수당</span>
-                <span className="font-semibold">{addComma(result.extPay)} 원</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>야간근로수당</span>
-                <span className="font-semibold">{addComma(result.nightPay)} 원</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>휴일근로수당</span>
-                <span className="font-semibold">{addComma(result.holidayPay)} 원</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="font-bold">총 수당</span>
-                <span className="font-bold text-blue-700">{addComma(result.total)} 원</span>
-              </div>
-            </div>
-          ) : (
-            <div className="text-gray-400 text-center mt-12">계산 결과가 여기에 표시됩니다.</div>
-          )}
-          
-        </section>
+<section ref={resultRef} className="w-full lg:w-1/2 pt-10 lg:pt-0 min-w-0">
+  <h3 className="font-semibold text-lg mb-6">계산 결과</h3>
+
+  {result ? (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <span>연장근로수당</span>
+        <span className="font-semibold">{addComma(result.extPay)} 원</span>
+      </div>
+      <div className="flex items-center justify-between">
+        <span>야간근로수당</span>
+        <span className="font-semibold">{addComma(result.nightPay)} 원</span>
+      </div>
+      <div className="flex items-center justify-between">
+        <span>휴일근로수당</span>
+        <span className="font-semibold">{addComma(result.holidayPay)} 원</span>
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="font-bold">총 수당</span>
+        <span className="font-bold text-blue-700">{addComma(result.total)} 원</span>
+      </div>
+    </div>
+  ) : (
+    <div className="text-gray-400 text-center mt-12">
+      계산 결과가 여기에 표시됩니다.
+    </div>
+  )}
+
+  {/* ✅ 여기(결과 아래, 섹션 끝나기 직전) */}
+  <div style={{ marginTop: 24, textAlign: "center" }}>
+    <KakaoShareButton />
+  </div>
+</section>
+
+        
       </div>
       <AdsenseBox />
       <CalculationMethodBox />

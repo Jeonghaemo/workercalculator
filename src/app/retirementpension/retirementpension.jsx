@@ -1,7 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
-import Script from "next/script";
 import AdsenseBox from "../components/AdsenseBox";
 import MobileToolbar from "../components/MobileToolbar";
 import KakaoShareButton from "../components/KakaoShareButton";
@@ -251,7 +250,11 @@ function RetirementPensionFAQBox() {
         <div>
           <div className="font-bold mb-1">Q 퇴직연금 수령 시 세금은 어떻게 부과되나요?</div>
           <div>
-            퇴직연금은 수령 방식에 따라 <b>세금</b>이 달라집니다. 일시금으로 받을 경우 퇴직소득세가 부과되고, 연금으로 받을 경우 연금소득세(3~5.5%)가 적용됩니다. IRP에 이체 후 55세 이후 연금 형태로 수령하면 세금 부담이 줄어들 수 있습니다. 세액공제 한도, 과세 기준 등은 매년 달라질 수 있으니 확인이 필요합니다.
+            퇴직연금은 수령 방식에 따라 <b>세금</b>이 달라집니다. 일시금으로 받을 경우 퇴직소득세가 부과되고, 연금으로 받을 경우 연금소득세(3.3~5.5%)가 적용됩니다. IRP에 이체 후 55세 이후 연금 형태로 수령하면 세금 부담이 줄어들 수 있습니다.
+세액공제는 통상 총급여(또는 종합소득)에 따라 공제율이 달라지며,
+연금저축은 600만원, 퇴직연금(IRP/DC) 포함 시 최대 900만원 한도로 안내됩니다.
+(공제율: 총급여 4,500만원/종합소득 5,500만원 이하 15%, 초과 12%)
+
           </div>
         </div>
         <div>

@@ -1,7 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
 import PageGrid from "../components/PageGrid";
-import Script from "next/script";
 import Link from "next/link";
 import AdsenseBox from "../components/AdsenseBox";
 import MobileToolbar from "../components/MobileToolbar";
@@ -80,7 +79,7 @@ function IntroBox() {
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 underline font-bold"
           >
-            시급 계산기
+            급여 계산기
           </Link>
           에서 확인하세요.
         </li>
@@ -149,8 +148,9 @@ function CalculationMethodBox() {
         <li>
           <b>시급 기준 통상임금:</b>
           <span className="ml-1">
-            입력한 시급 × 1일 근무시간<br />
-            예시: 시급 10,000원, 1일 8시간 → 10,000 × 8 = 80,000원
+            입력한 시급 그대로 사용
+예시: 시급 10,320원 → 시급 통상임금 10,320원<br />
+            예시: 시급 10,320원(2026 최저시급), 1일 8시간 → 10,320 × 8 = 82,560원
           </span>
         </li>
         <li>
@@ -161,15 +161,18 @@ function CalculationMethodBox() {
           </span>
         </li>
         <li>
-          <b>월급 기준 통상임금:</b>
-          <span className="ml-1">
-            (입력한 월급 + 통상적 수당)<br />
-            1일 통상임금 = 월급 ÷ 월평균 근무일수(21.75일)<br />
-            예시: 월급 2,000,000원, 수당 100,000원 → (2,000,000 + 100,000) ÷ 21.75 = 96,552원<br />
-            시급 통상임금 = 월급 ÷ 월 소정근로시간<br />
-            예시: 월급 2,000,000원, 소정근로시간 209시간 → 2,000,000 ÷ 209 = 9,569원
-          </span>
-        </li>
+  <b>월급 기준 통상임금 환산:</b>
+  <span className="ml-1">
+    입력한 <b>월급 + 통상적 수당</b>을 기준으로 계산합니다.<br /><br />
+
+    • <b>1일 통상임금</b> = (월급 + 수당) ÷ 월평균 근무일수(21.75일)<br />
+    예시: (2,000,000 + 100,000) ÷ 21.75 ≈ 96,552원<br /><br />
+
+    • <b>시급 통상임금</b> = (월급 + 수당) ÷ 월 소정근로시간<br />
+    예시: 2,100,000 ÷ 209 ≈ 10,048원
+  </span>
+</li>
+
       </ol>
       <div className="text-sm text-gray-600">
         ※ 월평균 근무일수 21.75일은 주 5일 근무 기준입니다.<br />
@@ -201,7 +204,7 @@ function OrdinaryWageFAQBox() {
         <div>
           <div className="font-bold mb-1">Q 통상임금이란 무엇인가요?</div>
           <div>
-            통상임금은 근로자가 정기적이고 일률적으로 받는 임금으로, 근로기준법상 연장·야간·휴일근로수당 및 퇴직금 산정의 기준이 되는 중요한 임금입니다. 2025년 대법원 판결에 따라 상여금, 근속수당 등도 일정 조건을 충족하면 통상임금에 포함될 수 있습니다.
+            통상임금은 근로자가 정기적이고 일률적으로 받는 임금으로, 근로기준법상 연장·야간·휴일근로수당 및 퇴직금 산정의 기준이 되는 중요한 임금입니다. 최근 대법원 판례 등에 따라 상여금, 근속수당 등도 일정 조건을 충족하면 통상임금에 포함될 수 있습니다.
           </div>
         </div>
         <div>
@@ -219,7 +222,7 @@ function OrdinaryWageFAQBox() {
         <div>
           <div className="font-bold mb-1">Q 상여금도 통상임금에 포함되나요?</div>
           <div>
-            2025년부터는 정기적이고 일률적으로 지급되는 상여금은 통상임금에 포함될 가능성이 높아졌습니다. 특히 근로자가 일정 근무 조건을 충족했을 때 지급되는 상여금은 통상임금 산정에 반영해야 하므로, 회사의 취업규칙과 근로계약서를 꼼꼼히 확인하는 것이 중요합니다.
+            정기적이고 일률적으로 지급되는 상여금은 통상임금에 포함될 가능성이 높아졌습니다. 특히 근로자가 일정 근무 조건을 충족했을 때 지급되는 상여금은 통상임금 산정에 반영해야 하므로, 회사의 취업규칙과 근로계약서를 꼼꼼히 확인하는 것이 중요합니다.
           </div>
         </div>
       </div>
@@ -347,7 +350,7 @@ export default function OrdinaryCalculator() {
               value={wage}
               onChange={handleNum(setWage)}
               className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
-              placeholder={unit === "hourly" ? "10,030" : unit === "daily" ? "80,240" : "2,090,000"}
+              placeholder={unit === "hourly" ? "10,320" : unit === "daily" ? "82,560" : "2,156,880"}
             />
             <span className="text-gray-500">원</span>
           </InputRow>
