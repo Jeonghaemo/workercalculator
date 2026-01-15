@@ -47,31 +47,67 @@ function InputRow({ label, tooltip, children }) {
   );
 }
 
-// 계산 함수 (2025년 기준)
-function calcParentalLeave({ wage, months }) {
+// 계산 함수 (2026년 기준: 시행 2026.1.2)
+// - 일반: 1~3개월 100%(상한 250/하한 70), 4~6개월 100%(상한 200/하한 70), 7개월~ 80%(상한 160/하한 70)
+// - 6+6(출생 후 18개월 이내 & 부모 모두 사용): 1~6개월 100% + 단계별 상한(250,250,300,350,400,450) / 하한 70, 7개월~ 80%(상한 160/하한 70)
+// - 한부모: 1~3개월 상한 300(하한 70), 4~6개월 상한 200(하한 70), 7개월~ 80%(상한 160/하한 70)
+function calcParentalLeave({ wage, months, scheme = "normal" }) {
   const monthPays = [];
   let total = 0;
-  let totalMonths = Math.min(12, Math.max(1, months));
-  for (let i = 1; i <= totalMonths; i++) {
-    let rate = 1, max = 2500000, min = 700000;
-    if (i >= 4 && i <= 6) {
-      max = 2000000;
-    }
-    if (i >= 7) {
-      rate = 0.8;
-      max = 1600000;
-    }
+
+  // 제도상 최대 18개월(1년 6개월) 입력 허용
+  const totalMonths = Math.min(18, Math.max(1, Number(months || 0)));
+
+  const MIN = 700000;
+
+  // 일반(기본) 상한
+  const normalCaps = (m) => {
+    if (m <= 3) return 2500000;
+    if (m <= 6) return 2000000;
+    return 1600000;
+  };
+
+  // 한부모 상한
+  const singleCaps = (m) => {
+    if (m <= 3) return 3000000;
+    if (m <= 6) return 2000000;
+    return 1600000;
+  };
+
+  // 6+6 상한(1~6개월만 특례 상한, 이후는 160)
+  const sixSixCaps = (m) => {
+    if (m === 1) return 2500000;
+    if (m === 2) return 2500000;
+    if (m === 3) return 3000000;
+    if (m === 4) return 3500000;
+    if (m === 5) return 4000000;
+    if (m === 6) return 4500000;
+    return 1600000;
+  };
+
+  for (let m = 1; m <= totalMonths; m++) {
+    let rate = m >= 7 ? 0.8 : 1;
+
+    let cap = normalCaps(m);
+    if (scheme === "single") cap = singleCaps(m);
+    if (scheme === "sixsix") cap = sixSixCaps(m);
+
     let pay = wage * rate;
-    pay = Math.max(min, Math.min(pay, max));
+
+    // 상한/하한 적용
+    pay = Math.max(MIN, Math.min(pay, cap));
+
     monthPays.push(pay);
     total += pay;
   }
+
   return {
     monthPays,
-    total,
+    total: Math.round(total),
     totalMonths,
   };
 }
+
 
 function IntroBox() {
   return (
@@ -193,9 +229,12 @@ function CalculationMethodBox() {
         </li>
       </ol>
       <div className="text-sm text-gray-600">
-        ※ 육아휴직급여는 고용보험에 가입된 근로자만 신청 가능하며, 실제 지급액은 고용노동부 심사 결과에 따라 달라질 수 있습니다.<br />
-        ※ 상한/하한액은 2025년 기준입니다.
-      </div>
+  ※ 6+6(특례): 출생 후 18개월 이내 자녀 + 부모 모두 육아휴직 사용 시 1~6개월 상한이 단계적으로 상향됩니다.<br />
+  ※ 육아휴직 기간은 자녀 1명당 최대 1년 6개월(18개월)까지 가능합니다.<br />
+  ※ 육아휴직급여는 고용보험에 가입된 근로자만 신청 가능하며, 실제 지급액은 고용노동부 심사 결과에 따라 달라질 수 있습니다.<br />
+  ※ 상한/하한액은 2026년 기준입니다.
+</div>
+
     </div>
   );
 }
@@ -221,7 +260,7 @@ function ParentalLeaveFAQBox() {
         <div>
           <div className="font-bold mb-1">Q 육아휴직 급여는 어떤 금액을 기준으로 계산하나요?</div>
           <div>
-            육아휴직 급여는 <b>통상임금</b>을 기준으로 하며, 2025년 기준 최초 6개월까지는 통상임금의 100%, 이후 개월수부터는 80%로 산정됩니다. 월별 상한액(예: 1~3개월 250만원, 4~6개월 200만원, 7개월 이후 160만원)이 적용되어 실제 지급 금액이 결정됩니다.
+            육아휴직 급여는 <b>통상임금</b>을 기준으로 하며, 2026년 기준 최초 6개월까지는 통상임금의 100%, 이후 개월수부터는 80%로 산정됩니다. 월별 상한액(예: 1~3개월 250만원, 4~6개월 200만원, 7개월 이후 160만원)이 적용되어 실제 지급 금액이 결정됩니다.
           </div>
         </div>
         <div>
@@ -248,6 +287,14 @@ function ParentalLeaveFAQBox() {
             <b>공휴일</b>이나 명절이 포함되어 있어도 육아휴직 급여 산정에는 영향을 주지 않습니다. 육아휴직 급여는 휴직 개시일을 기준으로 한 달 단위로 지급되며, 공휴일이 포함되어도 급여 금액에는 변동이 없습니다.
           </div>
         </div>
+        <div>
+  <div className="font-bold mb-1">Q 6+6(특례)와 한부모는 무엇인가요?</div>
+  <div>
+    <b>6+6(특례)</b>: 출생 후 18개월 이내 자녀에 대해 부모가 모두 육아휴직을 사용하면 1~6개월 상한이 단계적으로 상향됩니다.<br />
+    <b>한부모</b>: 한부모 가구의 경우 초기 구간(예: 1~3개월) 상한이 일반보다 높게 적용될 수 있습니다.
+  </div>
+</div>
+
       </div>
     </div>
   );
@@ -255,8 +302,10 @@ function ParentalLeaveFAQBox() {
 
 export default function ParentalLeave() {
   const [wage, setWage] = useState("");
+  const [scheme, setScheme] = useState("normal"); // normal | sixsix | single
   const [months, setMonths] = useState(12);
   const [result, setResult] = useState(null);
+
 
   const resultRef = useRef(null); // 결과 스크롤용 ref
 
@@ -269,11 +318,13 @@ export default function ParentalLeave() {
   const handleCalc = () => {
     const wageNum = Number(wage);
     const monthsNum = Number(months);
-    if (!wageNum || !monthsNum || monthsNum < 1 || monthsNum > 12) {
+    if (!wageNum || !monthsNum || monthsNum < 1 || monthsNum > 18) {
+
       setResult(null);
       return;
     }
-    setResult(calcParentalLeave({ wage: wageNum, months: monthsNum }));
+    setResult(calcParentalLeave({ wage: wageNum, months: monthsNum, scheme }));
+
 
     // 계산 후 모바일에서 결과로 스크롤
     setTimeout(() => {
@@ -302,8 +353,36 @@ export default function ParentalLeave() {
         <section className="w-full lg:w-1/2 border-r border-gray-200 pr-0 lg:pr-8 min-w-0">
           <h3 className="font-semibold text-lg mb-6">조건 입력</h3>
           <InputRow
+  label="급여 유형"
+  tooltip={
+    "2026.1.2 시행 기준 선택\n" +
+    "- 일반(기본): 1~3개월 상한 250만, 4~6개월 200만, 7개월~(80%) 160만 / 하한 70만\n" +
+    "- 6+6(특례): 출생 후 18개월 이내 자녀, 부모 모두 육아휴직 사용 시 1~6개월 상한 250/250/300/350/400/450만\n" +
+    "- 한부모: 1~3개월 상한 300만, 4~6개월 200만, 7개월~(80%) 160만 / 하한 70만"
+  }
+>
+  <select
+    value={scheme}
+    onChange={(e) => setScheme(e.target.value)}
+    className="w-full max-w-[220px] border rounded px-2 py-2"
+  >
+    <option value="normal">일반(기본)</option>
+    <option value="sixsix">6+6(출생 후 18개월·부모 모두)</option>
+    <option value="single">한부모</option>
+  </select>
+</InputRow>
+
+          <InputRow
             label="통상임금(월)"
-            tooltip={`월 기준 통상임금을 입력하세요.\n(정기적·일률적으로 지급되는 기본급, 고정수당 등 포함)\n상한액: 1~3개월 250만원, 4~6개월 200만원, 7개월~ 160만원`}
+            tooltip={
+  "월 기준 통상임금을 입력하세요.\n" +
+  "(정기적·일률적으로 지급되는 기본급, 고정수당 등 포함)\n" +
+  "2026.1.2 시행 기준 상한/하한이 적용됩니다.\n" +
+  "- 일반(기본): 1~3개월 250만, 4~6개월 200만, 7개월~(80%) 160만 / 하한 70만\n" +
+  "- 6+6(특례): 1~6개월 상한 250/250/300/350/400/450만\n" +
+  "- 한부모: 1~3개월 상한 300만"
+}
+
           >
             <input
               type="text"
@@ -330,12 +409,12 @@ export default function ParentalLeave() {
               onChange={(e) => {
                 let v = Number(e.target.value);
                 if (v < 1) v = 1;
-                if (v > 12) v = 12;
+                if (v > 18) v = 18;
                 setMonths(v);
               }}
               className="w-full max-w-[120px] border rounded px-2 py-2 text-right"
               min={1}
-              max={12}
+              max={18}
             />
             <span className="text-gray-500">개월</span>
           </InputRow>
