@@ -11,6 +11,27 @@ import { lookupIncomeTax } from "../utils/lookupIncomeTax";
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
 
+// 근로소득세 누진세율표 (2026년 기준)
+const TAX_TABLE = [
+  { std: 0, rate: 0.06, minus: 0 },
+  { std: 14000000, rate: 0.15, minus: 1260000 },
+  { std: 50000000, rate: 0.24, minus: 5760000 },
+  { std: 88000000, rate: 0.35, minus: 15440000 },
+  { std: 150000000, rate: 0.38, minus: 19940000 },
+  { std: 300000000, rate: 0.40, minus: 25940000 },
+  { std: 500000000, rate: 0.42, minus: 35940000 },
+  { std: 1000000000, rate: 0.45, minus: 65400000 },
+];
+
+// 근로소득공제 (간이 공식)
+function getEarnedIncomeDeduction(total) {
+  if (total <= 8000000) return total * 0.8;
+  if (total <= 70000000) return 6400000 + (total - 8000000) * 0.5;
+  if (total <= 120000000) return 32400000 + (total - 70000000) * 0.15;
+  if (total <= 150000000) return 39900000 + (total - 120000000) * 0.05;
+  return 41400000 + (total - 150000000) * 0.02;
+}
+
 
 // 툴팁 컴포넌트
 function Tooltip({ text }) {
@@ -188,9 +209,10 @@ function CalculationMethodBox() {
   </li>
 </ol>
 <div className="text-sm text-gray-600">
-  ※ 이 계산기는 <b>근로소득 간이세액표(원천징수)</b> 기준의 추정값입니다. :contentReference[oaicite:1]{index=1}<br />
-  ※ 연말정산(특별공제/세액공제 등) 결과에 따라 실제 납부세액은 달라질 수 있습니다.<br />
-  ※ 2026년 1월 현재 적용 기준은 법령 별표2(간이세액표) 체계에 따릅니다. :contentReference[oaicite:2]{index=2}
+  ※ 이 계산기는 <b>근로소득 간이세액표(원천징수)</b> 기준의 추정값입니다.<br />
+※ 연말정산(특별공제/세액공제 등) 결과에 따라 실제 납부세액은 달라질 수 있습니다.<br />
+※ 2026년 1월 현재 적용 기준은 법령 별표2(간이세액표) 체계에 따릅니다.
+
 </div>
 
     </div>
@@ -296,7 +318,7 @@ export default function IncomeTaxCalculator() {
   const taxableMonthly = Math.max(0, monthly - taxFreeNum);
 
   // 소득세: 간이세액표 기준 (월 기준)
-  const monthlyTax = lookupIncomeTax(taxableMonthly, family, children);
+  const monthlyTax = lookupIncomeTax(taxableMonthly, family);
 
   // 지방소득세: 소득세의 10%
   const localTax = Math.floor(monthlyTax * 0.1);
