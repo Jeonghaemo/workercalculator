@@ -11,27 +11,6 @@ import { lookupIncomeTax } from "../utils/lookupIncomeTax";
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
 
-// 근로소득세 누진세율표 (2025년 기준)
-const TAX_TABLE = [
-  { std: 0, rate: 0.06, minus: 0 },
-  { std: 14000000, rate: 0.15, minus: 1260000 },
-  { std: 50000000, rate: 0.24, minus: 5760000 },
-  { std: 88000000, rate: 0.35, minus: 15440000 },
-  { std: 150000000, rate: 0.38, minus: 19940000 },
-  { std: 300000000, rate: 0.40, minus: 25940000 },
-  { std: 500000000, rate: 0.42, minus: 35940000 },
-  { std: 1000000000, rate: 0.45, minus: 65400000 },
-];
-
-// 근로소득공제 (간이 공식)
-function getEarnedIncomeDeduction(total) {
-  if (total <= 8000000) return total * 0.8;
-  if (total <= 70000000) return 6400000 + (total - 8000000) * 0.5;
-  if (total <= 120000000) return 32400000 + (total - 70000000) * 0.15;
-  if (total <= 150000000) return 39900000 + (total - 120000000) * 0.05;
-  return 41400000 + (total - 150000000) * 0.02;
-}
-
 
 // 툴팁 컴포넌트
 function Tooltip({ text }) {
@@ -179,61 +158,41 @@ function CalculationMethodBox() {
         </li>
       </ul>
       <h2 className="text-2xl font-bold mb-4 text-blue-700">근로소득세 계산방법</h2>
-      <ol className="list-decimal list-inside mb-4 space-y-1">
-        <li>
-          <b>총급여액 산정:</b>
-          <span className="ml-1">
-            입력한 연봉 또는 월급에서 비과세액(식대 등)을 제외한 금액을 기준으로 계산합니다.<br />
-            예시: 연봉 24,000,000원, 비과세액 2,400,000원(연) → 24,000,000 - 2,400,000 = 21,600,000원
-          </span>
-        </li>
-        <li>
-          <b>근로소득공제 적용:</b>
-          <span className="ml-1">
-            총급여액에 2025년 근로소득공제율을 적용해 근로소득금액을 산출합니다.<br />
-            예시: 총급여 21,600,000원, 근로소득공제 9,600,000원 → 21,600,000 - 9,600,000 = 12,000,000원
-          </span>
-        </li>
-        <li>
-          <b>인적공제 반영:</b>
-          <span className="ml-1">
-            본인 포함 가족 1인당 150만 원, 8~20세 자녀 1인당 50만 원을 추가로 공제합니다.<br />
-            예시: 가족 3명(본인, 배우자, 자녀1), 8~20세 자녀 1명 → 1,500,000 × 3 + 500,000 × 1 = 5,000,000원
-          </span>
-        </li>
-        <li>
-          <b>과세표준 계산:</b>
-          <span className="ml-1">
-            근로소득금액에서 인적공제를 차감하여 과세표준을 구합니다.<br />
-            예시: 12,000,000 - 5,000,000 = 7,000,000원
-          </span>
-        </li>
-        <li>
-          <b>근로소득세 산출:</b>
-<span className="ml-1">
-  2025년 간이세액표 기준으로 월 급여와 부양가족 수에 따라 근로소득세가 결정됩니다.<br />
-  예시: 월급 7,000,000원, 부양가족 1명 → 간이세액표 기준 약 420,000원
-</span>
-        </li>
-        <li>
-          <b>지방소득세 산출:</b>
-          <span className="ml-1">
-            산출된 근로소득세의 10%를 지방소득세로 추가 계산합니다.<br />
-            예시: 420,000원 × 10% = 42,000원
-          </span>
-        </li>
-        <li>
-          <b>실수령액 계산:</b>
-          <span className="ml-1">
-            월급에서 근로소득세와 지방소득세를 합산한 금액을 차감해 월 실수령액을 산출합니다.<br />
-            예시: 월급 2,000,000원, 소득세 35,000원, 지방소득세 3,500원 → 2,000,000 - 38,500 = 1,961,500원
-          </span>
-        </li>
-      </ol>
-      <div className="text-sm text-gray-600">
-        ※ 이 계산기는 2025년 근로소득세율 및 공제 기준을 적용합니다.<br />
-        ※ 실제 연말정산 시 세액공제, 특별공제 등 추가 항목에 따라 결과가 달라질 수 있습니다.
-      </div>
+<ol className="list-decimal list-inside mb-4 space-y-1">
+  <li>
+    <b>월 과세급여(소득세 기준액) 산정:</b>
+    <span className="ml-1">
+      (세전 월급) - (비과세액)으로 월 과세급여를 계산합니다.<br />
+      예시: 월급 2,500,000원, 비과세 200,000원 → 2,300,000원
+    </span>
+  </li>
+  <li>
+    <b>근로소득세(원천징수) 산정:</b>
+    <span className="ml-1">
+      월 과세급여와 <b>공제대상가족수</b>(본인 포함), <b>20세 이하 자녀수</b>를 기준으로
+      <b>근로소득 간이세액표</b>에 따라 월 소득세를 계산합니다.
+    </span>
+  </li>
+  <li>
+    <b>지방소득세 산정:</b>
+    <span className="ml-1">
+      산출된 근로소득세의 10%를 지방소득세로 추가 계산합니다.<br />
+      예시: 소득세 35,000원 → 지방소득세 3,500원
+    </span>
+  </li>
+  <li>
+    <b>월 실수령액(예상) 계산:</b>
+    <span className="ml-1">
+      세전 월급에서 (근로소득세 + 지방소득세)를 차감해 월 실수령액을 계산합니다.
+    </span>
+  </li>
+</ol>
+<div className="text-sm text-gray-600">
+  ※ 이 계산기는 <b>근로소득 간이세액표(원천징수)</b> 기준의 추정값입니다. :contentReference[oaicite:1]{index=1}<br />
+  ※ 연말정산(특별공제/세액공제 등) 결과에 따라 실제 납부세액은 달라질 수 있습니다.<br />
+  ※ 2026년 1월 현재 적용 기준은 법령 별표2(간이세액표) 체계에 따릅니다. :contentReference[oaicite:2]{index=2}
+</div>
+
     </div>
   );
 }
@@ -337,7 +296,7 @@ export default function IncomeTaxCalculator() {
   const taxableMonthly = Math.max(0, monthly - taxFreeNum);
 
   // 소득세: 간이세액표 기준 (월 기준)
-  const monthlyTax = lookupIncomeTax(taxableMonthly, family);
+  const monthlyTax = lookupIncomeTax(taxableMonthly, family, children);
 
   // 지방소득세: 소득세의 10%
   const localTax = Math.floor(monthlyTax * 0.1);

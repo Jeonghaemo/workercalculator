@@ -10,7 +10,7 @@ import KakaoShareButton from "../components/KakaoShareButton";
 // 천 단위 콤마
 const addComma = (v) => (v || v === 0 ? Number(v).toLocaleString() : "");
 
-// 실업급여 지급일수 계산 (2025년 기준, 예시)
+// 실업급여 지급일수 계산 (2026년 기준, 예시)
 function getBenefitDays(age, insuredYear) {
   if (insuredYear < 1) return 0;
   if (insuredYear < 3) return 120;
@@ -23,9 +23,11 @@ function getBenefitDays(age, insuredYear) {
 function calcUnemploymentPay({ wage3m, days3m, age, insuredYear }) {
   const avgDailyWage = wage3m / days3m;
   let daily = avgDailyWage * 0.6;
-  // 2025년 기준 상하한
-  const MIN = 69040;
-  const MAX = 77000;
+  // 2026년 기준 상·하한 (변동 가능)
+// - 하한: 66,048원 (최저임금 10,320원 × 8시간 × 80%)
+// - 상한: 68,100원
+const MIN = 66048;
+const MAX = 68100;
   if (daily < MIN) daily = MIN;
   if (daily > MAX) daily = MAX;
   const benefitDays = getBenefitDays(age, insuredYear);
@@ -186,7 +188,8 @@ function CalculationMethodBox() {
           <span className="ml-1">
             1일 평균임금 × 60%<br />
             예시: 66,666원 × 0.6 = 40,000원<br />
-            ※ 2025년 기준 일일 상한(77,000원), 하한(69,040원) 적용. 하한보다 작으면 69,040원, 상한보다 크면 77,000원으로 제한
+            ※ 2026년 기준 일일 상한(68,100원), 하한(66,048원) 적용. 하한보다 작으면 66,048원, 상한보다 크면 68,100원으로 제한
+
           </span>
         </li>
         <li>
@@ -206,7 +209,7 @@ function CalculationMethodBox() {
         </li>
       </ol>
       <div className="text-sm text-gray-600">
-        ※ 2025년 기준 실업급여 상·하한액, 지급일수 적용.<br />
+        ※ 2026년 기준 실업급여 상·하한액, 지급일수 적용.<br />
         ※ 실제 지급액은 고용노동부 심사, 근로계약, 이직사유 등 상황에 따라 달라질 수 있습니다.<br />
         ※ 1일 평균임금이 하한액 미만이면 하한액으로, 상한액 초과면 상한액으로 지급됩니다.
       </div>
@@ -241,7 +244,8 @@ function UnemploymentFAQBox() {
         <div>
           <div className="font-bold mb-1">Q 실업급여 실수령액은 어떻게 계산되나요?</div>
           <div>
-            <b>실수령액</b>은 계산된 1일 지급액(평균임금×60%, 상·하한 적용)에서 소득세 등 공제 후의 금액입니다. 2025년 기준 1일 상한액은 77,000원, 하한액은 69,040원(최저임금의 80% × 8시간)입니다. 월 기준 실수령액은 1일 지급액×수급일수에서 세금을 뺀 금액입니다.
+            <b>실수령액</b>은 계산된 1일 지급액(평균임금×60%, 상·하한 적용)에서 소득세 등 공제 후의 금액입니다. 2026년 기준 1일 상한액은 68,100원, 하한액은 66,048원(최저임금의 80% × 8시간)입니다.
+
           </div>
         </div>
         <div>
