@@ -40,16 +40,18 @@ function calcDiffDeduct(convertedSalary) {
   return 151700000 + (convertedSalary - 300000000) * 0.35;
 }
 
+// 소득세 누진세율(현행 표준 구간) 기반
 const TAX_TABLE = [
   { std: 0, rate: 0.06, minus: 0 },
   { std: 14000000, rate: 0.15, minus: 1260000 },
   { std: 50000000, rate: 0.24, minus: 5760000 },
-  { std: 150000000, rate: 0.35, minus: 15440000 },
-  { std: 300000000, rate: 0.38, minus: 19940000 },
-  { std: 500000000, rate: 0.40, minus: 25940000 },
-  { std: 1000000000, rate: 0.42, minus: 35940000 },
-  { std: 2000000000, rate: 0.45, minus: 65400000 },
+  { std: 88000000, rate: 0.35, minus: 15440000 },
+  { std: 150000000, rate: 0.38, minus: 19940000 },
+  { std: 300000000, rate: 0.40, minus: 25940000 },
+  { std: 500000000, rate: 0.42, minus: 35940000 },
+  { std: 1000000000, rate: 0.45, minus: 65400000 },
 ];
+
 
 // 세금 계산
 function calcTax(taxBase) {
@@ -252,7 +254,7 @@ function CalculationMethodBox() {
       </ol>
       <div className="text-sm text-gray-600">
         ※ 실제 퇴직소득세는 퇴직소득 원천징수영수증, 근로계약, 공제항목 등에 따라 달라질 수 있습니다.<br />
-        ※ 2025년 기준 퇴직소득세율 및 공제방식 적용.<br />
+        ※ 2026년 1월 기준(현행 세법 체계) 산식으로 계산한 추정값입니다.<br />
         ※ 계산 결과는 참고용입니다.
       </div>
     </div>
